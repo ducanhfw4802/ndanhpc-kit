@@ -268,7 +268,7 @@
         <div class="catalog-search-row">
           <div class="search-input-wrap">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="catalog-search" class="catalog-search-input" placeholder="Tìm kiếm Agent, Skill, Workflow, Rule theo tên, mô tả hoặc tag... (/ để focus)">
+            <input type="text" id="catalog-search" class="catalog-search-input" placeholder="Tìm kiếm Agent, Skill, Workflow, Rule theo tên, mô tả hoặc tag... (/ để focus)" aria-label="Tìm kiếm Agent, Skill, Workflow hoặc Rule">
             <span class="kbd-shortcut">/</span>
           </div>
 
@@ -325,12 +325,12 @@
 
           <div>
             <div class="sim-section-label">Mô tả bài toán</div>
-            <textarea id="custom-task-desc" class="custom-task-input" placeholder="Mô tả công việc cần điều phối..."></textarea>
+            <textarea id="custom-task-desc" class="custom-task-input" placeholder="Mô tả công việc cần điều phối..." aria-label="Mô tả công việc cần điều phối"></textarea>
           </div>
 
           <div class="sim-speed-wrap">
             <span>Tốc độ mô phỏng:</span>
-            <select id="sim-speed" class="speed-select">
+            <select id="sim-speed" class="speed-select" aria-label="Tốc độ mô phỏng">
               <option value="1000">1x (Thực tế)</option>
               <option value="400">2.5x (Nhanh)</option>
               <option value="50">Siêu tốc</option>
@@ -571,6 +571,24 @@
       </div>
     </div>
   </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="badge-dot pulse"></span>
+          NDANHPC Kit
+        </div>
+        <span class="footer-version">v2026.10.10</span>
+        <p class="footer-desc">Antigravity-native AI Agent Capability Toolkit. Độc lập, tối ưu và bảo vệ đa tầng.</p>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 ndanhpc. Tất cả các quyền được bảo lưu.</span>
+        <span>Google Antigravity &amp; Gemini CLI Runtime</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Component Detail Modal -->
   <div id="detail-modal" class="modal-backdrop" aria-hidden="true">
