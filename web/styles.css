@@ -1738,35 +1738,413 @@ body {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
+/* =========================================================
+   COMPREHENSIVE RESPONSIVE DESIGN SYSTEM (Desktop / Tablet / Mobile)
+   ========================================================= */
+
+/* Global horizontal overflow safeguard */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* TABLET LANDSCAPE & MEDIUM DESKTOP (<= 1200px) */
+@media (max-width: 1200px) {
+  .header-container, .main-content {
+    max-width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
   .phases-timeline {
     grid-template-columns: repeat(3, 1fr);
   }
-  .overview-two-col, .simulator-layout, .setup-grid {
+}
+
+/* TABLET PORTRAIT (<= 1024px) */
+@media (max-width: 1024px) {
+  .overview-two-col, 
+  .simulator-layout, 
+  .setup-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .sim-sidebar {
+    padding: 1.25rem;
+  }
+  .task-preset-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.5rem;
+  }
+  .sim-stage {
+    padding: 1.25rem;
   }
 }
 
+/* MOBILE LANDSCAPE & TABLET (<= 768px) */
 @media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem 0;
-    gap: 1rem;
+  .app-header {
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
   }
+
+  .header-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    padding: 0.65rem 0;
+    gap: 0.65rem;
+  }
+
+  .brand-section {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .header-actions {
+    order: 2;
+    flex: 0 0 auto;
+    gap: 0.5rem;
+  }
+
   .nav-tabs {
+    order: 3;
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    border-radius: var(--radius-sm);
   }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    min-height: 44px; /* WCAG touch target */
+  }
+
+  .main-content {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  /* Hero & Metrics on Tablet/Mobile */
+  .hero-banner {
+    padding: 1.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
+    line-height: 1.3;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .metric-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .metric-num {
+    font-size: 1.6rem;
+  }
+
+  /* 6 Phases Timeline */
+  .phases-flow-container {
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.75rem;
+  }
+
   .phases-timeline {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
   }
+
+  .phase-node {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .phase-name {
+    font-size: 0.8rem;
+  }
+
+  .phase-sub {
+    font-size: 0.7rem;
+  }
+
+  .phase-detail-card {
+    padding: 1rem;
+  }
+
+  .phase-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  /* Section Header wrap */
+  .section-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  .section-title {
+    font-size: 1.15rem;
+  }
+
   .version-track-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
+
+  /* Catalog Tab */
+  .catalog-controls {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
   .catalog-search-row {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .type-filter-group {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    width: 100%;
+  }
+
+  .type-filter-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .type-filter-btn {
+    flex: 0 0 auto;
+    min-height: 40px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .item-card {
+    padding: 1rem;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-details, .btn-copy-prompt {
+    min-height: 42px;
+  }
+
+  /* Simulator Stage */
+  .sim-stage-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .sim-phase-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .gate-prompt-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .gate-actions {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .gate-btn-approve, .gate-btn-inspect {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    min-height: 40px;
+  }
+
+  /* Generator & Setup */
+  .generator-card, .doctor-guide-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .command-selector-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .command-selector-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cmd-tab-btn {
+    flex: 0 0 auto;
+    min-height: 42px;
+  }
+
+  /* Bottom sheet modal styling */
+  .modal-backdrop {
+    padding: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .modal-dialog {
+    max-height: 90vh;
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-md) var(--radius-md);
+  }
+
+  .modal-header, .modal-body, .modal-footer {
+    padding: 1rem;
+  }
+
+  .modal-close-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Toast */
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .toast {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* SMALL MOBILE (<= 480px) */
+@media (max-width: 480px) {
+  .brand-subtitle {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
+  }
+
+  .brand-logo-badge {
+    width: 38px;
+    height: 38px;
+  }
+
+  .runtime-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .btn-secondary {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .main-content {
+    padding: 0.85rem 0.65rem calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero-banner {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .hero-title {
+    font-size: 1.35rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .metric-card {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .metric-num {
+    font-size: 1.4rem;
+  }
+
+  .metric-label {
+    font-size: 0.68rem;
+  }
+
+  .task-preset-list {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-stage {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .sim-phase-block {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .modal-dialog {
+    width: 100%;
+  }
+
+  .modal-header, .modal-body, .modal-footer {
+    padding: 0.75rem;
+  }
+}
+
+/* MICRO DEVICES (<= 360px) */
+@media (max-width: 360px) {
+  .header-actions {
+    display: none;
+  }
+  .brand-logo-badge {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-title {
+    font-size: 0.92rem;
   }
 }
