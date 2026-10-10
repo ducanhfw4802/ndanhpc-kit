@@ -63,6 +63,7 @@
     "scripts/component_registry.py": "fcc09d1ac49b457352d5ddc74153972fb3209bef03c3f6b4716ada82e16d5153",
     "scripts/dependency_graph.py": "2a92705a7830bbe6465c05def2fb8e1729c9ce167f02e05bc03985f76bfbfd9d",
     "scripts/generate_manifest.py": "3b4e271cbe82abfecd72419331c9bcc4e165f3f825bcea579e2c4a6ea76b6f50",
+    "scripts/ndanhpc_cli.py": "e3f07ff051dbfefc25539a61a6f130adc642c5798d9f281f43af3dee05bd1d67",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
     "scripts/validate_kit.py": "fd6c6fd1ca14a225f68a61c0df4d76c13c9c35bac9a70fedb9ac82387ecef610",

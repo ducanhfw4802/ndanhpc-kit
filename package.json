@@ -13,6 +13,8 @@
     "test:toolkit": "python3 .agents/scripts/tests/test_toolkit.py",
     "verify": "python3 .agents/scripts/verify_all.py",
     "manifest": "python3 .agents/scripts/generate_manifest.py",
-    "deps": "python3 .agents/scripts/dependency_graph.py"
+    "deps": "python3 .agents/scripts/dependency_graph.py",
+    "web": "python3 -m http.server 3000 --directory web",
+    "tui": "python3 .agents/scripts/ndanhpc_cli.py"
   }
 }

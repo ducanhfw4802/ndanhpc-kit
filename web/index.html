@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDANHPC Kit - Antigravity Agent Capability Portal</title>
+  <meta name="description" content="NDANHPC Kit - Antigravity-native AI Agent Capability Toolkit v2026.10.10. Phân luồng yêu cầu thông minh, tải ngữ cảnh lũy tiến và bảo vệ an toàn với PreToolUse hook.">
+  <meta name="author" content="ndanhpc">
+  <meta name="datePublished" content="2026-10-10">
+  <meta property="og:title" content="NDANHPC Kit - Antigravity Agent Capability Portal">
+  <meta property="og:description" content="Khám phá 24 Specialist Agents, 51 Skills, 13 Workflows, và kiến trúc 6 phases Antigravity runtime.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/ndanhpc/ndanhpc-kit">
+  <meta property="og:image" content="/assets/og-preview.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NDANHPC Kit",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Antigravity, Linux, macOS, Windows",
+    "version": "2026.10.10",
+    "author": {
+      "@type": "Person",
+      "name": "ndanhpc"
+    },
+    "description": "Antigravity-native AI Agent Capability Toolkit providing specialized personas, modular skills, and safe runtime orchestration."
+  }
+  </script>
+</head>
+<body>
+  <!-- Accessible skip link for keyboard navigation -->
+  <a href="#main-content" class="skip-link">Chuyển đến nội dung chính (Skip to content)</a>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            <path d="M5 3v4"/>
+            <path d="M19 17v4"/>
+            <path d="M3 5h4"/>
+            <path d="M17 19h4"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title">
+            NDANHPC Kit
+            <span class="version-pill">v2026.10.10</span>
+          </div>
+          <span class="brand-subtitle">Antigravity-native AI Agent Capability Toolkit</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          Overview
+        </button>
+        <button class="tab-btn" data-tab="catalog" role="tab" aria-selected="false">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Explorer & Catalog
+        </button>
+        <button class="tab-btn" data-tab="simulator" role="tab" aria-selected="false">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Multi-Agent Simulator
+        </button>
+        <button class="tab-btn" data-tab="setup" role="tab" aria-selected="false">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Slash Command & Setup
+        </button>
+      </nav>
+
+      <!-- Status Indicator & Actions -->
+      <div class="header-actions">
+        <div class="runtime-badge">
+          <div class="pulse-dot"></div>
+          Antigravity Ready
+        </div>
+        <button class="btn-secondary" id="btn-quick-doctor">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Doctor
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container with proper anchor target -->
+  <main class="main-content" id="main-content">
+
+    <!-- =========================================================
+         TAB 1: OVERVIEW PANE
+         ========================================================= -->
+    <div id="tab-overview" class="tab-pane active" role="tabpanel">
+      <!-- Hero Banner -->
+      <section class="hero-banner glass-panel">
+        <div class="hero-tag-bar">
+          <span class="badge-tag badge-cyan">Antigravity Runtime Native</span>
+          <span class="badge-tag badge-emerald">Dual-Track CalVer + SemVer</span>
+          <span class="badge-tag badge-amber">PreToolUse Safety Gate</span>
+        </div>
+        <h1 class="hero-title">
+          Antigravity-native <span>AI Agent Capability Toolkit</span>
+        </h1>
+        <p class="hero-desc">
+          NDANHPC Kit cung cấp kiến trúc chuyên môn hóa cao cấp cho Google Antigravity: phân luồng yêu cầu thông minh, tải ngữ cảnh kỹ năng theo nhu cầu (Progressive Loading), bảo toàn lịch sử dự án bền vững và kiểm tra tự động trước mọi hành động.
+        </p>
+
+        <!-- Metrics Row -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-num" id="stat-agents">24</div>
+            <div class="metric-label">Specialist Agents</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num" id="stat-skills">51</div>
+            <div class="metric-label">Modular Skills</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num" id="stat-workflows">13</div>
+            <div class="metric-label">Slash Workflows</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num" id="stat-rules">6</div>
+            <div class="metric-label">Strict Rules</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">6</div>
+            <div class="metric-label">Runtime Phases</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-num">100%</div>
+            <div class="metric-label">Integrity Locked</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: 6 Phases Antigravity Runtime Architecture -->
+      <section class="phases-flow-container glass-panel">
+        <div class="section-header">
+          <h2 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Kiến trúc 6 Phases Antigravity Runtime
+          </h2>
+          <span class="section-badge">Contract: .agents/antigravity.json</span>
+        </div>
+
+        <!-- 6 Phases Interactive Timeline -->
+        <div class="phases-timeline" id="phases-timeline">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Phase Detail View -->
+        <div class="phase-detail-card" id="phase-detail-card">
+          <!-- Dynamic Phase Content -->
+        </div>
+      </section>
+
+      <!-- Section: Safety Sandbox & Dual-Track Heading -->
+      <div class="section-header" style="margin-top: 1rem;">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Hệ thống Bảo vệ Tiền thực thi & Chuẩn Định danh Phiên bản
+        </h2>
+      </div>
+
+      <!-- Two-column: PreToolUse Safety Sandbox & Dual-Track Versioning -->
+      <div class="overview-two-col">
+        <!-- PreToolUse Sandbox -->
+        <section class="sandbox-box glass-panel">
+          <div class="section-header">
+            <h3 class="section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Cơ chế PreToolUse Hook An toàn
+            </h3>
+            <span class="section-badge">validate-tool-call.mjs</span>
+          </div>
+          <p class="sandbox-desc">
+            Hook chặn trước khi thực thi lệnh (PreToolUse) cho <code>run_command</code>. Tự động kiểm tra và ngăn chặn các mẫu lệnh hủy diệt hệ thống mà không ảnh hưởng tới quyền hạn người dùng.
+          </p>
+
+          <div class="sandbox-input-group">
+            <label class="sandbox-label" for="sandbox-input">Thử nghiệm kiểm tra lệnh Bash:</label>
+            <div class="cmd-input-wrap">
+              <span class="cmd-prompt-sym">$</span>
+              <input type="text" id="sandbox-input" class="cmd-input" value="rm -rf /" placeholder="Nhập lệnh bash để kiểm tra..." spellcheck="false">
+            </div>
+          </div>
+
+          <div class="sandbox-quick-chips">
+            <span class="cmd-chip" data-cmd="rm -rf /">rm -rf /</span>
+            <span class="cmd-chip" data-cmd="sudo mkfs.ext4 /dev/sdb">mkfs.ext4 /dev/sdb</span>
+            <span class="cmd-chip" data-cmd="dd if=/dev/zero of=/dev/sda">dd of=/dev/sda</span>
+            <span class="cmd-chip" data-cmd="npm run test:antigravity">npm run test:antigravity</span>
+            <span class="cmd-chip" data-cmd="git status">git status</span>
+            <span class="cmd-chip" data-cmd="python3 .agents/scripts/validate_kit.py">python validate</span>
+          </div>
+
+          <button class="btn-primary" id="btn-test-sandbox">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Kiểm tra PreToolUse Gate
+          </button>
+
+          <div id="sandbox-result" class="sandbox-result blocked">
+            <!-- Simulated result -->
+          </div>
+        </section>
+
+        <!-- Dual-Track Versioning -->
+        <section class="versioning-card glass-panel">
+          <div class="section-header">
+            <h3 class="section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+              Dual-Track Versioning System
+            </h3>
+            <span class="section-badge">CalVer + SemVer</span>
+          </div>
+          <p class="sandbox-desc">
+            NDANHPC Kit áp dụng mô hình định danh phiên bản kép độc đáo nhằm phân biệt giữa bản phát hành toàn cục và chu kỳ phát triển của từng thành phần con:
+          </p>
+
+          <div class="version-track-grid">
+            <div class="track-box">
+              <div class="track-box-title">
+                Toolkit Track
+                <span class="badge-tag badge-cyan">CalVer</span>
+              </div>
+              <p class="track-desc">Đánh số theo ngày phát hành toàn hệ thống cho bộ cài và runtime:</p>
+              <div class="track-code">VERSION: 2026.10.10<br>package.json: 2026.10.10<br>web/package.json: 2026.10.10</div>
+            </div>
+
+            <div class="track-box">
+              <div class="track-box-title">
+                Component Track
+                <span class="badge-tag badge-emerald">SemVer</span>
+              </div>
+              <p class="track-desc">Đánh số độc lập cho từng Agent, Skill, Workflow, Rule:</p>
+              <div class="track-code">orchestrator: 1.0.0<br>clean-code: 2.0.0<br>orchestrate.md: 1.0.0<br>core-protocol: 1.0.0</div>
+            </div>
+          </div>
+
+          <div class="lock-integrity-note">
+            🔒 <strong>Deterministic Integrity:</strong> File <code>manifest.lock.json</code> lưu trữ băm SHA-256 cho toàn bộ 94 thành phần. Mọi thay đổi không qua script đồng bộ đều bị CI và Antigravity Doctor từ chối.
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         TAB 2: EXPLORER & CATALOG PANE
+         ========================================================= -->
+    <div id="tab-catalog" class="tab-pane" role="tabpanel">
+      <!-- Search & Filters Toolbar -->
+      <section class="catalog-controls glass-panel">
+        <div class="section-header" style="margin-bottom: 0.5rem;">
+          <h2 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Khám phá Danh mục Tác tử, Kỹ năng & Quy tắc
+          </h2>
+        </div>
+        <div class="catalog-search-row">
+          <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="catalog-search" class="catalog-search-input" placeholder="Tìm kiếm Agent, Skill, Workflow, Rule theo tên, mô tả hoặc tag... (/ để focus)">
+            <span class="kbd-shortcut">/</span>
+          </div>
+
+          <div class="type-filter-group">
+            <button class="type-filter-btn active" data-type="all">Tất cả <span class="type-count-badge" id="badge-count-all">94</span></button>
+            <button class="type-filter-btn" data-type="agent">Agents <span class="type-count-badge" id="badge-count-agents">24</span></button>
+            <button class="type-filter-btn" data-type="skill">Skills <span class="type-count-badge" id="badge-count-skills">51</span></button>
+            <button class="type-filter-btn" data-type="workflow">Workflows <span class="type-count-badge" id="badge-count-workflows">13</span></button>
+            <button class="type-filter-btn" data-type="rule">Rules <span class="type-count-badge" id="badge-count-rules">6</span></button>
+          </div>
+        </div>
+
+        <!-- Subcategory Filter Chips -->
+        <div class="subcat-chips-row" id="subcat-chips">
+          <!-- Dynamically populated chips -->
+        </div>
+      </section>
+
+      <!-- Catalog Results Grid -->
+      <div class="catalog-grid" id="catalog-grid">
+        <!-- Rendered items -->
+      </div>
+    </div>
+
+    <!-- =========================================================
+         TAB 3: MULTI-AGENT SIMULATOR PANE
+         ========================================================= -->
+    <div id="tab-simulator" class="tab-pane" role="tabpanel">
+      <div class="section-header" style="margin-bottom: 1.25rem;">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Mô phỏng Phối hợp Đa Tác tử (Multi-Agent Simulator)
+        </h2>
+        <span class="section-badge">Workflows: /orchestrate & /coordinate</span>
+      </div>
+
+      <div class="simulator-layout">
+        <!-- Left Sidebar: Controls & Presets -->
+        <aside class="sim-sidebar glass-panel">
+          <div>
+            <div class="sim-section-label">Chế độ điều phối</div>
+            <div class="sim-workflow-toggle">
+              <button class="sim-toggle-btn active" data-flow="orchestrate">/orchestrate</button>
+              <button class="sim-toggle-btn" data-flow="coordinate">/coordinate</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="sim-section-label">Loại bài toán (Task Presets)</div>
+            <div class="task-preset-list" id="preset-list">
+              <!-- Dynamically populated presets -->
+            </div>
+          </div>
+
+          <div>
+            <div class="sim-section-label">Mô tả bài toán</div>
+            <textarea id="custom-task-desc" class="custom-task-input" placeholder="Mô tả công việc cần điều phối..."></textarea>
+          </div>
+
+          <div class="sim-speed-wrap">
+            <span>Tốc độ mô phỏng:</span>
+            <select id="sim-speed" class="speed-select">
+              <option value="1000">1x (Thực tế)</option>
+              <option value="400">2.5x (Nhanh)</option>
+              <option value="50">Siêu tốc</option>
+            </select>
+          </div>
+
+          <div class="sim-run-actions">
+            <button class="btn-primary" id="btn-start-sim">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Bắt đầu mô phỏng
+            </button>
+            <button class="btn-secondary" id="btn-reset-sim">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+              Đặt lại
+            </button>
+          </div>
+        </aside>
+
+        <!-- Right Canvas: Flow Diagram & Execution Simulation -->
+        <section class="sim-stage glass-panel">
+          <div class="sim-stage-header">
+            <div class="sim-task-badge">
+              <span id="sim-task-name">Web Application</span>
+              <span class="badge-tag badge-cyan" id="sim-agent-min-badge">Tối thiểu 3 Agents</span>
+            </div>
+            <div class="sim-step-indicator" id="sim-step-indicator">Trạng thái: Chờ khởi chạy</div>
+          </div>
+
+          <!-- 3-Phase Orchestration Diagram -->
+          <div class="sim-diagram-container" id="sim-diagram-container">
+            <!-- Phase 1: Planning -->
+            <div class="sim-phase-block" id="sim-p1">
+              <div class="sim-phase-header">
+                <div class="sim-phase-title-wrap">
+                  <span class="sim-phase-badge">Phase 1</span>
+                  <span class="sim-phase-name">Sequential Planning (Tuần tự)</span>
+                </div>
+                <span class="sim-phase-rule">Chỉ project-planner / explorer-agent • Chưa code</span>
+              </div>
+              <div class="sim-agents-row" id="p1-agents">
+                <!-- Planning agent card -->
+              </div>
+              <div class="approval-gate-banner" id="approval-gate">
+                <div class="gate-text">⏸️ Checkpoint Approval Gate: Chờ người dùng phê duyệt kế hoạch <code>{task-slug}.md</code></div>
+                <div class="gate-actions">
+                  <button class="gate-btn-approve" id="btn-gate-approve">Phê duyệt (Y)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 2: Implementation -->
+            <div class="sim-phase-block" id="sim-p2">
+              <div class="sim-phase-header">
+                <div class="sim-phase-title-wrap">
+                  <span class="sim-phase-badge">Phase 2</span>
+                  <span class="sim-phase-name">Parallel Execution (Thực thi song song)</span>
+                </div>
+                <span class="sim-phase-rule">Bắt buộc ≥ 3 chuyên gia song song</span>
+              </div>
+              <div class="sim-agents-row" id="p2-agents">
+                <!-- Parallel agents cards -->
+              </div>
+            </div>
+
+            <!-- Phase 3: Synthesis & Verification -->
+            <div class="sim-phase-block" id="sim-p3">
+              <div class="sim-phase-header">
+                <div class="sim-phase-title-wrap">
+                  <span class="sim-phase-badge">Phase 3</span>
+                  <span class="sim-phase-name">Synthesis & Verification (Tổng hợp & Thẩm định)</span>
+                </div>
+                <span class="sim-phase-rule">orchestrator + security_scan + lint_runner</span>
+              </div>
+              <div class="sim-agents-row" id="p3-agents">
+                <!-- Synthesis agent card -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Terminal Simulator Output -->
+          <div>
+            <div class="sim-section-label">Nhật ký tiến trình thực thi (Execution Logs)</div>
+            <div class="sim-terminal" id="sim-terminal">
+              <div class="term-line info">[INIT] Simulator sẵn sàng. Hãy chọn loại bài toán và bấm 'Bắt đầu mô phỏng'.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         TAB 4: SLASH COMMAND & SETUP PANE
+         ========================================================= -->
+    <div id="tab-setup" class="tab-pane" role="tabpanel">
+      <div class="section-header" style="margin-bottom: 1.25rem;">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Trình tạo Lệnh Slash Command & Thiết lập Môi trường Antigravity
+        </h2>
+      </div>
+
+      <div class="setup-grid">
+        <!-- Slash Command Generator -->
+        <section class="generator-card glass-panel">
+          <div class="section-header">
+            <h3 class="section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              Trình tạo cú pháp Slash Command
+            </h3>
+            <span class="section-badge">1-Click Copy</span>
+          </div>
+
+          <div class="command-selector-tabs">
+            <button class="cmd-tab-btn active" data-cmd="/create">/create</button>
+            <button class="cmd-tab-btn" data-cmd="/orchestrate">/orchestrate</button>
+            <button class="cmd-tab-btn" data-cmd="/debug">/debug</button>
+            <button class="cmd-tab-btn" data-cmd="/plan">/plan</button>
+          </div>
+
+          <div id="generator-form">
+            <div class="form-group">
+              <label class="form-label" for="gen-task">Nội dung yêu cầu (Task / Problem):</label>
+              <input type="text" id="gen-task" class="form-input" value="Xây dựng hệ thống quản lý kho hàng với Next.js và Supabase">
+            </div>
+
+            <div class="form-group" id="form-group-stack">
+              <label class="form-label" for="gen-stack">Công nghệ ưu tiên (Tech Stack / Focus):</label>
+              <input type="text" id="gen-stack" class="form-input" value="Next.js 15, Tailwind v4, PostgreSQL, TypeScript">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="gen-mode">Chế độ thực thi (Mode):</label>
+              <select id="gen-mode" class="form-select">
+                <option value="plan">Plan Mode (4 pha chặt chẽ - Lập kế hoạch trước)</option>
+                <option value="edit">Edit Mode (Thực thi trực tiếp với orchestrator)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cmd-preview-box">
+            <label class="form-label">Cú pháp lệnh hoàn chỉnh:</label>
+            <div class="cmd-preview-code" id="cmd-preview-text">/create Xây dựng hệ thống quản lý kho hàng với Next.js và Supabase</div>
+          </div>
+
+          <button class="btn-primary" id="btn-copy-command" style="margin-top: 1rem; width: 100%;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Sao chép câu lệnh (Copy Command)
+          </button>
+        </section>
+
+        <!-- Antigravity Doctor Guide & MCP Config Hub -->
+        <section class="doctor-guide-card glass-panel">
+          <div class="section-header">
+            <h3 class="section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Hướng dẫn Antigravity Doctor
+            </h3>
+            <span class="section-badge">npm run check:antigravity</span>
+          </div>
+
+          <p class="sandbox-desc">
+            Doctor kiểm tra toàn diện hợp đồng 6 phases của runtime. Đảm bảo cấu trúc YAML, hash SHA-256 trong manifest.lock, hook an toàn và phiên bản luôn đồng bộ.
+          </p>
+
+          <div class="doctor-checklist">
+            <div class="check-item">
+              <div class="check-name-wrap">
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <div class="check-title">Discovery</div>
+                  <div class="check-sub">rules/ (6), skills/ (51), workflows/ (13) frontmatter hợp lệ</div>
+                </div>
+              </div>
+              <span class="check-status">PASS</span>
+            </div>
+
+            <div class="check-item">
+              <div class="check-name-wrap">
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <div class="check-title">MCP Configuration</div>
+                  <div class="check-sub">4 máy chủ trong mcp_config.json, không ghi ngầm vào thư mục home</div>
+                </div>
+              </div>
+              <span class="check-status">PASS</span>
+            </div>
+
+            <div class="check-item">
+              <div class="check-name-wrap">
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <div class="check-title">Hooks & PreToolUse</div>
+                  <div class="check-sub">hooks.json bật gate cho run_command qua validate-tool-call.mjs</div>
+                </div>
+              </div>
+              <span class="check-status">PASS</span>
+            </div>
+
+            <div class="check-item">
+              <div class="check-name-wrap">
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <div class="check-title">Orchestration & Validation</div>
+                  <div class="check-sub">Đồng bộ phiên bản 2026.10.10: .agents/VERSION, package.json, web/package.json</div>
+                </div>
+              </div>
+              <span class="check-status">PASS</span>
+            </div>
+          </div>
+
+          <!-- MCP Config Section -->
+          <div style="margin-top: 1rem;">
+            <div class="sim-section-label">Máy chủ MCP đã đăng ký (.agents/mcp_config.json)</div>
+            <div class="mcp-servers-grid">
+              <div class="mcp-server-box">
+                <div class="mcp-server-name">chrome-devtools</div>
+                <div class="mcp-server-desc">Kiểm thử giao diện headless, audit hiệu năng LCP/CLS</div>
+                <span class="mcp-badge">Browser Automation</span>
+              </div>
+              <div class="mcp-server-box">
+                <div class="mcp-server-name">puppeteer</div>
+                <div class="mcp-server-desc">Chụp ảnh màn hình UI, trích xuất DOM động</div>
+                <span class="mcp-badge">Headless Chrome</span>
+              </div>
+              <div class="mcp-server-box">
+                <div class="mcp-server-name">figma</div>
+                <div class="mcp-server-desc">Chuyển đổi Figma Frames sang code chuẩn token</div>
+                <span class="mcp-badge">Design-to-Code</span>
+              </div>
+              <div class="mcp-server-box">
+                <div class="mcp-server-name">context7</div>
+                <div class="mcp-server-desc">Truy vấn vector tài liệu thư viện mở rộng</div>
+                <span class="mcp-badge">Semantic Docs</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Component Detail Modal -->
+  <div id="detail-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div id="modal-kind-icon" class="item-kind-icon">A</div>
+          <div>
+            <h3 id="modal-title" class="modal-title">Agent Name</h3>
+            <span id="modal-subtitle" class="item-meta-sub">Specialist Agent</span>
+          </div>
+        </div>
+        <button id="modal-close" class="modal-close-btn" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="modal-section-title">Mô tả chi tiết</div>
+          <p id="modal-desc" class="modal-desc-box"></p>
+        </div>
+
+        <div id="modal-tools-section">
+          <div class="modal-section-title">Công cụ được cấp phép (Tools)</div>
+          <div id="modal-tools" class="card-tags"></div>
+        </div>
+
+        <div id="modal-requires-section">
+          <div class="modal-section-title">Kỹ năng & Ràng buộc yêu cầu (Requires)</div>
+          <div id="modal-requires" class="card-tags"></div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">Mẫu lời nhắc kích hoạt (Prompt Template)</div>
+          <pre id="modal-prompt" class="modal-prompt-box"></pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-btn-close">Đóng</button>
+        <button class="btn-primary" id="modal-btn-copy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Sao chép Prompt 1-Click
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Logic -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
