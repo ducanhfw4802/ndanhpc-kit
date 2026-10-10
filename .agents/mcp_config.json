@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "YOUR_API_KEY"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "/root/.nvm/versions/node/v24.21.0/bin/chrome-devtools-mcp",
+      "args": [
+        "--headless",
+        "--chrome-arg=--no-sandbox",
+        "--chrome-arg=--disable-setuid-sandbox",
+        "--no-usage-statistics",
+        "--executablePath=/usr/bin/google-chrome"
+      ],
+      "disabled": false
+    },
+    "puppeteer": {
+      "command": "/root/.nvm/versions/node/v24.21.0/bin/mcp-server-puppeteer",
+      "args": [],
+      "env": {
+        "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/google-chrome"
+      },
+      "disabled": false
+    },
+    "figma": {
+      "command": "/root/.nvm/versions/node/v24.21.0/bin/scalably-figma-mcp",
+      "args": [],
+      "env": {
+        "FIGMA_TOKEN": ""
+      },
+      "disabled": false
+    }
+  }
+}

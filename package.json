@@ -1,0 +1,18 @@
+{
+  "name": "ndanhpc-kit",
+  "version": "2026.10.10",
+  "description": "NDANHPC Kit - Antigravity-native AI Agent Capability Toolkit",
+  "author": "ndanhpc",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:agents": "python3 .agents/scripts/validate_kit.py",
+    "check:antigravity": "node .agents/hooks/antigravity-doctor.mjs",
+    "test:antigravity": "node .agents/hooks/tests/antigravity.test.mjs",
+    "test:toolkit": "python3 .agents/scripts/tests/test_toolkit.py",
+    "verify": "python3 .agents/scripts/verify_all.py",
+    "manifest": "python3 .agents/scripts/generate_manifest.py",
+    "deps": "python3 .agents/scripts/dependency_graph.py"
+  }
+}
