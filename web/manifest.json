@@ -1,11 +1,11 @@
 {
-  "kitVersion": "2026.10.10",
+  "kitVersion": "2026.10.13",
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
-    "skills": 51,
-    "workflows": 13,
-    "rules": 6
+    "skills": 61,
+    "workflows": 29,
+    "rules": 7
   },
   "agents": [
     {
@@ -455,8 +455,18 @@
       ],
       "skills": [
         "clean-code",
+        "flaky-test-analyzer",
+        "jira-integration",
         "lint-and-validate",
+        "locator-healer",
+        "qa-automation-workflow",
+        "qa-framework-architect",
+        "rbt-manual-testing",
+        "requirements-analyzer",
+        "smart-locator",
+        "test-data-generator",
         "testing-patterns",
+        "ui-debug",
         "web-design-guidelines",
         "webapp-testing"
       ],
@@ -528,7 +538,10 @@
         "clean-code",
         "code-review-checklist",
         "lint-and-validate",
+        "qa-automation-workflow",
+        "rbt-manual-testing",
         "tdd-workflow",
+        "test-data-generator",
         "testing-patterns",
         "webapp-testing"
       ],
@@ -834,6 +847,23 @@
       "category": "Other"
     },
     {
+      "id": "flaky-test-analyzer",
+      "name": "flaky-test-analyzer",
+      "description": "Phân tích và khắc phục các automation test không ổn định (flaky tests), xác định root cause và đề xuất fix.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/flaky-test-analyzer/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
       "id": "frontend-architecture",
       "name": "frontend-architecture",
       "description": "How to organize frontend code — separation of concerns (UI / logic / data / type), file responsibility, state tiers, API services, schema validation, and framework conventions for React/Next and Vue. Structural rules, not visual design.",
@@ -933,6 +963,23 @@
       "category": "Orchestration & Memory"
     },
     {
+      "id": "jira-integration",
+      "name": "jira-integration",
+      "description": "Tích hợp Jira và Xray — lấy requirements/user stories từ Jira, xác thực Xray, và đẩy kết quả test lên Xray Cloud/Server.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/jira-integration/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
       "id": "lint-and-validate",
       "name": "lint-and-validate",
       "description": "Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers on keywords: lint, format, check, validate, types, static analysis.",
@@ -948,6 +995,23 @@
         "skills/lint-and-validate/scripts/type_coverage.py"
       ],
       "path": "skills/lint-and-validate/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
+      "id": "locator-healer",
+      "name": "locator-healer",
+      "description": "Tự động phát hiện và sửa chữa locators bị hỏng khi UI automation tests fail do thay đổi DOM.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/locator-healer/SKILL.md",
       "category": "Testing & Quality"
     },
     {
@@ -1131,6 +1195,57 @@
       "category": "Backend & API"
     },
     {
+      "id": "qa-automation-workflow",
+      "name": "qa-automation-workflow",
+      "description": "Quy trình kiểm thử automation toàn diện: sinh test script Playwright/Selenium/Appium/API, chuẩn POM, smart waits, tự động debug và verify.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/qa-automation-workflow/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
+      "id": "qa-framework-architect",
+      "name": "qa-framework-architect",
+      "description": "Thiết kế và scaffold automation framework hoàn chỉnh cho Playwright, Selenium, và Appium — bao gồm POM, base classes, config, reporting.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/qa-framework-architect/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
+      "id": "rbt-manual-testing",
+      "name": "rbt-manual-testing",
+      "description": "Sinh manual test cases với 2 modes: QUICK (sinh nhanh từ requirements) và FULL RBT (quy trình AI-RBT 6 bước có đánh giá rủi ro).",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/rbt-manual-testing/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
       "id": "red-team-tactics",
       "name": "red-team-tactics",
       "description": "Red team tactics principles based on MITRE ATT&CK. Attack phases, detection evasion, reporting.",
@@ -1143,6 +1258,23 @@
       "scripts": [],
       "path": "skills/red-team-tactics/SKILL.md",
       "category": "Security"
+    },
+    {
+      "id": "requirements-analyzer",
+      "name": "requirements-analyzer",
+      "description": "Kỹ năng phân tích trang web/module và sinh ra tài liệu Yêu cầu (Requirements Document/User Stories) chuẩn mực.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/requirements-analyzer/SKILL.md",
+      "category": "Testing & Quality"
     },
     {
       "id": "responsive-web-design",
@@ -1243,6 +1375,23 @@
       "category": "Other"
     },
     {
+      "id": "smart-locator",
+      "name": "smart-locator",
+      "description": "Sinh locator ổn định, bền vững và dễ bảo trì cho UI automation (Playwright, Selenium, Appium), ưu tiên semantic và data-testid.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/smart-locator/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
       "id": "systematic-debugging",
       "name": "systematic-debugging",
       "description": "4-phase systematic debugging methodology with root cause analysis and evidence-based verification. Use when debugging complex issues.",
@@ -1290,6 +1439,23 @@
       "category": "Testing & Quality"
     },
     {
+      "id": "test-data-generator",
+      "name": "test-data-generator",
+      "description": "Sinh test data có cấu trúc, unique, traceable (timestamp/random prefix) cho automation tests, hỗ trợ combinatorial pairwise test data.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/test-data-generator/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
       "id": "testing-patterns",
       "name": "testing-patterns",
       "description": "Testing patterns and principles. Unit, integration, mocking strategies.",
@@ -1306,6 +1472,23 @@
         "skills/testing-patterns/scripts/test_runner.py"
       ],
       "path": "skills/testing-patterns/SKILL.md",
+      "category": "Testing & Quality"
+    },
+    {
+      "id": "ui-debug",
+      "name": "ui-debug",
+      "description": "Inspect web/mobile applications bằng browser tools, phân tích DOM elements, chụp snapshot, debug UI automation failures với viewport 1920x1080 headed.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [],
+      "path": "skills/ui-debug/SKILL.md",
       "category": "Testing & Quality"
     },
     {
@@ -1411,6 +1594,46 @@
     }
   ],
   "workflows": [
+    {
+      "id": "analyze-flaky-tests",
+      "name": "/analyze_flaky_tests",
+      "slug": "analyze-flaky-tests",
+      "description": "Phân tích và khắc phục các automation test không ổn định (flaky tests).",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "flaky-test-analyzer",
+          "qa-automation-workflow"
+        ]
+      },
+      "artifactOutputs": [
+        "test-report"
+      ],
+      "path": "workflows/analyze-flaky-tests.md"
+    },
+    {
+      "id": "analyze-requirement-document",
+      "name": "/analyze_requirement_document",
+      "slug": "analyze-requirement-document",
+      "description": "Phân tích requirement document (Jira/.doc) — sinh tài liệu phân tích nghiệp vụ, rủi ro, gap và test scope.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "rbt-manual-testing"
+        ]
+      },
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/analyze-requirement-document.md"
+    },
     {
       "id": "brainstorm",
       "name": "/brainstorm",
@@ -1542,6 +1765,285 @@
         "verification-report"
       ],
       "path": "workflows/enhance.md"
+    },
+    {
+      "id": "fetch-jira-requirements",
+      "name": "/fetch_jira_requirements",
+      "slug": "fetch-jira-requirements",
+      "description": "Lấy requirements/user stories từ Jira và lưu trữ thành tài liệu Markdown.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "jira-integration",
+          "requirements-analyzer"
+        ]
+      },
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/fetch-jira-requirements.md"
+    },
+    {
+      "id": "generate-api-tests-from-swagger",
+      "name": "/generate_api_tests_from_swagger",
+      "slug": "generate-api-tests-from-swagger",
+      "description": "Sinh API automation test scripts tự động từ Swagger/OpenAPI spec.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-automation-workflow",
+          "test-data-generator"
+        ]
+      },
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-api-tests-from-swagger.md"
+    },
+    {
+      "id": "generate-application-test-plan",
+      "name": "/generate_application_test_plan",
+      "slug": "generate-application-test-plan",
+      "description": "Khám phá toàn diện ứng dụng web/mobile và xây dựng Test Plan chiến lược hoặc Full Test Suite.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "rbt-manual-testing",
+          "ui-debug"
+        ]
+      },
+      "artifactOutputs": [
+        "test-plan"
+      ],
+      "path": "workflows/generate-application-test-plan.md"
+    },
+    {
+      "id": "generate-automation-framework",
+      "name": "/generate_automation_framework",
+      "slug": "generate-automation-framework",
+      "description": "Thiết kế và scaffold khung automation test hoàn chỉnh cho Playwright, Selenium, hoặc Appium.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-framework-architect",
+          "qa-automation-workflow"
+        ]
+      },
+      "artifactOutputs": [
+        "automation-framework"
+      ],
+      "path": "workflows/generate-automation-framework.md"
+    },
+    {
+      "id": "generate-automation-from-testcases",
+      "name": "/generate_automation_from_testcases",
+      "slug": "generate-automation-from-testcases",
+      "description": "Chuyển đổi Manual Test Cases thành kịch bản Automation Test (Playwright, Selenium) theo chuẩn POM.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-automation-workflow",
+          "smart-locator",
+          "test-data-generator"
+        ]
+      },
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-automation-from-testcases.md"
+    },
+    {
+      "id": "generate-automation-from-ui-flow",
+      "name": "/generate_automation_from_ui_flow",
+      "slug": "generate-automation-from-ui-flow",
+      "description": "Trực tiếp điều tra UI flow trên trình duyệt và tự động sinh mã automation test.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "ui-debug",
+          "smart-locator",
+          "qa-automation-workflow"
+        ]
+      },
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-automation-from-ui-flow.md"
+    },
+    {
+      "id": "generate-combinatorial-test-data",
+      "name": "/generate_combinatorial_test_data",
+      "slug": "generate-combinatorial-test-data",
+      "description": "Sinh bộ dữ liệu kiểm thử tổ hợp (Pairwise/Orthogonal Array) từ ma trận kết hợp.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "test-data-generator"
+        ]
+      },
+      "artifactOutputs": [
+        "test-data"
+      ],
+      "path": "workflows/generate-combinatorial-test-data.md"
+    },
+    {
+      "id": "generate-cross-module-test-plan",
+      "name": "/generate_cross_module_test_plan",
+      "slug": "generate-cross-module-test-plan",
+      "description": "Phân tích kiểm thử tương tác đa module (Cross-Module) và sinh ma trận kết hợp Pairwise.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing",
+          "test-data-generator"
+        ]
+      },
+      "artifactOutputs": [
+        "test-plan"
+      ],
+      "path": "workflows/generate-cross-module-test-plan.md"
+    },
+    {
+      "id": "generate-locator",
+      "name": "/generate_locator",
+      "slug": "generate-locator",
+      "description": "Phân tích DOM và sinh locator bền vững, tối ưu cho Playwright, Selenium, hoặc Appium.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "smart-locator",
+          "ui-debug"
+        ]
+      },
+      "artifactOutputs": [
+        "locator-spec"
+      ],
+      "path": "workflows/generate-locator.md"
+    },
+    {
+      "id": "generate-manual-testcases-rbt",
+      "name": "/generate_manual_testcases_rbt",
+      "slug": "generate-manual-testcases-rbt",
+      "description": "Sinh manual test cases chất lượng cao theo quy trình AI-RBT 6 bước (Risk-Based Testing).",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing",
+          "requirements-analyzer"
+        ]
+      },
+      "artifactOutputs": [
+        "test-cases"
+      ],
+      "path": "workflows/generate-manual-testcases-rbt.md"
+    },
+    {
+      "id": "generate-requirements-from-website",
+      "name": "/generate_requirements_from_website",
+      "slug": "generate-requirements-from-website",
+      "description": "Trực tiếp duyệt website và trích xuất tài liệu Requirements / User Stories chuẩn mực.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "ui-debug"
+        ]
+      },
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/generate-requirements-from-website.md"
+    },
+    {
+      "id": "generate-test-data",
+      "name": "/generate_test_data",
+      "slug": "generate-test-data",
+      "description": "Sinh tập dữ liệu test có cấu trúc, unique, traceable và phù hợp với nhiều miền giá trị.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "test-data-generator"
+        ]
+      },
+      "artifactOutputs": [
+        "test-data"
+      ],
+      "path": "workflows/generate-test-data.md"
+    },
+    {
+      "id": "generate-testcases-from-requirements",
+      "name": "/generate_testcases_from_requirements",
+      "slug": "generate-testcases-from-requirements",
+      "description": "Sinh test cases nhanh chóng từ tài liệu requirements (Quick Mode).",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing"
+        ]
+      },
+      "artifactOutputs": [
+        "test-cases"
+      ],
+      "path": "workflows/generate-testcases-from-requirements.md"
+    },
+    {
+      "id": "import-test-results-xray",
+      "name": "/import_test_results_xray",
+      "slug": "import-test-results-xray",
+      "description": "Xác thực và tự động import kết quả test execution lên Jira Xray Cloud/Server.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "jira-integration"
+        ]
+      },
+      "artifactOutputs": [
+        "test-report"
+      ],
+      "path": "workflows/import-test-results-xray.md"
     },
     {
       "id": "orchestrate",
@@ -1712,6 +2214,15 @@
       "version": "1.0.0",
       "description": "Anti-slop UI design principles, purple ban enforcement, high contrast, clean typography, responsive layout contracts.",
       "path": "rules/design-rules.md"
+    },
+    {
+      "id": "qa-testing-rules",
+      "name": "qa-testing-rules",
+      "priority": "P1",
+      "trigger": "model_decision",
+      "version": "1.0.0",
+      "description": "Strict guidelines for QA testing, manual test case design, locator strategy, smart waits, Playwright/Selenium/Appium automation, and API verification.",
+      "path": "rules/qa-testing-rules.md"
     },
     {
       "id": "quick-reference",

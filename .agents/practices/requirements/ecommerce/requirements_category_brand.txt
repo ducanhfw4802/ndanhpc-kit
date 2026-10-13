@@ -1,0 +1,402 @@
+TÀI LIỆU YÊU CẦU CHỨC NĂNG
+Hệ thống: eCommerce CMS (https://ecommerce.anhtester.com)
+Phiên bản: 1.0
+Ngày tạo: 2026-03-19
+Người tạo: QA Engineer / Business Analyst
+Module: Category và Brand (thuộc menu Products)
+
+================================================================================
+
+PHẦN 1: MODULE CATEGORY (QUẢN LÝ DANH MỤC SẢN PHẨM)
+
+================================================================================
+
+1. TỔNG QUAN (Overview)
+--------------------------------------------------------------------------------
+
+Module Category là chức năng quản lý danh mục sản phẩm trong hệ thống eCommerce CMS
+dành cho người dùng có vai trò Admin. Module cho phép quản trị viên tạo mới, chỉnh sửa,
+xóa và quản lý các danh mục sản phẩm theo cấu trúc phân cấp (cha - con).
+
+URL truy cập: https://ecommerce.anhtester.com/admin/categories
+Phân quyền: Chỉ dành cho tài khoản Admin đã đăng nhập.
+
+
+2. YÊU CẦU CHỨC NĂNG (Functional Requirements)
+--------------------------------------------------------------------------------
+
+2.1 Xem danh sách Danh mục (View Category List)
+
+Mô tả:
+Người quản trị có thể xem toàn bộ danh sách danh mục sản phẩm hiện có trong hệ thống
+trên một trang danh sách được tổ chức theo dạng bảng.
+
+Tiêu chí chấp nhận:
+- Hệ thống hiển thị danh sách danh mục dưới dạng bảng với các cột:
+  STT (#), Name (Tên danh mục), Parent Category (Danh mục cha), Order Level
+  (Thứ tự hiển thị), Level (Cấp độ), Banner, Icon, Cover Image, Featured
+  (Nổi bật), Hot Category (Danh mục hot), Options (Hành động).
+- Người dùng có thể tìm kiếm danh mục theo tên thông qua ô tìm kiếm "Type name & Enter".
+- Bảng hiển thị phân trang khi dữ liệu lớn.
+
+
+2.2 Thêm mới Danh mục (Add New Category)
+
+Mô tả:
+Người quản trị có thể thêm mới danh mục sản phẩm vào hệ thống.
+
+Tiêu chí chấp nhận:
+- Người dùng nhấn nút "Add New" để mở form tạo danh mục mới.
+  URL form: https://ecommerce.anhtester.com/admin/categories/create
+- Người dùng điền các thông tin cập nhật và nhấn nút "Save" để lưu.
+- Hệ thống kiểm tra ràng buộc dữ liệu trước khi lưu.
+- Khi lưu thành công, hệ thống hiển thị thông báo thành công và chuyển về trang danh sách.
+- Khi có lỗi, hệ thống hiển thị thông báo lỗi tương ứng.
+
+
+2.3 Chỉnh sửa Danh mục (Edit Category)
+
+Mô tả:
+Người quản trị có thể chọn chỉnh sửa thông tin một danh mục đã tồn tại.
+
+Tiêu chí chấp nhận:
+- Tại cột Options, người dùng nhấn icon Edit (bút chì màu xanh) để mở form chỉnh sửa.
+  URL format: https://ecommerce.anhtester.com/admin/categories/edit/{id}?lang=en
+- Form chỉnh sửa hiển thị đầy đủ thông tin hiện tại của danh mục.
+- Form Edit có thêm trường Slug (so với form Add).
+- Hệ thống sử dụng HTTP method PATCH để cập nhật dữ liệu.
+- Khi lưu thành công, hệ thống thông báo thành công và chuyển về trang danh sách.
+
+
+2.4 Xóa Danh mục (Delete Category)
+
+Mô tả:
+Người quản trị có thể xóa một danh mục ra khỏi hệ thống.
+
+Tiêu chí chấp nhận:
+- Tại cột Options, người dùng nhấn icon Delete (thùng rác màu đỏ) để thực hiện xóa.
+- Hệ thống hiển thị modal xác nhận với:
+  + Tiêu đề: "Delete Confirmation"
+  + Nội dung: "Are you sure to delete this?"
+  + Nút: "Delete" (xác nhận xóa) và "Cancel" (hủy bỏ)
+- Khi người dùng xác nhận xóa, hệ thống xóa danh mục và hiển thị thông báo thành công.
+- URL xóa: https://ecommerce.anhtester.com/admin/categories/destroy/{id}
+
+
+2.5 Đánh dấu Nổi bật - Featured (Toggle Featured)
+
+Mô tả:
+Người quản trị có thể bật/tắt trạng thái "Nổi bật" cho từng danh mục ngay trong bảng danh sách.
+
+Tiêu chí chấp nhận:
+- Tại cột "Featured", có switch toggle dạng checkbox.
+- Người dùng click để thay đổi trạng thái (bật/tắt).
+- Hệ thống cập nhật trạng thái qua hàm JavaScript "update_featured(this)" và gọi API không tải lại trang.
+
+
+2.6 Đánh dấu Danh mục Hot (Toggle Hot Category)
+
+Mô tả:
+Người quản trị có thể bật/tắt trạng thái "Hot" cho từng danh mục ngay trong bảng danh sách.
+
+Tiêu chí chấp nhận:
+- Tại cột "Hot Category", có switch toggle dạng checkbox.
+- Người dùng click để thay đổi trạng thái (bật/tắt).
+- Hệ thống cập nhật trạng thái qua hàm JavaScript "update_hot(this)" và gọi API không tải lại trang.
+
+
+3. QUY TẮC TRƯỜNG DỮ LIỆU - FORM CATEGORY (Field Specifications)
+--------------------------------------------------------------------------------
+
+Form Tạo mới (Add New) - URL: /admin/categories/create
+Form Chỉnh sửa (Edit) - URL: /admin/categories/edit/{id}?lang=en
+
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Tên Trường (Label) | Loại (Type)    | Bắt buộc? | Placeholder/Default| Ghi chú                                  |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Name               | text           | Có        | "Name"             | ID: name. Bắt buộc khi tạo và sửa.       |
+|                    |                |           |                    | Validation: "Please fill out this field."|
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Type               | select         | Có        | Mặc định: Physical | Giá trị: Physical (0), Digital (1).      |
+|                    |                |           |                    | name="digital". Bắt buộc.                |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Parent Category    | select         | Không     | Mặc định: No Parent| name="parent_id". Danh sách phân cấp     |
+|                    |                |           |                    | (dấu "--" là con, "----" là cháu).       |
+|                    |                |           |                    | Cho phép không có cha (root category).   |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Ordering Number    | number         | Không     | "Order Level"      | name="order_level", id="order_level".    |
+|                    |                |           |                    | Ghi chú: "Higher number has high         |
+|                    |                |           |                    |  priority" (Số lớn có ưu tiên cao hơn)   |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Banner             | file (hidden)  | Không     | Nút "Browse" /     | name="banner". Nút "Choose File".        |
+|                    |                |           | "Choose File"      | Yêu cầu: Tối thiểu 150px x 150px.        |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Icon               | file (hidden)  | Không     | Nút "Browse" /     | name="icon". Nút "Choose File".          |
+|                    |                |           | "Choose File"      | Yêu cầu: Tối thiểu 16px x 16px.          |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Cover Image        | file (hidden)  | Không     | Nút "Browse" /     | name="cover_image". Nút "Choose File".   |
+|                    |                |           | "Choose File"      | Yêu cầu: Tối thiểu 260px x 260px.        |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta Title         | text           | Không     | "Meta Title"       | name="meta_title". SEO title.            |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta description   | textarea       | Không     | (trống)            | name="meta_description". SEO description.|
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta Keywords      | textarea       | Không     | "Keyword, Keyword" | name="meta_keywords".                    |
+|                    |                |           |                    | Phân cách bằng dấu phẩy.                 |
+|                    |                |           |                    | Ghi chú: "Separate with coma"            |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Filtering Attributes| multiselect   | Không     | "Nothing selected" | name="filtering_attributes[]".           |
+|                    |                |           |                    | Lựa chọn nhiều. Options: Size, Fabric.   |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Slug               | text           | Không     | "Slug"             | name="slug", id="slug".                  |
+|                    |                |           |                    | Chỉ hiển thị ở form Edit, không có ở     |
+|                    |                |           |                    | form tạo mới.                            |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+
+Các nút (Buttons) trong form:
+- Save (type="submit"): Lưu thông tin danh mục.
+
+Các nút trong trang danh sách:
+- Add New: Mở form tạo mới danh mục.
+- Edit (icon bút chì): Chỉnh sửa danh mục.
+- Delete (icon thùng rác): Xóa danh mục.
+- Featured toggle: Bật/tắt trạng thái nổi bật.
+- Hot Category toggle: Bật/tắt trạng thái hot.
+
+Tính năng tìm kiếm:
+- Ô tìm kiếm: name="search", placeholder="Type name & Enter".
+- Phương thức: GET.
+
+
+4. LUỒNG XỬ LÝ VÀ NGHIỆP VỤ (Business Rules & Validations)
+--------------------------------------------------------------------------------
+
+4.1 Luồng thêm mới Danh mục (Happy Path):
+1. Admin đăng nhập thành công vào hệ thống.
+2. Trong menu Products, chọn Category.
+3. Hệ thống hiển thị trang danh sách /admin/categories.
+4. Admin nhấn nút "Add New" (btn btn-soft-blue).
+5. Hệ thống chuyển đến trang /admin/categories/create.
+6. Admin điền thông tin: trường Name bắt buộc, các trường khác tùy chọn.
+7. Admin nhấn nút "Save".
+8. Hệ thống kiểm tra validation: nếu tên rỗng -> hiển thị "Please fill out this field."
+9. Nếu hợp lệ: lưu dữ liệu, hiển thị thông báo thành công, quay về trang danh sách.
+
+4.2 Luồng chỉnh sửa Danh mục:
+1. Admin ở trang danh sách, nhấn icon Edit (btn-soft-primary) tại cột Options.
+2. Hệ thống chuyển đến /admin/categories/edit/{id}?lang=en.
+3. Form hiển thị đầy đủ thông tin danh mục hiện tại.
+4. Admin thay đổi thông tin, nhấn nút "Save".
+5. Hệ thống gửi yêu cầu PATCH.
+6. Khi cập nhật thành công, hiển thị thông báo và quay về danh sách.
+
+4.3 Luồng xóa Danh mục:
+1. Admin tại trang danh sách, nhấn icon Delete (btn-soft-danger) tại cột Options.
+2. Hệ thống hiển thị modal xác nhận: "Delete Confirmation" / "Are you sure to delete this?".
+3. Admin nhấn nút "Delete" để xác nhận, hoặc "Cancel" để hủy.
+4. Khi xác nhận: hệ thống gửi yêu cầu đến /admin/categories/destroy/{id}, xóa bản ghi.
+5. Hệ thống hiển thị thông báo thành công và refresh danh sách.
+
+4.4 Luồng bật/tắt Featured / Hot Category:
+1. Admin tại trang danh sách, tìm đến cột "Featured" hoặc "Hot Category".
+2. Mỗi danh mục có một switch toggle (aiz-switch-success).
+3. Admin click vào switch để bật hoặc tắt.
+4. Hệ thống gọi hàm update_featured(this) hoặc update_hot(this) qua AJAX.
+5. Trang không tải lại, trạng thái được cập nhật ngay lập tức.
+
+4.5 Quy tắc nghiệp vụ danh mục cha - con (Parent-Child Hierarchy):
+- Danh mục có thể không có cha (root category: value = 0, text = "No Parent").
+- Danh mục cấp 1: chỉ có tên (ví dụ: "Computer & Accessories").
+- Danh mục cấp 2: tên có tiền tố "--" (ví dụ: "-- Laptop Accessories").
+- Danh mục cấp 3: tên có tiền tố "----" (ví dụ: "---- Sinks and kitchen taps").
+- Khi tạo danh mục con, chọn Parent Category tương ứng.
+- Cột "Level" trong danh sách hiển thị cấp độ của danh mục.
+
+4.6 Quy tắc hình ảnh:
+- Banner: Kích thước tối thiểu: 150px x 150px.
+- Icon: Kích thước tối thiểu: 16px x 16px.
+- Cover Image: Kích thước tối thiểu: 260px x 260px.
+
+4.7 Quy tắc tìm kiếm:
+- Người dùng nhập tên danh mục vào ô tìm kiếm và nhấn Enter.
+- Hệ thống lọc danh sách theo tên.
+- Phương thức GET, tham số: search.
+
+
+================================================================================
+
+PHẦN 2: MODULE BRAND (QUẢN LÝ NHÃN HÀNG)
+
+================================================================================
+
+1. TỔNG QUAN (Overview)
+--------------------------------------------------------------------------------
+
+Module Brand là chức năng quản lý nhãn hàng/thương hiệu sản phẩm trong hệ thống
+eCommerce CMS dành cho người dùng có vai trò Admin. Module cho phép quản trị viên
+tạo mới, chỉnh sửa và xóa các nhãn hàng sản phẩm.
+
+URL truy cập: https://ecommerce.anhtester.com/admin/brands
+Phân quyền: Chỉ dành cho tài khoản Admin đã đăng nhập.
+
+
+2. YÊU CẦU CHỨC NĂNG (Functional Requirements)
+--------------------------------------------------------------------------------
+
+2.1 Xem danh sách Nhãn hàng (View Brand List)
+
+Mô tả:
+Người quản trị có thể xem toàn bộ danh sách nhãn hàng hiện có trong hệ thống
+dưới dạng bảng.
+
+Tiêu chí chấp nhận:
+- Hệ thống hiển thị danh sách nhãn hàng dưới dạng bảng với các cột:
+  STT (#), Name (Tên nhãn hàng), Logo (Logo thương hiệu), Options (Hành động).
+- Người dùng có thể tìm kiếm theo tên nhãn hàng qua ô tìm kiếm "Type name & Enter".
+
+
+2.2 Thêm mới Nhãn hàng (Add New Brand)
+
+Mô tả:
+Người quản trị có thể thêm mới nhãn hàng vào hệ thống thông qua form inline
+(tích hợp trong trang danh sách).
+
+Tiêu chí chấp nhận:
+- Người dùng nhấn nút "Add New" để hiển thị form thêm mới (inline trong trang).
+- Hệ thống hiển thị form thêm mới với các trường: Name, Logo, Meta Title, Meta Description, Meta Keywords.
+- Người dùng điền thông tin và nhấn nút "Save" để lưu.
+- Hệ thống kiểm tra ràng buộc: trường Name bắt buộc.
+- Khi lưu thành công, hiển thị thông báo thành công và cập nhật danh sách.
+- Người dùng có thể nhấn "Cancel" để đóng form mà không lưu.
+
+
+2.3 Chỉnh sửa Nhãn hàng (Edit Brand)
+
+Mô tả:
+Người quản trị có thể chọn chỉnh sửa thông tin một nhãn hàng đã tồn tại.
+
+Tiêu chí chấp nhận:
+- Tại cột Options, người dùng nhấn icon Edit để mở form chỉnh sửa trên trang mới.
+  URL format: https://ecommerce.anhtester.com/admin/brands/edit/{id}?lang=en
+- Form chỉnh sửa hiển thị đầy đủ thông tin hiện tại của nhãn hàng.
+- Form Edit có thêm trường Slug (so với form Add).
+- Hệ thống sử dụng HTTP method PATCH để cập nhật dữ liệu.
+- Khi lưu thành công, hiển thị thông báo thành công và chuyển về trang danh sách.
+
+
+2.4 Xóa Nhãn hàng (Delete Brand)
+
+Mô tả:
+Người quản trị có thể xóa một nhãn hàng ra khỏi hệ thống.
+
+Tiêu chí chấp nhận:
+- Tại cột Options, người dùng nhấn icon Delete để thực hiện xóa.
+- Hệ thống hiển thị modal xác nhận:
+  + Tiêu đề: "Delete Confirmation"
+  + Nội dung: "Are you sure to delete this?"
+  + Nút: "Delete" (xác nhận) và "Cancel" (hủy bỏ)
+- Khi xác nhận xóa, hệ thống xóa nhãn hàng và hiển thị thông báo.
+
+
+3. QUY TẮC TRƯỜNG DỮ LIỆU - FORM BRAND (Field Specifications)
+--------------------------------------------------------------------------------
+
+Form Add New Brand (Inline trong trang danh sách, POST đến /admin/brands)
+Form Edit Brand - URL: /admin/brands/edit/{id}?lang=en
+
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Tên Trường (Label) | Loại (Type)    | Bắt buộc? | Placeholder/Default| Ghi chú                                  |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Name               | text           | Có        | "Name"             | name="name", id="name".                  |
+|                    |                |           |                    | Bắt buộc. Hiển thị trong hàng danh sách. |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Logo               | file (hidden)  | Không     | (trống)            | name="logo". Upload ảnh logo nhãn hàng.  |
+|                    |                |           |                    | Hiển thị trong cột Logo của bảng.        |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta Title         | text           | Không     | "Meta Title"       | name="meta_title". SEO title.            |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta description   | textarea       | Không     | (trống)            | name="meta_description". SEO description.|
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Meta Keywords      | textarea       | Không     | "Keyword, Keyword" | name="meta_keywords".                    |
+|                    |                |           |                    | Phân cách bằng dấu phẩy.                 |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+| Slug               | text           | Không     | "Slug"             | name="slug", id="slug".                  |
+|                    |                |           |                    | Chỉ hiển thị ở form Edit, không có ở     |
+|                    |                |           |                    | form thêm mới. Tự động sinh từ Name.     |
+|                    |                |           |                    | Ví dụ: "addidas-ysxch".                  |
++--------------------+----------------+-----------+--------------------+------------------------------------------+
+
+Các nút (Buttons) trong form Add New (inline):
+- Save (btn btn-primary): Lưu thông tin nhãn hàng.
+- Cancel (btn btn-secondary): Hủy bỏ, đóng form.
+
+Các nút trong trang danh sách:
+- Add New: Hiển thị form thêm mới inline.
+- Edit (icon bút chì): Chuyển đến trang chỉnh sửa.
+- Delete (icon thùng rác): Xóa nhãn hàng.
+
+Tính năng tìm kiếm:
+- Ô tìm kiếm: name="search", placeholder="Type name & Enter".
+- Phương thức: GET, form id="sort_brands".
+
+
+4. LUỒNG XỬ LÝ VÀ NGHIỆP VỤ (Business Rules & Validations)
+--------------------------------------------------------------------------------
+
+4.1 Luồng thêm mới Nhãn hàng (Happy Path):
+1. Admin đăng nhập thành công vào hệ thống.
+2. Trong menu Products, chọn Brand.
+3. Hệ thống hiển thị trang danh sách /admin/brands.
+4. Admin nhấn nút "Add New".
+5. Form inline hiển thị bên dưới danh sách với các trường nhập liệu.
+6. Admin điền thông tin: trường Name bắt buộc, các trường khác tùy chọn.
+7. Admin nhấn nút "Save".
+8. Hệ thống kiểm tra validation: nếu tên trống -> hiển thị lỗi validation.
+9. Nếu hợp lệ: lưu dữ liệu (POST /admin/brands), hiển thị thông báo thành công, cập nhật danh sách.
+
+4.2 Luồng chỉnh sửa Nhãn hàng:
+1. Admin ở trang danh sách, nhấn icon Edit tại cột Options.
+2. Hệ thống chuyển đến /admin/brands/edit/{id}?lang=en.
+3. Form hiển thị đầy đủ thông tin nhãn hàng hiện tại.
+4. Admin thay đổi thông tin, nhấn nút "Save".
+5. Hệ thống gửi yêu cầu PATCH.
+6. Khi cập nhật thành công, hiển thị thông báo và quay về danh sách.
+
+4.3 Luồng xóa Nhãn hàng:
+1. Admin tại trang danh sách, nhấn icon Delete tại cột Options.
+2. Hệ thống hiển thị modal xác nhận: "Delete Confirmation" / "Are you sure to delete this?".
+3. Admin nhấn "Delete" để xác nhận, hoặc "Cancel" để hủy.
+4. Khi xác nhận: hệ thống xóa bản ghi nhãn hàng.
+5. Hệ thống hiển thị thông báo thành công và refresh danh sách.
+
+4.4 Quy tắc Slug:
+- Slug chỉ xuất hiện trong form Edit, không có ở form thêm mới.
+- Slug tự động được sinh ra khi tạo nhãn hàng mới (dựa trên name + suffix ngẫu nhiên).
+- Ví dụ: Name = "Addidas" -> Slug = "addidas-ysxch".
+
+4.5 Quy tắc tìm kiếm:
+- Người dùng nhập tên nhãn hàng vào ô tìm kiếm và nhấn Enter.
+- Hệ thống lọc danh sách theo tên.
+- Chuyển hướng GET đến /admin/brands?search={tu_khoa}.
+
+
+================================================================================
+
+CÂU HỎI LÀM RÕ VỚI PO/STAKEHOLDER (Clarification Questions)
+================================================================================
+
+1. Khi xóa Category có danh mục con hoặc sản phẩm liên kết, hệ thống xử lý thế nào?
+   (Cascade delete? Báo lỗi? Chuyển sản phẩm sang danh mục khác?)
+
+2. Trường "Featured" và "Hot Category" có ảnh hưởng gì đến màn hình trang chủ
+   hoặc cần lọc sản phẩm phía Front-end?
+
+3. Giới hạn số lượng ảnh (Banner, Icon, Cover Image) cho phép upload là gì? (định dạng file, dung lượng tối đa?)
+
+4. Cột "Level" trong danh sách Category được tính toán tự động theo cấu trúc phân cấp hay admin nhập tay?
+
+5. Khi xóa Brand đang được sử dụng bởi sản phẩm, hệ thống có cảnh báo hay xử lý thế nào?
+
+6. "Filtering Attributes" của Category phục vụ mục đích gì trong quá trình lọc sản phẩm phía người dùng?
+
+7. Có giới hạn ký tự (maxlength) cho trường Name của Category và Brand không?

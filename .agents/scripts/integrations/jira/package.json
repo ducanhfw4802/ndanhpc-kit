@@ -1,0 +1,22 @@
+{
+  "name": "antigravity-jira-integration",
+  "version": "1.0.0",
+  "description": "Jira & Xray integration scripts for Antigravity Testing Kit",
+  "private": true,
+  "scripts": {
+    "fetch": "node jira/jira_fetcher.js",
+    "fetch:issue": "node jira/jira_fetcher.js --issue",
+    "fetch:project": "node jira/jira_fetcher.js --project",
+    "xray:auth": "node jira/xray_auth.js",
+    "xray:verify": "node jira/xray_auth.js --verify",
+    "xray:import": "node jira/xray_importer.js",
+    "test:connection": "node jira/jira_fetcher.js --help"
+  },
+  "dependencies": {
+    "axios": "1.14.0",
+    "dotenv": "16.4.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,5 +1,55 @@
 # AG Kit Toolkit Changelog
 
+## 2026.10.13 - QA & Test Automation Supercharge Release
+
+### Added
+- **10 Specialized QA Skills**: Tích hợp toàn diện bộ kỹ năng kiểm thử chuẩn quốc tế từ Antigravity Testing Kit:
+  - `rbt-manual-testing`: Sinh Manual Test Cases 6 bước AI-RBT (QUICK & FULL mode).
+  - `qa-automation-workflow`: Quy trình tự động hóa E2E chuẩn POM, smart waits, tự fix lỗi.
+  - `smart-locator`: Chiến lược chọn locator ổn định, ưu tiên semantic và data-testid.
+  - `locator-healer`: Tự phát hiện và sửa locator hỏng (Self-healing).
+  - `ui-debug`: Inspect DOM và điều tra UI chuyên sâu (desktop viewport 1920x1080 headed).
+  - `flaky-test-analyzer`: Phân tích nguyên nhân gốc và khắc phục test chạy chập chờn.
+  - `qa-framework-architect`: Scaffold framework POM cho Playwright, Selenium, Appium.
+  - `test-data-generator`: Sinh dữ liệu unique, traceable và tổ hợp ma trận Pairwise.
+  - `requirements-analyzer`: Khám phá và trích xuất requirements chuẩn từ web/tài liệu.
+  - `jira-integration`: Tích hợp kéo requirements từ Jira và đẩy kết quả lên Xray.
+- **16 Slash Command Workflows**: Bổ sung đầy đủ lệnh kiểm thử:
+  - `/generate_manual_testcases_rbt`, `/generate_testcases_from_requirements`
+  - `/generate_automation_from_testcases`, `/generate_automation_from_ui_flow`
+  - `/generate_cross_module_test_plan`, `/generate_combinatorial_test_data`
+  - `/generate_api_tests_from_swagger`, `/generate_automation_framework`
+  - `/generate_locator`, `/analyze_flaky_tests`, `/fetch_jira_requirements`, `/import_test_results_xray`, v.v.
+- **Quy Tắc QA Khắt Khe (`rules/qa-testing-rules.md`)**:
+  - Bắt buộc Desktop Viewport 1920x1080 và Headed Mode khi debug UI.
+  - Cấm đoán selector bừa bãi; cấm hard sleep (`Thread.sleep`, `waitForTimeout`).
+  - Định dạng test data unique + traceable (timestamp/prefix).
+  - Bắt buộc mô hình Page Object Model (POM) và tiêu chuẩn Definition of Done (PASS 2 lần liên tiếp trên UI).
+- **Self-Contained Architecture**:
+  - Di chuyển toàn bộ các thư mục hỗ trợ (`plans/`, `practices/`, `prompt_templates/`, `scripts/convert_excel`, `scripts/integrations`) vào bên trong `.agents/`.
+  - Dự án mới chỉ cần copy đúng **duy nhất 1 thư mục `.agents/`** là sở hữu 100% năng lực hệ thống.
+
+### Changed
+- **Nâng cấp Agent**:
+  - Trang bị trọn bộ 10 kỹ năng QA mới cho `qa-automation-engineer` (tổng cộng 15 skills).
+  - Nâng cấp `test-engineer` với `rbt-manual-testing`, `test-data-generator`, `qa-automation-workflow`.
+- **Nâng cấp Web Portal**:
+  - Cập nhật giao diện Web Portal hiển thị đầy đủ 121 thành phần (24 Agents, 61 Skills, 29 Workflows, 7 Rules).
+  - Bổ sung thông báo phát hành v2026.10.13 trên trang chủ Web Portal.
+- Đồng bộ phiên bản toàn hệ thống lên `2026.10.13`.
+
+---
+
+## 2026.10.10 - NDANHPC Kit Official Release
+
+### Added
+- **Interactive Web Portal (`web/`)**: Cổng tra cứu trực quan và mô phỏng điều phối Multi-Agent trên nền tảng Web.
+- **Terminal TUI Tool (`ndanhpc_cli.py`)**: Giao diện dòng lệnh tương tác trực quan cho Antigravity Toolkit.
+- **24 Specialist Agents & 51 Modular Skills**: Hệ sinh thái AI Agent toàn diện cho Full-stack Software Engineering.
+- **Native Lifecycle Hooks**: Bảo vệ hệ thống với `PreToolUse` hook chặn lệnh nguy hiểm trước khi thực thi.
+
+---
+
 ## 2026.8.31
 
 ### Added

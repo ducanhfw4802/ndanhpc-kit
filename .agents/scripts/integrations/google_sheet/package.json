@@ -1,0 +1,26 @@
+{
+  "name": "antigravity-google-sheet-integration",
+  "version": "1.0.0",
+  "description": "Google Sheets integration scripts for Antigravity Testing Kit",
+  "private": true,
+  "scripts": {
+    "read": "node sheet_reader.js",
+    "read:range": "node sheet_reader.js --range",
+    "read:sheet": "node sheet_reader.js --sheet",
+    "write": "node sheet_writer.js",
+    "write:results": "node sheet_writer.js --results",
+    "write:testdata": "node sheet_writer.js --testdata",
+    "auth:verify": "node sheet_auth.js --verify",
+    "auth:setup": "node sheet_auth.js --setup",
+    "test:connection": "node sheet_reader.js --help"
+  },
+  "dependencies": {
+    "axios": "1.14.0",
+    "dotenv": "16.4.7",
+    "googleapis": "^144.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

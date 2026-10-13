@@ -1,0 +1,23 @@
+{
+  "name": "antigravity-testing-kit",
+  "version": "1.0.0",
+  "description": "👋 Chào mừng bạn đến với **Antigravity Testing Kit**!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anhtester/antigravity-testing-kit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anhtester/antigravity-testing-kit/issues"
+  },
+  "homepage": "https://github.com/anhtester/antigravity-testing-kit#readme",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

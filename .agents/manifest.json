@@ -383,8 +383,18 @@
       "requires": {
         "skills": {
           "clean-code": "^2.0.0",
+          "flaky-test-analyzer": "^1.0.0",
+          "jira-integration": "^1.0.0",
           "lint-and-validate": "^1.0.0",
+          "locator-healer": "^1.0.0",
+          "qa-automation-workflow": "^1.0.0",
+          "qa-framework-architect": "^1.0.0",
+          "rbt-manual-testing": "^1.0.0",
+          "requirements-analyzer": "^1.0.0",
+          "smart-locator": "^1.0.0",
+          "test-data-generator": "^1.0.0",
           "testing-patterns": "^1.0.0",
+          "ui-debug": "^1.0.0",
           "web-design-guidelines": "^1.0.0",
           "webapp-testing": "^1.0.0"
         }
@@ -447,7 +457,10 @@
           "clean-code": "^2.0.0",
           "code-review-checklist": "^1.0.0",
           "lint-and-validate": "^1.0.0",
+          "qa-automation-workflow": "^1.0.0",
+          "rbt-manual-testing": "^1.0.0",
           "tdd-workflow": "^1.0.0",
+          "test-data-generator": "^1.0.0",
           "testing-patterns": "^1.0.0",
           "webapp-testing": "^1.0.0"
         }
@@ -510,7 +523,7 @@
     "rulesApi": "1.0.0",
     "workflowApi": "1.0.0"
   },
-  "kitVersion": "2026.10.10",
+  "kitVersion": "2026.10.13",
   "rules": {
     "code-rules": {
       "path": "rules/code-rules.md",
@@ -528,6 +541,12 @@
       "path": "rules/design-rules.md",
       "priority": "P0",
       "trigger": "glob",
+      "version": "1.0.0"
+    },
+    "qa-testing-rules": {
+      "path": "rules/qa-testing-rules.md",
+      "priority": "P1",
+      "trigger": "model_decision",
       "version": "1.0.0"
     },
     "quick-reference": {
@@ -790,6 +809,19 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "flaky-test-analyzer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/flaky-test-analyzer/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "frontend-architecture": {
       "allowedTools": [
         "Read",
@@ -865,6 +897,19 @@
       "scripts": [],
       "version": "1.1.0"
     },
+    "jira-integration": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/jira-integration/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "lint-and-validate": {
       "allowedTools": [
         "Read",
@@ -877,6 +922,19 @@
         "skills/lint-and-validate/scripts/lint_runner.py",
         "skills/lint-and-validate/scripts/type_coverage.py"
       ],
+      "version": "1.0.0"
+    },
+    "locator-healer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/locator-healer/SKILL.md",
+      "scripts": [],
       "version": "1.0.0"
     },
     "mcp-builder": {
@@ -1015,6 +1073,45 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "qa-automation-workflow": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/qa-automation-workflow/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "qa-framework-architect": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/qa-framework-architect/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "rbt-manual-testing": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/rbt-manual-testing/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "red-team-tactics": {
       "allowedTools": [
         "Read",
@@ -1022,6 +1119,19 @@
         "Grep"
       ],
       "path": "skills/red-team-tactics/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "requirements-analyzer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/requirements-analyzer/SKILL.md",
       "scripts": [],
       "version": "1.0.0"
     },
@@ -1099,6 +1209,19 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "smart-locator": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/smart-locator/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "systematic-debugging": {
       "allowedTools": [
         "Read",
@@ -1134,6 +1257,19 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "test-data-generator": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/test-data-generator/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "testing-patterns": {
       "allowedTools": [
         "Read",
@@ -1147,6 +1283,19 @@
       "scripts": [
         "skills/testing-patterns/scripts/test_runner.py"
       ],
+      "version": "1.0.0"
+    },
+    "ui-debug": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/ui-debug/SKILL.md",
+      "scripts": [],
       "version": "1.0.0"
     },
     "ui-ux-design-system": {
@@ -1239,6 +1388,38 @@
     "primary": "Google Antigravity"
   },
   "workflows": {
+    "analyze-flaky-tests": {
+      "artifactOutputs": [
+        "test-report"
+      ],
+      "path": "workflows/analyze-flaky-tests.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "flaky-test-analyzer",
+          "qa-automation-workflow"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "analyze-requirement-document": {
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/analyze-requirement-document.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "rbt-manual-testing"
+        ]
+      },
+      "version": "1.0.0"
+    },
     "brainstorm": {
       "artifactOutputs": [
         "discovery-notes",
@@ -1343,6 +1524,229 @@
           "simplify-code",
           "clean-code",
           "verify-changes"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "fetch-jira-requirements": {
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/fetch-jira-requirements.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "jira-integration",
+          "requirements-analyzer"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-api-tests-from-swagger": {
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-api-tests-from-swagger.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-automation-workflow",
+          "test-data-generator"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-application-test-plan": {
+      "artifactOutputs": [
+        "test-plan"
+      ],
+      "path": "workflows/generate-application-test-plan.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "rbt-manual-testing",
+          "ui-debug"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-automation-framework": {
+      "artifactOutputs": [
+        "automation-framework"
+      ],
+      "path": "workflows/generate-automation-framework.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-framework-architect",
+          "qa-automation-workflow"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-automation-from-testcases": {
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-automation-from-testcases.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "qa-automation-workflow",
+          "smart-locator",
+          "test-data-generator"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-automation-from-ui-flow": {
+      "artifactOutputs": [
+        "automation-suite"
+      ],
+      "path": "workflows/generate-automation-from-ui-flow.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "ui-debug",
+          "smart-locator",
+          "qa-automation-workflow"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-combinatorial-test-data": {
+      "artifactOutputs": [
+        "test-data"
+      ],
+      "path": "workflows/generate-combinatorial-test-data.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "test-data-generator"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-cross-module-test-plan": {
+      "artifactOutputs": [
+        "test-plan"
+      ],
+      "path": "workflows/generate-cross-module-test-plan.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing",
+          "test-data-generator"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-locator": {
+      "artifactOutputs": [
+        "locator-spec"
+      ],
+      "path": "workflows/generate-locator.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "smart-locator",
+          "ui-debug"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-manual-testcases-rbt": {
+      "artifactOutputs": [
+        "test-cases"
+      ],
+      "path": "workflows/generate-manual-testcases-rbt.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing",
+          "requirements-analyzer"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-requirements-from-website": {
+      "artifactOutputs": [
+        "requirement-spec"
+      ],
+      "path": "workflows/generate-requirements-from-website.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "requirements-analyzer",
+          "ui-debug"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-test-data": {
+      "artifactOutputs": [
+        "test-data"
+      ],
+      "path": "workflows/generate-test-data.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "test-data-generator"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "generate-testcases-from-requirements": {
+      "artifactOutputs": [
+        "test-cases"
+      ],
+      "path": "workflows/generate-testcases-from-requirements.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "rbt-manual-testing"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "import-test-results-xray": {
+      "artifactOutputs": [
+        "test-report"
+      ],
+      "path": "workflows/import-test-results-xray.md",
+      "requires": {
+        "agents": [
+          "qa-automation-engineer"
+        ],
+        "skills": [
+          "jira-integration"
         ]
       },
       "version": "1.0.0"
