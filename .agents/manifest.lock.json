@@ -84,7 +84,7 @@
     "scripts/integrations/jira/utils.js": "43c96142611e28e6c546e7bbe3b9655dae2c4dfe4f3ac9d8ad63c2ed36d48aa1",
     "scripts/integrations/jira/xray_auth.js": "26480eda2fd0c6079a98436ddfe72d65d224811a90e83b96ec7630bcd6eedcf3",
     "scripts/integrations/jira/xray_importer.js": "6484c8705783dd71353ed63c01e22fb46fc253ca4e3b8eff229ac598df1d3f88",
-    "scripts/ndanhpc_cli.py": "1b26f8eef87db521beab33b0c4bde9dafc1ce3dd426599f3d000c4120f694bbe",
+    "scripts/ndanhpc_cli.py": "170fa8e385532864b7d88f83c872735a35dc5ad4bb57158fe6eafd9ad49f0b98",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
     "scripts/validate_kit.py": "fd6c6fd1ca14a225f68a61c0df4d76c13c9c35bac9a70fedb9ac82387ecef610",

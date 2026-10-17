@@ -53,10 +53,49 @@ ndanhpc-kit/
 
 ---
 
+## ⚡ Cài Đặt, Cập Nhật & Gỡ Bỏ Nhanh (1 Dòng Lệnh Duy Nhất)
+
+Không cần clone cả kho mã nguồn hay xóa đi clone lại, bạn có thể cài đặt, cập nhật hoặc gỡ bỏ bộ kit trên **bất kỳ máy tính / dự án nào** chỉ với một dòng lệnh duy nhất:
+
+### 📥 1. Cài Đặt Vào Dự Án Bất Kỳ (1 Lệnh Duy Nhất)
+Đứng tại thư mục bất kỳ của bạn trên máy tính và chạy:
+```bash
+curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash
+```
+> Script sẽ tự động tải trọn gói bộ não AI khép kín `.agents/` mới nhất về dự án hiện tại và kiểm tra toàn vẹn 100%.
+
+### 🔄 2. Cập Nhật Lên Bản Mới Nhất (1 Lệnh Duy Nhất)
+Khi có bản cập nhật mới trên GitHub, cập nhật siêu tốc trong 2 giây mà không cần clone lại:
+```bash
+# Cách 1: Qua 1 dòng lệnh curl (áp dụng cho mọi máy / mọi dự án):
+curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- update
+
+# Cách 2: Qua Terminal CLI tích hợp:
+python3 .agents/scripts/ndanhpc_cli.py --update
+
+# Cách 3: Nếu bạn dùng Git Repository ndanhpc-kit:
+npm run update   # hoặc: git pull origin main
+```
+> Tự động so sánh phiên bản, sao lưu an toàn (`.agents.bak/`), bảo toàn bộ nhớ ghi chú cá nhân (`.agents/memory/`) và nạp ngay năng lực mới.
+
+### 🗑️ 3. Gỡ Bỏ Hoàn Toàn Khỏi Dự Án (1 Lệnh Duy Nhất)
+```bash
+curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- uninstall
+# hoặc:
+python3 .agents/scripts/ndanhpc_cli.py --uninstall
+```
+
+### 🔍 4. Kiểm Tra Trạng Thái Phiên Bản
+```bash
+curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- check
+```
+
+---
+
 ## 🚀 Hướng Dẫn Sử Dụng Nhanh
 
-### 1. Áp dụng Toolkit cho một Dự án Mới
-Bạn chỉ cần copy duy nhất thư mục `.agents/` vào thư mục gốc của dự án mới:
+### 1. Áp dụng Toolkit Thủ Công
+Bạn có thể copy thư mục `.agents/` vào thư mục gốc của dự án:
 
 ```bash
 cp -r /opt/Apps/ndanhpc-kit/.agents /duong/dan/du-an-moi/

@@ -1435,6 +1435,121 @@ def launch_web_portal(data: ToolkitData, port: int = 3000) -> None:
         print(red(f"\nLỗi khi khởi chạy Web Portal: {e}"))
 
 
+def update_kit(data: ToolkitData) -> int:
+    """Update NDANHPC Kit to the latest release version."""
+    print(bold(cyan("\n🔄 CẬP NHẬT NDANHPC KIT LÊN PHIÊN BẢN MỚI NHẤT")))
+    hr("═", Colors.CYAN)
+    local_ver = data.kit_version
+    print(f" {bold('Thư mục Toolkit:')}      {cyan(str(data.toolkit_dir))}")
+    print(f" {bold('Phiên bản trên máy:')}     {yellow(f'v{local_ver}')}")
+
+    # Check remote version from GitHub
+    remote_ver = None
+    try:
+        import urllib.request
+        url = "https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/.agents/VERSION"
+        req = urllib.request.Request(url, headers={"User-Agent": "NDANHPC-CLI"})
+        with urllib.request.urlopen(req, timeout=5) as response:
+            remote_ver = response.read().decode("utf-8").strip()
+    except Exception as e:
+        print(yellow(f" ⚠️ Không thể kiểm tra phiên bản trên GitHub ({e})"))
+
+    if remote_ver:
+        print(f" {bold('Phiên bản trên GitHub:')}  {green(f'v{remote_ver}')}")
+        if remote_ver == local_ver:
+            print(bold(green("\n✔ Bạn đang sử dụng phiên bản mới nhất! Không cần cập nhật.")))
+            try:
+                c = input("Bạn có muốn buộc cập nhật lại (force refresh) không? (y/n, mặc định n): ").strip().lower()
+                if c != "y":
+                    return 0
+            except (EOFError, KeyboardInterrupt):
+                return 0
+
+    # Case 1: Git repository clone
+    git_dir = data.project_dir / ".git"
+    if git_dir.exists():
+        print(bold(cyan("\nĐang cập nhật Git repository (git fetch & reset)...")))
+        try:
+            subprocess.run(["git", "fetch", "origin", "main"], cwd=str(data.project_dir), check=True)
+            subprocess.run(["git", "reset", "--hard", "origin/main"], cwd=str(data.project_dir), check=True)
+            print(bold(green("✔ Cập nhật qua Git thành công!")))
+            subprocess.run(["npm", "run", "manifest"], cwd=str(data.project_dir), check=False)
+            subprocess.run(["npm", "run", "deps"], cwd=str(data.project_dir), check=False)
+            return 0
+        except Exception as e:
+            print(red(f"✖ Cập nhật qua Git thất bại: {e}"))
+            return 1
+
+    # Case 2: Standalone .agents inside external project
+    install_script = data.project_dir / "install.sh"
+    if install_script.exists():
+        cmd = ["bash", str(install_script), "update"]
+        try:
+            return subprocess.run(cmd, cwd=str(data.project_dir)).returncode
+        except Exception as e:
+            print(red(f"✖ Lỗi khi thực thi install.sh: {e}"))
+            return 1
+
+    # Fallback tarball update
+    try:
+        import urllib.request, tarfile, tempfile, shutil
+        print(bold(cyan("\nĐang tải bản cập nhật mới nhất từ GitHub...")))
+        tar_url = "https://github.com/ducanhfw4802/ndanhpc-kit/archive/refs/heads/main.tar.gz"
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_tar = Path(tmp_dir) / "kit.tar.gz"
+            urllib.request.urlretrieve(tar_url, tmp_tar)
+            with tarfile.open(tmp_tar, "r:gz") as tar:
+                tar.extractall(tmp_dir)
+            extracted = Path(tmp_dir) / "ndanhpc-kit-main" / ".agents"
+            if not extracted.exists():
+                print(red("✖ Gói tải về không chứa thư mục .agents hợp lệ."))
+                return 1
+            mem_src = data.toolkit_dir / "memory"
+            mem_backup = Path(tmp_dir) / "mem_backup"
+            if mem_src.exists():
+                shutil.copytree(mem_src, mem_backup)
+            for item in extracted.iterdir():
+                dest = data.toolkit_dir / item.name
+                if item.is_dir():
+                    shutil.copytree(item, dest, dirs_exist_ok=True)
+                else:
+                    shutil.copy2(item, dest)
+            if mem_backup.exists():
+                shutil.copytree(mem_backup, mem_src, dirs_exist_ok=True)
+            print(bold(green(f"\n✔ Cập nhật NDANHPC Kit lên v{remote_ver or 'mới nhất'} thành công!")))
+            return 0
+    except Exception as e:
+        print(red(f"✖ Cập nhật thất bại: {e}"))
+        return 1
+
+
+def uninstall_kit(data: ToolkitData) -> int:
+    """Safely uninstall NDANHPC Kit from the current project."""
+    print(bold(red("\n🗑️ GỠ BỎ NDANHPC KIT KHỎI DỰ ÁN")))
+    hr("═", Colors.RED)
+    print(bold(yellow(f"Thư mục sẽ bị xóa: {data.toolkit_dir}")))
+    try:
+        confirm = input(bold(red("Bạn có chắc chắn muốn gỡ bỏ hoàn toàn .agents/ không? (yes/no): "))).strip().lower()
+    except (EOFError, KeyboardInterrupt):
+        print(yellow("\nĐã hủy thao tác."))
+        return 0
+    if confirm not in ("yes", "y"):
+        print(yellow("\nĐã hủy thao tác gỡ bỏ."))
+        return 0
+
+    try:
+        import shutil
+        shutil.rmtree(data.toolkit_dir)
+        bak_dir = data.project_dir / ".agents.bak"
+        if bak_dir.exists():
+            shutil.rmtree(bak_dir)
+        print(bold(green("\n✔ Đã gỡ bỏ thành công NDANHPC Kit khỏi dự án.")))
+        return 0
+    except Exception as e:
+        print(red(f"\n✖ Lỗi khi xóa thư mục .agents: {e}"))
+        return 1
+
+
 # ==============================================================================
 # Interactive TUI Main Menu
 # ==============================================================================
@@ -1456,11 +1571,13 @@ def interactive_menu(data: ToolkitData) -> None:
         print(f"  {cyan('[9]')}  🩺 {bold('Chạy kiểm định Antigravity Doctor')} {dim('(npm run check:antigravity)')}")
         print(f"  {cyan('[10]')} 🔬 {bold('Chạy Full Verification Suite')} {dim('(npm run verify)')}")
         print(f"  {cyan('[11]')} 🌐 {bold('Khởi chạy Web Portal')} {dim('(http://localhost:3000)')}")
+        print(f"  {cyan('[12]')} 🔄 {bold('Cập nhật Kit lên bản mới nhất')} {dim('(Check & Auto Update)')}")
+        print(f"  {red('[13]')} 🗑️ {bold('Gỡ bỏ Kit khỏi dự án')} {dim('(Uninstall .agents/)')}")
         print(f"  {yellow('[0]')}  🚪 {bold('Thoát (Exit)')}")
         hr()
 
         try:
-            choice = input(bold(cyan("NDANHPC > Chọn số [0-11]: "))).strip()
+            choice = input(bold(cyan("NDANHPC > Chọn số [0-13]: "))).strip()
         except (EOFError, KeyboardInterrupt):
             print(yellow("\n\nTạm biệt! Đã thoát NDANHPC CLI."))
             break
@@ -1490,8 +1607,13 @@ def interactive_menu(data: ToolkitData) -> None:
             run_verify(data)
         elif choice == "11":
             launch_web_portal(data, 3000)
+        elif choice == "12":
+            update_kit(data)
+        elif choice == "13":
+            if uninstall_kit(data) == 0:
+                break
         else:
-            print(yellow(f"\n⚠️ Lựa chọn '{choice}' không hợp lệ. Vui lòng nhập từ 0 đến 11."))
+            print(yellow(f"\n⚠️ Lựa chọn '{choice}' không hợp lệ. Vui lòng nhập từ 0 đến 13."))
 
         print()
         try:
@@ -1522,6 +1644,8 @@ def main() -> int:
   python3 .agents/scripts/ndanhpc_cli.py --doctor      # Kiểm định Antigravity Doctor
   python3 .agents/scripts/ndanhpc_cli.py --verify      # Kiểm định chất lượng toàn diện
   python3 .agents/scripts/ndanhpc_cli.py --web         # Mở Web Portal trên cổng 3000
+  python3 .agents/scripts/ndanhpc_cli.py --update      # Cập nhật phiên bản mới nhất từ GitHub
+  python3 .agents/scripts/ndanhpc_cli.py --uninstall   # Gỡ bỏ kit khỏi dự án hiện tại
 """
     )
 
@@ -1541,12 +1665,18 @@ def main() -> int:
     parser.add_argument("--doctor", action="store_true", help="Chạy kiểm định Antigravity Doctor (npm run check:antigravity)")
     parser.add_argument("--verify", action="store_true", help="Chạy Full Verification Suite (npm run verify)")
     parser.add_argument("--web", nargs="?", type=int, const=3000, help="Khởi chạy Web Portal trên cổng chỉ định (mặc định: 3000)")
+    parser.add_argument("--update", action="store_true", help="Cập nhật NDANHPC Kit lên bản mới nhất từ GitHub")
+    parser.add_argument("--uninstall", action="store_true", help="Gỡ bỏ thư mục .agents khỏi dự án")
     parser.add_argument("--root", type=Path, help="Đường dẫn tuỳ biến tới thư mục .agents")
 
     args = parser.parse_args()
     data = ToolkitData(root=args.root)
 
     # Check non-interactive options
+    if args.update:
+        return update_kit(data)
+    if args.uninstall:
+        return uninstall_kit(data)
     if args.overview:
         show_overview(data)
         return 0
