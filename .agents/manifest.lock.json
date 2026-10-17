@@ -1,10 +1,10 @@
 {
   "$schema": "schemas/manifest-lock.schema.json",
   "components": {
-    "ARCHITECTURE.md": "dc85d75296e994055a2c08d73d1e9bd39f69a6f1be7b12cf77d03e6072637664",
-    "CHANGELOG.md": "24a54db12e09dd2326f93b8c4edd44a26216c5971d66fc2a0b1790d2eeaa8f1a",
+    "ARCHITECTURE.md": "c09459972b56048ae47bf2a421973511598e98adfc779438e877ee30cf7b375f",
+    "CHANGELOG.md": "76893360a2716265087f5cfab593f4e4126f5b175d2b1f84e0f3d30f5b51ac69",
     "README.md": "51f5484fab2e73b5896d6b4ca9861c1875aa607544fbc63867c3ec078d3f60da",
-    "VERSION": "43b20d9c7a3e93ec12a6c91dd441996f425d9ddc4c18a5c196048dfbdad154ea",
+    "VERSION": "84078880372ae23a581676459c5b00e1ff9b6d6fe9bccaceb1b73e3f1ad917f8",
     "agent/backend-specialist.md": "65087ad56011ce55231f2754c3bdbb1c32ee14fa24ae9f389c0a7a67c178f1fd",
     "agent/code-archaeologist.md": "a0c654b885773c425f6a1c3f35ac7a1d509ed32e08a4e2daf373ddc5c6c805f3",
     "agent/database-architect.md": "1649c5ba554eca2674df75c50229cc00463aed1400d3b6d55131d8f4b12f3c76",
@@ -84,7 +84,7 @@
     "scripts/integrations/jira/utils.js": "43c96142611e28e6c546e7bbe3b9655dae2c4dfe4f3ac9d8ad63c2ed36d48aa1",
     "scripts/integrations/jira/xray_auth.js": "26480eda2fd0c6079a98436ddfe72d65d224811a90e83b96ec7630bcd6eedcf3",
     "scripts/integrations/jira/xray_importer.js": "6484c8705783dd71353ed63c01e22fb46fc253ca4e3b8eff229ac598df1d3f88",
-    "scripts/ndanhpc_cli.py": "e3f07ff051dbfefc25539a61a6f130adc642c5798d9f281f43af3dee05bd1d67",
+    "scripts/ndanhpc_cli.py": "1b26f8eef87db521beab33b0c4bde9dafc1ce3dd426599f3d000c4120f694bbe",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
     "scripts/validate_kit.py": "fd6c6fd1ca14a225f68a61c0df4d76c13c9c35bac9a70fedb9ac82387ecef610",
@@ -207,7 +207,7 @@
     "skills/nextjs-react-expert/9-cache-components.md": "69a798ec10f178a44c50c2e31535d3a448e603ecddddb57a7911faa340754a4b",
     "skills/nextjs-react-expert/SKILL.md": "1db0736663af55a5df009b0e937576fee5cba166b48d98cfcd8b2010fada1d28",
     "skills/nextjs-react-expert/scripts/convert_rules.py": "848034fec008ec808851ea91f698b9032dab199eadb9f9bfbc5fd5b8f14d0108",
-    "skills/nextjs-react-expert/scripts/react_performance_checker.py": "aae59d1e0aa1b58acd3fdac4701b3822956c6057d932794822ef4ee3342a7781",
+    "skills/nextjs-react-expert/scripts/react_performance_checker.py": "1b00ba9d3254ab79476ad8d37d143e2c8de1dc75bb560e45cc9e15dd9a79b1b0",
     "skills/nodejs-best-practices/SKILL.md": "da0e84eb6dd2f9784860209ce451725d32a5743a685084bd077d69503aa7e706",
     "skills/parallel-agents/SKILL.md": "f61769e3ba2298d8311bdf75b2a69c0138640422255ed9449286c10e224e7892",
     "skills/performance-profiling/SKILL.md": "91bd2041ab8447ad6fc6fa16d4e0e414adc2ee38e4df6fd27f1810e4e982ca0c",
@@ -279,7 +279,7 @@
     "workflows/test.md": "bd06ae644376e3cc2661f1a623504247445c86a83dfb0df92ed5f0eccdef60ea",
     "workflows/verify.md": "2dc26bcbe24c7e71571953da75629521ea3d7a0a444a7101e3601b39864971fc"
   },
-  "kitVersion": "2026.10.13",
-  "manifestSha256": "e9f4ce5aa1a5470529f7f2e4be91112eead9e43234cf41ac87a2565df79e91ea",
+  "kitVersion": "2026.10.17",
+  "manifestSha256": "f91b44469f53b44c1648f58ea642aa6b19d9c86365c989cf74d7ae86c5d3e891",
   "schemaVersion": "1.0.0"
 }

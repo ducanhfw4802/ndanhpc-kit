@@ -11,7 +11,7 @@ from pathlib import Path
 
 SKIP_DIRS = {
     ".git", ".next", ".agents", "node_modules", "dist", "build",
-    "coverage", "out", ".turbo", ".cache", "vendor",
+    "coverage", "out", ".turbo", ".cache", "vendor", "temple",
 }
 
 

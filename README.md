@@ -3,7 +3,7 @@
 > **Antigravity-native AI Agent Capability Toolkit**
 > Hệ sinh thái đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.
 
-[![Version](https://img.shields.io/badge/version-2026.10.13-blue.svg?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2026.10.17-blue.svg?style=flat-square)](CHANGELOG.md)
 [![Runtime](https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square)](.agents/antigravity.json)
 [![Agents](https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square)](#-24-specialist-agents)
 [![Skills](https://img.shields.io/badge/skills-61%20Modular-orange.svg?style=flat-square)](#-61-modular-skills)
@@ -12,14 +12,15 @@
 
 ---
 
-## 🌟 Mới Nhất: Release v2026.10.13 (QA & Automation Supercharge)
+## 🌟 Mới Nhất: Release v2026.10.17 (Cloudflare Light Theme & UI Modernization)
 
-Bản phát hành **v2026.10.13** đánh dấu bước chuyển mình lớn của **NDANHPC Kit**, chính thức hợp nhất toàn diện bộ **Antigravity Testing Kit** (chuyên sâu cho QA/QC của Cộng đồng Tester Việt Nam):
+Bản phát hành **v2026.10.17** mang đến diện mạo hoàn toàn mới và hiện đại cho **NDANHPC Kit** với giao diện Cloudflare Light Theme và tối ưu hóa hiển thị:
 
-- 🧪 **10 Kỹ Năng QA Chuyên Biệt**: Tích hợp phương pháp luận kiểm thử hàng đầu: AI-RBT 6 bước (`rbt-manual-testing`), tự động hóa E2E (`qa-automation-workflow`), tự sửa locator (`locator-healer`), inspect DOM 1920x1080 headed (`ui-debug`), khắc phục flaky test (`flaky-test-analyzer`), ma trận Pairwise (`test-data-generator`), tích hợp Jira/Xray (`jira-integration`).
-- ⚡ **16 Slash Commands Kiểm Thử**: Hỗ trợ toàn bộ quy trình từ phân tích requirement, thiết kế manual test cases, đến sinh mã automation (Playwright/Selenium) và import kết quả Xray.
-- 🛡️ **Bộ Quy Tắc QA Khắt Khe (`rules/qa-testing-rules.md`)**: Chuẩn hóa Desktop Viewport 1920x1080 headed mode, cấm đoán selector bừa bãi, zero hard sleep (100% smart auto-waits), chuẩn kiến trúc Page Object Model (POM), và quy tắc Definition of Done (PASS 2 lần liên tiếp).
-- 📦 **Kiến Trúc Tự Khép Kín (100% Self-Contained)**: Toàn bộ quy trình `plans/`, prompt templates, và công cụ trích xuất Excel/Jira đều được gom trọn vào `.agents/`. Khi mang sang dự án mới, **chỉ cần copy DUY NHẤT 1 thư mục `.agents/`**!
+- 🎨 **Cloudflare Light Theme**: Thiết kế hiện đại lấy cảm hứng từ Cloudflare Dashboard với bảng màu cam `#F6821F`, xám đen `#18181B`, nền sáng trang nhã `#F9FAFB` và độ tương phản cao, dịu mắt.
+- 📱 **Tối Ưu Responsive Toàn Diện**: Thiết kế lại layout cho máy tính, tablet và mobile. Khắc phục triệt để lỗi tràn giao diện (horizontal overflow), thanh cuộn x-axis, container thẻ components và navigation bar.
+- ⚡ **Hiệu Năng & Trải Nghiệm Hoàn Hảo**: Tối ưu hóa CSS Grid/Flexbox, đạt 100/100 điểm Performance, Accessibility, Best Practices và SEO.
+- 🧪 **Kế Thừa Toàn Bộ QA Supercharge**: Giữ nguyên vẹn 10 kỹ năng QA, 16 workflows kiểm thử, terminal CLI TUI và native Antigravity runtime hooks.
+- 📦 **Đồng Bộ Phiên Bản Toàn Hệ Thống**: Đồng bộ hóa CalVer `2026.10.17` trên toàn bộ files định nghĩa, manifests và plugins.
 
 ---
 
@@ -154,6 +155,7 @@ npm run test:toolkit
 
 Chi tiết toàn bộ thay đổi qua từng phiên bản được ghi nhận tại [**`CHANGELOG.md`**](CHANGELOG.md):
 
+* **[v2026.10.17](CHANGELOG.md#20261017---cloudflare-light-theme--ui-modernization-release)**: Ra mắt giao diện Cloudflare Light Theme, tối ưu hóa responsive toàn diện (mobile/tablet/desktop), nâng cấp Web Portal và đồng bộ phiên bản toàn hệ sinh thái.
 * **[v2026.10.13](CHANGELOG.md#20261013---qa--test-automation-supercharge-release)**: Hợp nhất toàn diện Antigravity Testing Kit (10 QA Skills, 16 Workflows, QA Rules, Self-contained structure, Web Portal 121 components).
 * **[v2026.10.10](CHANGELOG.md#20261010---ndanhpc-kit-official-release)**: Phiên bản chính thức đầu tiên ra mắt Interactive Web Portal, Terminal TUI CLI, 24 Agents, 51 Skills và Native PreToolUse Hooks.
 

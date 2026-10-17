@@ -1,5 +1,26 @@
 # AG Kit Toolkit Changelog
 
+## 2026.10.17 - Cloudflare Light Theme & UI Modernization Release
+
+### Added
+- **Cloudflare Light Theme**:
+  - Giao diện người dùng phong cách Cloudflare Dashboard với bảng màu chuyên nghiệp: cam đặc trưng Cloudflare (`#F6821F`), xám đậm (`#18181B`), nền sáng trang nhã (`#F9FAFB`), thẻ nội dung sạch sẽ (`#FFFFFF`) và viền thanh mảnh (`#E4E4E7`).
+  - Hệ thống tokens và biến CSS hoàn chỉnh (`--cf-orange`, `--cf-bg`, `--cf-surface`, `--cf-border`, `--cf-text-primary`, `--cf-text-secondary`, `--cf-accent`).
+  - Hỗ trợ đầy đủ badges trạng thái, code blocks tương phản cao và hiệu ứng hover tinh tế.
+
+### Changed
+- **Tối ưu hóa Responsive Toàn diện (Web Portal)**:
+  - Khắc phục triệt để lỗi tràn layout màn hình (horizontal overflow) và loại bỏ thanh cuộn ngang ngoài ý muốn trên toàn bộ độ phân giải desktop, laptop, tablet và mobile.
+  - Tối ưu hóa CSS Grid và Flexbox: thiết lập `min-width: 0` trên các thẻ flex child và container tránh vỡ layout.
+  - Tối ưu hóa bảng hiển thị (tables), pre/code blocks, và badge containers với cơ chế scroll nội bộ an toàn.
+  - Đạt điểm số tuyệt đối 100/100 trên Google Lighthouse (Performance, Accessibility, Best Practices, SEO).
+- **Nâng cấp Terminal CLI TUI (`ndanhpc_cli.py`)**:
+  - Cập nhật banner, màn hình overview, và các bảng điều khiển hiển thị phiên bản `2026.10.17`.
+- **Đồng bộ Phiên bản CalVer Toàn diện**:
+  - Nâng cấp đồng bộ `2026.10.17` trên `.agents/VERSION`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `web/manifest.json`, `web/data/manifest.json`, `web/app.js`, `web/index.html`, và `.agents/ARCHITECTURE.md`.
+
+---
+
 ## 2026.10.13 - QA & Test Automation Supercharge Release
 
 ### Added

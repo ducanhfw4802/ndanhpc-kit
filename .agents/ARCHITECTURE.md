@@ -1,6 +1,6 @@
 # NDANHPC Kit Architecture
 
-> Antigravity-native AI Agent Capability Toolkit — 2026.10.10
+> Antigravity-native AI Agent Capability Toolkit — 2026.10.17
 
 ---
 
@@ -9,14 +9,14 @@
 NDANHPC Kit is a modular, independent Antigravity workspace system consisting of:
 
 - **24 Specialist Agents** — role-based AI personas and orchestration roles;
-- **51 Skills** — domain knowledge modules with progressive conditional loading;
-- **13 Workflows** — slash-command procedures;
-- **6 Rules** — workspace routing, coding, design, safety, and quick-reference constraints;
+- **61 Skills** — domain knowledge modules with progressive conditional loading;
+- **29 Workflows** — slash-command procedures;
+- **7 Rules** — workspace routing, coding, design, safety, QA, and quick-reference constraints;
 - **Antigravity runtime layer** — contract, native hook, MCP helper, plugin builder, Doctor, schemas, and tests.
 
 ---
 
-## 🔐 Managed Component Registry (2026.10.10)
+## 🔐 Managed Component Registry (2026.10.17)
 
 NDANHPC Kit uses dual-track versioning:
 

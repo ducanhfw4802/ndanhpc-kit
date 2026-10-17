@@ -5,7 +5,7 @@
 
 // Embedded full dataset for seamless operation offline / file:// / HTTP
 const EMBEDDED_DATA = {
-  "kitVersion": "2026.10.13",
+  "kitVersion": "2026.10.17",
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
@@ -2522,6 +2522,20 @@ const state = {
             "explorer-agent": "Quét bản đồ phụ thuộc để tính toán bán kính ảnh hưởng của lỗi",
             "test-engineer": "Viết Unit Test hồi quy (Regression Test) để bảo đảm lỗi không tái phát"
         }
+    },
+    "qa": {
+        "name": "QA & Test Automation Suite",
+        "desc": "Quy trình AI-RBT & QA Automation toàn diện (Playwright, Smart Locators, Flaky Analyzer, Jira Xray)",
+        "agents": [
+            "qa-automation-engineer",
+            "test-engineer",
+            "ux-accessibility-reviewer"
+        ],
+        "subtasks": {
+            "qa-automation-engineer": "Kích hoạt @rbt-manual-testing sinh test cases, scaffold framework POM và cấu hình tự sửa locators",
+            "test-engineer": "Sinh dữ liệu thử nghiệm có cấu trúc qua @test-data-generator và chạy automation test suite",
+            "ux-accessibility-reviewer": "Thực hiện audit khả năng tiếp cận WCAG 2.2 và tính khả dụng của giao diện"
+        }
     }
 }
   }
@@ -2550,7 +2564,7 @@ if (document.readyState === 'loading') {
 
 async function initData() {
   try {
-    const res = await fetch('manifest.json');
+    const res = await fetch('manifest.json?v=20261017');
     if (res.ok) {
       const liveData = await res.json();
       state.data.manifest = liveData;
@@ -2596,6 +2610,10 @@ function setupNavTabs() {
     btnDoc.addEventListener('click', () => {
       switchTab('setup');
       showToast('Đã chuyển đến trang hướng dẫn Antigravity Doctor.');
+      const docCard = document.querySelector('.doctor-guide-card');
+      if (docCard) {
+        docCard.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
 }
@@ -2744,21 +2762,21 @@ function setupPreToolUseSandbox() {
     if (res.blocked) {
       resultBox.className = 'sandbox-result blocked';
       resultBox.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
         <div>
-          <div style="font-weight: 700; color: #FDA4AF;">❌ BLOCKED BY PRE-TOOL-USE GATE (Exit Code 1)</div>
+          <div style="font-weight: 700; color: #991B1B;">❌ BLOCKED BY PRE-TOOL-USE GATE (Exit Code 1)</div>
           <div style="font-size: 0.8rem; margin-top: 2px;">Quy tắc vi phạm: <strong>${res.ruleId}</strong> — ${res.reason}.</div>
-          <div style="font-size: 0.75rem; color: #94A3B8; margin-top: 4px;">Hành động này bị chặn hoàn toàn trước khi chuyển tới Antigravity Bash tool.</div>
+          <div style="font-size: 0.75rem; color: #B91C1C; margin-top: 4px;">Hành động này bị chặn hoàn toàn trước khi chuyển tới Antigravity Bash tool.</div>
         </div>
       `;
     } else {
       resultBox.className = 'sandbox-result allowed';
       resultBox.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <div>
-          <div style="font-weight: 700; color: #A7F3D0;">✅ ALLOWED TO EXECUTE (Exit Code 0)</div>
+          <div style="font-weight: 700; color: #065F46;">✅ ALLOWED TO EXECUTE (Exit Code 0)</div>
           <div style="font-size: 0.8rem; margin-top: 2px;">Lệnh an toàn. Không trùng khớp với bất kỳ mẫu phá hủy hệ thống nào trong chính sách.</div>
-          <div style="font-size: 0.75rem; color: #94A3B8; margin-top: 4px;">Lệnh sẽ được chuyển tiếp an toàn tới Bash runtime kèm quyền kiểm soát của người dùng.</div>
+          <div style="font-size: 0.75rem; color: #047857; margin-top: 4px;">Lệnh sẽ được chuyển tiếp an toàn tới Bash runtime kèm quyền kiểm soát của người dùng.</div>
         </div>
       `;
     }
@@ -2803,16 +2821,15 @@ function renderSubcatChips() {
   if (!container) return;
 
   const currentType = state.catalog.type;
-  let subcats = ['Tất cả'];
+  const categories = new Set();
+  (state.catalog.items || []).forEach(item => {
+    if ((currentType === 'all' || item.kind === currentType) && item.category) {
+      categories.add(item.category);
+    }
+  });
 
-  if (currentType === 'agent' || currentType === 'all') {
-    subcats.push('Coordination & Product', 'Frontend & Design', 'Backend & Data', 'Security', 'Testing & Quality', 'Specialist Engineering');
-  }
-  if (currentType === 'skill' || currentType === 'all') {
-    subcats.push('Frontend & UI', 'Backend & API', 'Architecture & Planning', 'Testing & Quality', 'Security', 'Orchestration & Memory', 'Mobile', 'Cloud & Infrastructure', 'Shell/CLI');
-  }
-
-  subcats = [...new Set(subcats)];
+  const subcats = ['Tất cả', ...Array.from(categories).sort()];
+  state.catalog.subcat = 'all';
 
   container.innerHTML = subcats.map((sc, i) => `
     <button class="subcat-chip ${i === 0 ? 'active' : ''}" data-sub="${sc}">${sc}</button>
@@ -2856,7 +2873,7 @@ function renderCatalogItems() {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 0.75rem;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <div style="font-size: 1.1rem; color: #FFFFFF; font-weight: 600;">Không tìm thấy thành phần phù hợp</div>
+        <div style="font-size: 1.1rem; color: var(--text-primary); font-weight: 600;">Không tìm thấy thành phần phù hợp</div>
         <div style="font-size: 0.85rem; margin-top: 0.35rem;">Hãy thử từ khóa khác hoặc bỏ bộ lọc danh mục.</div>
       </div>
     `;
@@ -2957,7 +2974,10 @@ function setupDetailModal() {
   const copyBtn = document.getElementById('modal-btn-copy');
 
   const closeFn = () => {
-    if (modal) modal.classList.remove('open');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
   };
 
   if (closeBtn) closeBtn.addEventListener('click', closeFn);
@@ -2967,6 +2987,12 @@ function setupDetailModal() {
       if (e.target === modal) closeFn();
     });
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+      closeFn();
+    }
+  });
 
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
@@ -2990,6 +3016,7 @@ function openDetailModal(item) {
   const toolsBox = document.getElementById('modal-tools');
   const reqBox = document.getElementById('modal-requires');
   const promptBox = document.getElementById('modal-prompt');
+  const closeBtn = document.getElementById('modal-close');
 
   if (!modal) return;
 
@@ -3011,7 +3038,7 @@ function openDetailModal(item) {
 
   const reqs = item.skills || (item.requires ? Object.values(item.requires).flat() : []);
   if (reqs.length > 0) {
-    reqBox.innerHTML = reqs.map(r => `<span class="card-tag" style="color: #34D399;">${r}</span>`).join('');
+    reqBox.innerHTML = reqs.map(r => `<span class="card-tag" style="color: #059669; font-weight: 600;">${r}</span>`).join('');
     document.getElementById('modal-requires-section').style.display = 'block';
   } else {
     document.getElementById('modal-requires-section').style.display = 'none';
@@ -3019,6 +3046,8 @@ function openDetailModal(item) {
 
   promptBox.textContent = generatePromptText(item);
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  if (closeBtn) closeBtn.focus();
 }
 
 // =========================================================
@@ -3494,7 +3523,7 @@ function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerHTML = `
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F6821F" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <span>${message}</span>
   `;
 

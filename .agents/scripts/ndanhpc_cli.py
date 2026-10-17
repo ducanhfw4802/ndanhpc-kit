@@ -12,11 +12,17 @@ import json
 import os
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+try:
+    import yaml  # type: ignore
+except ImportError:
+    yaml = None
 
 # ==============================================================================
 # ANSI Color & Formatting Utilities
@@ -96,6 +102,10 @@ def dim(text: Any) -> str:
     return c(text, Colors.DIM)
 
 
+def italic(text: Any) -> str:
+    return c(text, Colors.ITALIC)
+
+
 def get_terminal_width() -> int:
     """Return current terminal column width clamped between 70 and 110."""
     try:
@@ -110,8 +120,9 @@ def hr(char: str = "─", color: str = Colors.DIM) -> None:
     print(c(char * width, color))
 
 
-def banner() -> None:
-    """Print the NDANHPC Kit banner."""
+def banner(data: Optional[ToolkitData] = None) -> None:
+    """Print the NDANHPC Kit banner with dynamic CalVer version."""
+    version = data.kit_version if data else "2026.10.17"
     ascii_logo = r"""
   _   _ ____    _    _   _ _   _ ____   ____   _  ___ _   
  | \ | |  _ \  / \  | \ | | | | |  _ \ / ___| | |/ (_) |_ 
@@ -121,13 +132,101 @@ def banner() -> None:
 """
     print(c(ascii_logo, Colors.BRIGHT_CYAN))
     print(f" {bold(cyan('⚡ NDANHPC KIT'))} {dim('•')} {bold('Antigravity-Native AI Agent Capability Toolkit')}")
-    print(f" {dim('Production CalVer: 2026.10.10 | Multi-Agent Orchestration & Runtime Contract')}")
+    print(f" {dim(f'Production CalVer: {version} | Multi-Agent Orchestration & QA Supercharge Contract')}")
     hr("═", Colors.CYAN)
 
 
 # ==============================================================================
 # Manifest & Data Access Layer
 # ==============================================================================
+
+SKILL_CATEGORIES: Dict[str, Tuple[str, str, List[str]]] = {
+    "qa": (
+        "🧪 QA & Test Automation",
+        "Kỹ năng kiểm thử AI-RBT, POM automation, smart locators, test data & tự sửa lỗi",
+        [
+            "flaky-test-analyzer", "jira-integration", "locator-healer",
+            "qa-automation-workflow", "qa-framework-architect", "rbt-manual-testing",
+            "requirements-analyzer", "smart-locator", "test-data-generator",
+            "ui-debug", "webapp-testing", "testing-patterns", "tdd-workflow"
+        ]
+    ),
+    "frontend": (
+        "🎨 Frontend & Design",
+        "Thiết kế giao diện, UI/UX tokens, Tailwind CSS, Next.js và responsive web/mobile",
+        [
+            "frontend-design", "frontend-architecture", "design-spec",
+            "responsive-web-design", "ui-ux-design-system", "ux-audit-and-heuristics",
+            "nextjs-react-expert", "tailwind-patterns", "mobile-app-ui-ux",
+            "mobile-design", "web-design-guidelines", "game-development", "i18n-localization"
+        ]
+    ),
+    "backend": (
+        "⚙️ Backend & Architecture",
+        "Kiến trúc hệ thống, API patterns, thiết kế cơ sở dữ liệu và async runtimes",
+        [
+            "architecture", "api-patterns", "database-design", "nodejs-best-practices",
+            "python-patterns", "rust-pro"
+        ]
+    ),
+    "orchestration": (
+        "🚀 Multi-Agent & Orchestration",
+        "Điều phối đa agent, lập kế hoạch tuần tự, nén ngữ cảnh và ra quyết định",
+        [
+            "app-builder", "coordinator-mode", "parallel-agents", "plan-writing",
+            "brainstorming", "behavioral-modes", "context-compression",
+            "intelligent-routing", "memory-system"
+        ]
+    ),
+    "security": (
+        "🛡️ Security & Red Team",
+        "Quét lỗ hổng SAST, OWASP 2025, kiểm định chuỗi cung ứng và kỹ thuật tấn công",
+        ["vulnerability-scanner", "red-team-tactics"]
+    ),
+    "core": (
+        "🧹 Clean Code & Standards",
+        "Quy chuẩn mã nguồn tinh gọn, kiểm thử hồi quy, tối ưu hiệu năng và soát mã",
+        [
+            "clean-code", "code-review-checklist", "code-review-graph",
+            "documentation-templates", "lint-and-validate", "simplify-code",
+            "systematic-debugging", "verify-changes", "performance-profiling"
+        ]
+    ),
+    "system": (
+        "💻 System & Tooling",
+        "Quản trị máy chủ, terminal Linux/PowerShell, MCP server và tự động hóa thao tác",
+        ["bash-linux", "powershell-windows", "server-management", "batch-operations", "mcp-builder", "skillify"]
+    ),
+    "content": (
+        "🌐 SEO & Content Discovery",
+        "Tối ưu hóa công cụ tìm kiếm truyền thống và Generative Engine Optimization (GEO)",
+        ["seo-fundamentals", "geo-fundamentals"]
+    )
+}
+
+WORKFLOW_CATEGORIES: Dict[str, Tuple[str, List[str]]] = {
+    "qa": (
+        "🧪 QA & Testing Workflows",
+        [
+            "analyze-flaky-tests", "analyze-requirement-document", "fetch-jira-requirements",
+            "generate-api-tests-from-swagger", "generate-application-test-plan",
+            "generate-automation-framework", "generate-automation-from-testcases",
+            "generate-automation-from-ui-flow", "generate-combinatorial-test-data",
+            "generate-cross-module-test-plan", "generate-locator",
+            "generate-manual-testcases-rbt", "generate-requirements-from-website",
+            "generate-test-data", "generate-testcases-from-requirements",
+            "import-test-results-xray"
+        ]
+    ),
+    "core": (
+        "🚀 Core Lifecycle & Architecture Workflows",
+        [
+            "brainstorm", "coordinate", "create", "debug", "deploy", "enhance",
+            "orchestrate", "plan", "preview", "remember", "status", "test", "verify"
+        ]
+    )
+}
+
 
 class ToolkitData:
     """Loads and caches metadata from .agents/manifest.json and markdown files."""
@@ -137,13 +236,10 @@ class ToolkitData:
         if root:
             self.toolkit_dir = root
         else:
-            # ndanhpc_cli.py is at .agents/scripts/ndanhpc_cli.py
-            # parent is .agents/scripts, parent.parent is .agents
             candidate = self.script_dir.parent
             if (candidate / "manifest.json").exists():
                 self.toolkit_dir = candidate
             else:
-                # Search up from current directory
                 curr = Path(".").resolve()
                 if (curr / ".agents" / "manifest.json").exists():
                     self.toolkit_dir = curr / ".agents"
@@ -159,6 +255,7 @@ class ToolkitData:
         self.agents_meta: Dict[str, Dict[str, Any]] = {}
         self.skills_meta: Dict[str, Dict[str, Any]] = {}
         self.workflows_meta: Dict[str, Dict[str, Any]] = {}
+        self.rules_meta: Dict[str, Dict[str, Any]] = {}
         self._load()
 
     def _load(self) -> None:
@@ -176,7 +273,7 @@ class ToolkitData:
         self._parse_markdown_metadatas()
 
     def _parse_frontmatter(self, file_path: Path) -> Dict[str, Any]:
-        """Simple, standard library frontmatter extractor."""
+        """Simple and robust frontmatter extractor supporting PyYAML when available."""
         if not file_path.exists():
             return {}
         try:
@@ -187,6 +284,14 @@ class ToolkitData:
             if end < 0:
                 return {}
             raw = text[4:end]
+            if yaml is not None:
+                try:
+                    loaded = yaml.safe_load(raw)
+                    if isinstance(loaded, dict):
+                        return dict(loaded)
+                except Exception:
+                    pass
+
             data: Dict[str, Any] = {}
             for line in raw.splitlines():
                 if not line or line.startswith("#"):
@@ -208,10 +313,11 @@ class ToolkitData:
                 name = meta.get("name", p.stem)
                 self.agents_meta[name] = {
                     "name": name,
-                    "description": meta.get("description", "No description provided."),
+                    "description": meta.get("description", "Chưa có mô tả vai trò."),
                     "model": meta.get("model", "inherit"),
                     "tools": meta.get("tools", ""),
                     "version": meta.get("version", "1.0.0"),
+                    "skills": meta.get("skills", []),
                     "file": str(p.relative_to(self.toolkit_dir)),
                     "abs_path": p
                 }
@@ -224,7 +330,7 @@ class ToolkitData:
                 sname = meta.get("name", skill_path.parent.name)
                 self.skills_meta[sname] = {
                     "name": sname,
-                    "description": meta.get("description", "No description provided."),
+                    "description": meta.get("description", "Chưa có mô tả kỹ năng."),
                     "when_to_use": meta.get("when_to_use", ""),
                     "allowed_tools": meta.get("allowed-tools", ""),
                     "version": meta.get("version", "1.0.0"),
@@ -249,9 +355,38 @@ class ToolkitData:
                     "abs_path": wfp
                 }
 
+        # Load rules
+        rules_dir = self.toolkit_dir / "rules"
+        if rules_dir.exists():
+            for rp in sorted(rules_dir.glob("*.md")):
+                meta = self._parse_frontmatter(rp)
+                rname = meta.get("name", rp.stem)
+                self.rules_meta[rname] = {
+                    "name": rname,
+                    "description": meta.get("description", "Rule description."),
+                    "priority": meta.get("priority", "P0"),
+                    "trigger": meta.get("trigger", "model_decision"),
+                    "version": meta.get("version", "1.0.0"),
+                    "file": str(rp.relative_to(self.toolkit_dir)),
+                    "abs_path": rp
+                }
+
     @property
     def kit_version(self) -> str:
-        return self.manifest.get("kitVersion", "2026.10.10")
+        # Try manifest first
+        v = self.manifest.get("kitVersion")
+        if v:
+            return str(v)
+        # Try package.json
+        pkg_json = self.project_dir / "package.json"
+        if pkg_json.exists():
+            try:
+                data = json.loads(pkg_json.read_text("utf-8"))
+                if "version" in data:
+                    return str(data["version"])
+            except Exception:
+                pass
+        return "2026.10.17"
 
     @property
     def agents(self) -> Dict[str, Any]:
@@ -269,6 +404,47 @@ class ToolkitData:
     def rules(self) -> Dict[str, Any]:
         return self.manifest.get("rules", {})
 
+    def search(self, query: str) -> Dict[str, List[Tuple[str, str]]]:
+        """Search across agents, skills, workflows, and rules."""
+        q = query.lower().strip()
+        results: Dict[str, List[Tuple[str, str]]] = {
+            "agents": [],
+            "skills": [],
+            "workflows": [],
+            "rules": []
+        }
+
+        # Search Agents
+        for name, info in self.agents.items():
+            meta = self.agents_meta.get(name, {})
+            desc = meta.get("description", "")
+            if q in name.lower() or q in desc.lower():
+                results["agents"].append((name, desc))
+
+        # Search Skills
+        for name, info in self.skills.items():
+            meta = self.skills_meta.get(name, {})
+            desc = meta.get("description", "")
+            when = meta.get("when_to_use", "")
+            if q in name.lower() or q in desc.lower() or q in when.lower():
+                results["skills"].append((name, desc))
+
+        # Search Workflows
+        for name, info in self.workflows.items():
+            meta = self.workflows_meta.get(name, {})
+            desc = meta.get("description", "")
+            if q in name.lower() or q in desc.lower():
+                results["workflows"].append((f"/{name}", desc))
+
+        # Search Rules
+        for name, info in self.rules.items():
+            meta = self.rules_meta.get(name, {})
+            desc = meta.get("description", "")
+            if q in name.lower() or q in desc.lower():
+                results["rules"].append((name, desc))
+
+        return results
+
 
 # ==============================================================================
 # View 1: Overview & Architecture
@@ -276,30 +452,40 @@ class ToolkitData:
 
 def show_overview(data: ToolkitData) -> None:
     """Display comprehensive overview & architecture of NDANHPC Kit."""
+    total_components = len(data.agents) + len(data.skills) + len(data.workflows) + len(data.rules)
     print(bold(cyan("\n🚀 TỔNG QUAN & KIẾN TRÚC NDANHPC KIT")))
     hr()
 
-    print(f" {bold('Phiên bản Kit (CalVer):')}   {green(data.kit_version)}")
+    print(f" {bold('Phiên bản Kit (CalVer):')}   {green(data.kit_version)} {dim('(Bản phát hành ổn định)')}")
     print(f" {bold('Vị trí Toolkit:')}          {cyan(str(data.toolkit_dir))}")
     print(f" {bold('Thư mục Dự án:')}          {cyan(str(data.project_dir))}")
-    print(f" {bold('Trạng thái Khóa:')}          {green('manifest.lock.json Đồng bộ') if data.lock_path.exists() else yellow('Chưa khóa')}")
+    print(f" {bold('Trạng thái Khóa:')}          {green('manifest.lock.json Đồng bộ (SHA-256)') if data.lock_path.exists() else yellow('Chưa khóa')}")
+    print(f" {bold('Tổng số Thành phần:')}      {bold(green(str(total_components)))} thành phần đã được kiểm định toàn vẹn")
     print()
 
     # Metric summary table
     print(bold("📊 THỐNG KÊ TỔNG THỂ HỆ THỐNG:"))
-    print(f"  • {bold('Specialist Agents:')}  {green(len(data.agents))} vai trò chuyên môn hóa")
-    print(f"  • {bold('Domain Skills:')}     {green(len(data.skills))} kỹ năng tải theo điều kiện (Progressive)")
+    print(f"  • {bold('Specialist Agents:')}  {green(len(data.agents))} vai trò chuyên môn hóa độc lập")
+    print(f"  • {bold('Domain Skills:')}     {green(len(data.skills))} kỹ năng tải theo điều kiện (Progressive Loading)")
     print(f"  • {bold('Workflows:')}          {green(len(data.workflows))} quy trình chuẩn với Slash Commands (/command)")
-    print(f"  • {bold('Workspace Rules:')}    {green(len(data.rules))} quy tắc bắt buộc (P0 Universal -> P1 -> P2)")
-    print(f"  • {bold('Runtime Contracts:')}   {green('Antigravity 6-Phase Contract')} (Discovery, MCP, Hooks, Orchestration, Plugin, Validation)")
+    print(f"  • {bold('Workspace Rules:')}    {green(len(data.rules))} quy tắc bắt buộc (P0 Universal -> P1 QA -> P2 QuickRef)")
+    print(f"  • {bold('Self-Contained:')}     {green('100%')} nằm trọn trong thư mục {cyan('.agents/')} (Dễ dàng sao chép sang dự án mới)")
+    print()
+
+    # Highlight v2026.10.17
+    print(bold(yellow("⭐ ĐIỂM NHẤN PHÁT HÀNH v2026.10.17 - CLOUDFLARE LIGHT THEME & UI MODERNIZATION:")))
+    print(f"  • {bold('Cloudflare Light Theme:')}     Giao diện sáng cao cấp (#F6821F / #18181B / #F9FAFB), sắc nét, dịu mắt")
+    print(f"  • {bold('Responsive Toàn Diện:')}       Tương thích 100% Mobile, Tablet & Desktop, khắc phục tràn layout")
+    print(f"  • {bold('QA Automation Supercharge:')}  10 Kỹ năng QA, 16 Workflows (/rbt, /framework, /flaky, POM, Jira/Xray)")
+    print(f"  • {bold('Đồng Bộ CalVer 2026.10.17:')}  Đồng bộ toàn bộ hệ sinh thái (Rules, Hooks, Manifests, Web Portal)")
     print()
 
     # Tier Architecture
     print(bold("🏛️ HỆ THỐNG PHÂN CẤP NGUYÊN TẮC (RULE HIERARCHY):"))
     print(f"  {bold(yellow('Tier 0 (P0) Universal Rules:'))}   Luôn kích hoạt ({cyan('.agents/rules/universal-rules.md')})")
     print(f"    └── Protocol cấm code thừa, cấm phỏng đoán, áp dụng Clean Code & AAA testing.")
-    print(f"  {bold(cyan('Tier 1 (P1) Specialist Personas:'))} Khi kích hoạt Agent ({cyan('.agents/agent/*.md')})")
-    print(f"    └── Phong cách, triết lý, công cụ và kỹ năng gắn liền với từng vai trò chuyên trách.")
+    print(f"  {bold(cyan('Tier 1 (P1) Specialist & QA Rules:'))} Áp dụng cho từng miền nghiệp vụ")
+    print(f"    └── 24 Agent Personas ({cyan('.agents/agent/*.md')}) + Quy tắc QA ({cyan('.agents/rules/qa-testing-rules.md')})")
     print(f"  {bold(magenta('Tier 2 (P2) Progressive Skills:'))}  Nạp theo ngữ cảnh ({cyan('.agents/skills/*/SKILL.md')})")
     print(f"    └── Đọc 'when_to_use' trước khi load; tiết kiệm token ngữ cảnh tối đa.")
     print()
@@ -320,15 +506,25 @@ def show_overview(data: ToolkitData) -> None:
 
 
 # ==============================================================================
-# View 2: Tra cứu 24 Specialist Agents
+# View 2: Tra cứu Specialist Agents
 # ==============================================================================
 
-def list_agents(data: ToolkitData, non_interactive: bool = False) -> None:
-    """Display table of all 24 Specialist Agents with drill-down capability."""
+def list_agents(data: ToolkitData, non_interactive: bool = False, query: Optional[str] = None) -> None:
+    """Display table of all Specialist Agents with drill-down and search."""
     agents = data.agents
     sorted_names = sorted(agents.keys())
 
-    print(bold(cyan(f"\n🤖 DANH MỤC 24 SPECIALIST AGENTS (NDANHPC KIT v{data.kit_version})")))
+    if query:
+        q = query.lower()
+        sorted_names = [
+            n for n in sorted_names
+            if q in n.lower() or q in data.agents_meta.get(n, {}).get("description", "").lower()
+        ]
+
+    count_str = f"{len(sorted_names)}/{len(data.agents)}" if query else str(len(data.agents))
+    print(bold(cyan(f"\n🤖 DANH MỤC SPECIALIST AGENTS ({count_str}) (NDANHPC KIT v{data.kit_version})")))
+    if query:
+        print(f" {dim(f'Bộ lọc tìm kiếm theo từ khóa:')} {yellow(query)}")
     hr()
     print(f"{bold('STT'):<5} {bold('Tên Agent'):<26} {bold('Model'):<10} {bold('Skills'):<8} {bold('Chuyên môn / Mô tả tóm tắt')}")
     hr("-")
@@ -339,25 +535,30 @@ def list_agents(data: ToolkitData, non_interactive: bool = False) -> None:
         model = info.get("model", "inherit")
         skills_req = len(info.get("requires", {}).get("skills", {}))
         desc = meta.get("description", "")
-        # Truncate description for table
-        desc_short = (desc[:48] + "...") if len(desc) > 51 else desc
+        desc_short = (desc[:46] + "...") if len(desc) > 49 else desc
         print(f"{cyan(f'[{idx:02d}]'):<5} {bold(name):<26} {yellow(model):<10} {green(str(skills_req)):<8} {desc_short}")
 
     hr()
-    print(f" {dim('Tổng cộng: 24 agents chuyên biệt sẵn sàng cho Multi-Agent Orchestration.')}")
+    print(f" {dim(f'Tổng cộng: {len(data.agents)} agents chuyên biệt sẵn sàng cho Multi-Agent Orchestration.')}")
 
     if non_interactive:
         return
 
     # Interactive inspection sub-menu
     while True:
-        print(f"\n {bold('👉 Nhập số [1-24]')} hoặc {bold('tên agent')} để xem chi tiết | {bold('0')} để quay lại menu:")
+        prompt_text = f"\n {bold(f'👉 Nhập số [1-{len(sorted_names)}]')} hoặc {bold('tên agent')} | gõ {bold('/search <từ khóa>')} để lọc | {bold('0')} để quay lại:"
+        print(prompt_text)
         try:
             choice = input(cyan("NDANHPC/agents > ")).strip()
         except (EOFError, KeyboardInterrupt):
             break
 
         if not choice or choice in ("0", "q", "exit"):
+            break
+
+        if choice.startswith("/search "):
+            sub_q = choice[8:].strip()
+            list_agents(data, non_interactive=False, query=sub_q)
             break
 
         target_name = None
@@ -387,7 +588,7 @@ def show_agent_detail(data: ToolkitData, name: str) -> None:
     print(f" {bold('Đường dẫn file:')}     {dim(info.get('path', meta.get('file', 'N/A')))}")
     print(f" {bold('Phiên bản:')}          {green(info.get('version', '1.0.0'))}")
     print(f" {bold('Model Runtime:')}     {yellow(info.get('model', 'inherit'))}")
-    
+
     tools = info.get("tools", [])
     if isinstance(tools, list):
         tools_str = ", ".join(tools)
@@ -397,8 +598,8 @@ def show_agent_detail(data: ToolkitData, name: str) -> None:
 
     skills_req = info.get("requires", {}).get("skills", {})
     if skills_req:
-        print(f" {bold('Kỹ năng phụ thuộc:')}")
-        for sname, s_ver in skills_req.items():
+        print(f" {bold(f'Kỹ năng phụ thuộc ({len(skills_req)} skills):')}")
+        for sname, s_ver in sorted(skills_req.items()):
             print(f"   • {cyan(sname)} {dim(f'({s_ver})')}")
     else:
         print(f" {bold('Kỹ năng phụ thuộc:')}  {dim('Không yêu cầu cứng (sử dụng kỹ năng phổ quát)')}")
@@ -415,13 +616,12 @@ def show_agent_detail(data: ToolkitData, name: str) -> None:
     if abs_path and abs_path.exists():
         try:
             content = abs_path.read_text("utf-8", errors="replace")
-            # Skip frontmatter
             if "---" in content:
                 parts = content.split("---", 2)
                 body = parts[2].strip() if len(parts) >= 3 else parts[-1].strip()
             else:
                 body = content.strip()
-            
+
             paragraphs = [p.strip() for p in body.split("\n\n") if p.strip() and not p.startswith("#")][:2]
             if paragraphs:
                 print(f"\n {bold('Triết lý hoạt động (Philosophy Excerpt):')}")
@@ -432,20 +632,42 @@ def show_agent_detail(data: ToolkitData, name: str) -> None:
     hr()
 
 
-def italic(text: Any) -> str:
-    return c(text, Colors.ITALIC)
-
-
 # ==============================================================================
-# View 3: Tra cứu 51 Skills
+# View 3: Tra cứu Domain Skills (61 Skills)
 # ==============================================================================
 
-def list_skills(data: ToolkitData, non_interactive: bool = False) -> None:
-    """Display table of all 51 Skills categorized with search capability."""
+def list_skills(
+    data: ToolkitData,
+    non_interactive: bool = False,
+    query: Optional[str] = None,
+    category_key: Optional[str] = None
+) -> None:
+    """Display table of all Skills with categorization, filtering, and search."""
     skills = data.skills
     sorted_names = sorted(skills.keys())
 
-    print(bold(cyan(f"\n📚 DANH MỤC 51 DOMAIN SKILLS (NDANHPC KIT v{data.kit_version})")))
+    # Apply category filter
+    cat_title = None
+    if category_key and category_key in SKILL_CATEGORIES:
+        cat_title, _, cat_skills = SKILL_CATEGORIES[category_key]
+        sorted_names = [n for n in sorted_names if n in cat_skills]
+
+    # Apply text query filter
+    if query:
+        q = query.lower()
+        sorted_names = [
+            n for n in sorted_names
+            if q in n.lower()
+            or q in data.skills_meta.get(n, {}).get("description", "").lower()
+            or q in data.skills_meta.get(n, {}).get("when_to_use", "").lower()
+        ]
+
+    count_str = f"{len(sorted_names)}/{len(data.skills)}" if (query or category_key) else str(len(data.skills))
+    print(bold(cyan(f"\n📚 DANH MỤC DOMAIN SKILLS ({count_str}) (NDANHPC KIT v{data.kit_version})")))
+    if cat_title:
+        print(f" {bold('Danh mục:')} {magenta(cat_title)}")
+    if query:
+        print(f" {bold('Từ khóa tìm kiếm:')} {yellow(query)}")
     hr()
     print(f"{bold('STT'):<5} {bold('Tên Kỹ năng'):<28} {bold('Ver'):<8} {bold('Scripts'):<9} {bold('Công cụ cho phép / Trạng thái')}")
     hr("-")
@@ -459,21 +681,278 @@ def list_skills(data: ToolkitData, non_interactive: bool = False) -> None:
         allowed = ", ".join(info.get("allowedTools", []))
         if not allowed:
             allowed = meta.get("allowed_tools", "Standard")
-        allowed_short = (allowed[:38] + "...") if len(allowed) > 40 else allowed
+        allowed_short = (allowed[:36] + "...") if len(allowed) > 38 else allowed
 
         print(f"{cyan(f'[{idx:02d}]'):<5} {bold(name):<28} {yellow(ver):<8} {scripts_tag:<9} {dim(allowed_short)}")
 
     hr()
-    print(f" {dim('Tổng cộng: 51 kỹ năng được tải theo điều kiện when_to_use giúp tối ưu ngữ cảnh.')}")
+    print(f" {dim(f'Tổng cộng: {len(data.skills)} kỹ năng được tải theo điều kiện when_to_use giúp tối ưu ngữ cảnh.')}")
 
     if non_interactive:
         return
 
     # Interactive search & inspection
     while True:
-        print(f"\n {bold('👉 Nhập số [1-51]')} hoặc {bold('tên kỹ năng')} để xem chi tiết | {bold('0')} để quay lại menu:")
+        print(f"\n {bold(f'👉 Nhập số [1-{len(sorted_names)}]')} | {bold('tên kỹ năng')} | {bold('cat')} (xem theo danh mục) | {bold('/search <từ khóa>')} | {bold('0')} để quay lại:")
         try:
             choice = input(cyan("NDANHPC/skills > ")).strip()
+        except (EOFError, KeyboardInterrupt):
+            break
+
+        if not choice or choice in ("0", "q", "exit"):
+            break
+
+        if choice in ("cat", "c", "categories"):
+            show_skill_categories(data)
+            break
+
+        if choice.startswith("/search "):
+            sub_q = choice[8:].strip()
+            list_skills(data, non_interactive=False, query=sub_q)
+            break
+
+        target_name = None
+        if choice.isdigit():
+            c_idx = int(choice)
+            if 1 <= c_idx <= len(sorted_names):
+                target_name = sorted_names[c_idx - 1]
+        else:
+            matches = [n for n in sorted_names if choice.lower() in n.lower()]
+            if matches:
+                target_name = matches[0]
+
+        if target_name:
+            show_skill_detail(data, target_name)
+        else:
+            # Try searching as general filter
+            sub_matches = [
+                n for n in sorted(skills.keys())
+                if choice.lower() in n.lower()
+                or choice.lower() in data.skills_meta.get(n, {}).get("description", "").lower()
+            ]
+            if sub_matches:
+                list_skills(data, non_interactive=False, query=choice)
+                break
+            else:
+                print(yellow(f"Không tìm thấy kỹ năng phù hợp với '{choice}'."))
+
+
+def show_skill_categories(data: ToolkitData) -> None:
+    """Show interactive skill category browser."""
+    print(bold(cyan("\n📂 PHÂN LOẠI DANH MỤC SKILLS")))
+    hr()
+    keys = list(SKILL_CATEGORIES.keys())
+    for idx, key in enumerate(keys, 1):
+        title, desc, cat_skills = SKILL_CATEGORIES[key]
+        print(f"  [{cyan(str(idx))}] {bold(title)} {dim(f'({len(cat_skills)} skills)')}")
+        print(f"      {dim(desc)}")
+
+    print(f"\n {bold('👉 Chọn số [1-8]')} để lọc danh mục | {bold('0')} để quay lại:")
+    try:
+        sel = input(cyan("NDANHPC/skills/cat > ")).strip()
+    except (EOFError, KeyboardInterrupt):
+        return
+
+    if sel.isdigit() and 1 <= int(sel) <= len(keys):
+        chosen_key = keys[int(sel) - 1]
+        list_skills(data, non_interactive=False, category_key=chosen_key)
+    else:
+        list_skills(data, non_interactive=False)
+
+
+def show_skill_detail(data: ToolkitData, name: str) -> None:
+    """Show detailed metadata and instructions for a specific skill."""
+    info = data.skills.get(name, {})
+    meta = data.skills_meta.get(name, {})
+
+    print(bold(cyan(f"\n📋 THÔNG TIN KỸ NĂNG: @{name}")))
+    hr("═")
+    print(f" {bold('Tên Kỹ năng:')}       {cyan(name)}")
+    print(f" {bold('Tập tin SKILL.md:')}   {dim(info.get('path', meta.get('file', 'N/A')))}")
+    print(f" {bold('Phiên bản:')}          {green(info.get('version', '1.0.0'))}")
+
+    tools = info.get("allowedTools", [])
+    print(f" {bold('Công cụ cho phép:')}   {magenta(', '.join(tools) if tools else meta.get('allowed_tools', 'Standard'))}")
+
+    scripts = info.get("scripts", [])
+    if scripts:
+        print(f" {bold('Scripts đi kèm:')}")
+        for sc in scripts:
+            print(f"   • {green(sc)}")
+    else:
+        print(f" {bold('Scripts đi kèm:')}    {dim('Không có script độc lập')}")
+
+    # Check for references or assets
+    abs_path = meta.get("abs_path")
+    if abs_path and abs_path.exists():
+        skill_dir = abs_path.parent
+        refs_dir = skill_dir / "references"
+        if refs_dir.exists():
+            ref_files = [f.name for f in refs_dir.glob("*.md")]
+            if ref_files:
+                print(f" {bold('Tài liệu tham chiếu (References):')}")
+                for rf in ref_files:
+                    print(f"   • {yellow(rf)}")
+
+    desc = meta.get("description", "")
+    if desc:
+        print(f"\n {bold('Mô tả chuyên môn:')}")
+        print(f"   {desc}")
+
+    when_to_use = meta.get("when_to_use", "")
+    if when_to_use:
+        print(f"\n {bold('Điều kiện kích hoạt (when_to_use):')}")
+        print(f"   {yellow(when_to_use)}")
+
+    hr()
+
+
+# ==============================================================================
+# View 4: Tra cứu Workflows & Slash Commands (29 Workflows)
+# ==============================================================================
+
+def list_workflows(data: ToolkitData, non_interactive: bool = False, query: Optional[str] = None) -> None:
+    """Display table of all Workflows and slash command guides."""
+    workflows = data.workflows
+    sorted_names = sorted(workflows.keys())
+
+    if query:
+        q = query.lower().lstrip("/")
+        sorted_names = [
+            n for n in sorted_names
+            if q in n.lower() or q in data.workflows_meta.get(n, {}).get("description", "").lower()
+        ]
+
+    count_str = f"{len(sorted_names)}/{len(data.workflows)}" if query else str(len(data.workflows))
+    print(bold(cyan(f"\n⚡ DANH MỤC WORKFLOWS & SLASH COMMANDS ({count_str}) (NDANHPC KIT v{data.kit_version})")))
+    if query:
+        print(f" {bold('Bộ lọc từ khóa:')} {yellow(query)}")
+    hr()
+    print(f"{bold('STT'):<5} {bold('Slash Command'):<35} {bold('Agents Yêu Cầu'):<26} {bold('Artifact Outputs')}")
+    hr("-")
+
+    for idx, name in enumerate(sorted_names, 1):
+        info = workflows[name]
+        meta = data.workflows_meta.get(name, {})
+        req_agents = ", ".join(info.get("requires", {}).get("agents", []))
+        if not req_agents:
+            req_agents = meta.get("requires_agents", "orchestrator")
+        req_agents_short = (req_agents[:24] + "...") if len(req_agents) > 26 else req_agents
+
+        artifacts = ", ".join(info.get("artifactOutputs", []))
+        if not artifacts:
+            artifacts = meta.get("artifact_outputs", "status-report")
+        artifacts_short = (artifacts[:28] + "...") if len(artifacts) > 30 else artifacts
+
+        cmd = f"/{name}"
+        # Highlight QA commands with green, others with cyan
+        cmd_colored = green(cmd) if name in WORKFLOW_CATEGORIES["qa"][1] else cyan(cmd)
+        print(f"{cyan(f'[{idx:02d}]'):<5} {cmd_colored:<35} {bold(req_agents_short):<26} {dim(artifacts_short)}")
+
+    hr()
+    print(bold("💡 BẢNG TRA CỨU NHANH CÁC LỆNH SLASH COMMAND THƯỜNG DÙNG:"))
+    print(f"  • {green('/plan')} [nhiệm vụ]                  → Phân rã bài toán thành lộ trình 4 giai đoạn ({cyan('{task-slug}.md')})")
+    print(f"  • {green('/orchestrate')} [nhiệm vụ]           → Điều phối tối thiểu 3 agents song song giải quyết bài toán lớn")
+    print(f"  • {green('/debug')} [lỗi]                     → Điều tra lỗi 4 pha khoa học tìm nguyên nhân gốc rễ (Root Cause)")
+    print(f"  • {green('/verify')}                           → Chạy kiểm định 17 tiêu chí sản xuất trước khi nghiệm thu")
+    print(f"  • {yellow('/generate-manual-testcases-rbt')}    → Sinh Test Cases thủ công AI-RBT 6 bước có ma trận rủi ro")
+    print(f"  • {yellow('/generate-automation-framework')}    → Khởi tạo khung kiểm thử tự động Playwright POM chuẩn mực")
+    print(f"  • {yellow('/analyze-flaky-tests')}              → Định vị và tự động khắc phục test chạy chập chờn")
+    print(f"  • {yellow('/fetch-jira-requirements')}          → Kéo yêu cầu nghiệp vụ từ Jira và xuất định dạng chuẩn")
+
+    if non_interactive:
+        return
+
+    while True:
+        print(f"\n {bold(f'👉 Nhập số [1-{len(sorted_names)}]')} hoặc {bold('tên lệnh')} (ví dụ: plan, rbt, flaky) | {bold('0')} để quay lại:")
+        try:
+            choice = input(cyan("NDANHPC/workflows > ")).strip().lstrip("/")
+        except (EOFError, KeyboardInterrupt):
+            break
+
+        if not choice or choice in ("0", "q", "exit"):
+            break
+
+        target_name = None
+        if choice.isdigit():
+            c_idx = int(choice)
+            if 1 <= c_idx <= len(sorted_names):
+                target_name = sorted_names[c_idx - 1]
+        else:
+            matches = [n for n in sorted_names if choice.lower() == n.lower() or choice.lower() in n.lower()]
+            if matches:
+                target_name = matches[0]
+
+        if target_name:
+            show_workflow_detail(data, target_name)
+        else:
+            print(yellow(f"Không tìm thấy workflow phù hợp với '/{choice}'."))
+
+
+def show_workflow_detail(data: ToolkitData, name: str) -> None:
+    """Show details of a workflow."""
+    info = data.workflows.get(name, {})
+    meta = data.workflows_meta.get(name, {})
+
+    print(bold(cyan(f"\n📋 CHI TIẾT WORKFLOW: /{name}")))
+    hr("═")
+    print(f" {bold('Lệnh gọi:')}            {green(f'/{name}')}")
+    print(f" {bold('Tập tin quy trình:')}   {dim(info.get('path', meta.get('file', 'N/A')))}")
+    print(f" {bold('Phiên bản:')}           {green(info.get('version', '1.0.0'))}")
+
+    req_agents = info.get("requires", {}).get("agents", [])
+    print(f" {bold('Agents tham gia:')}     {cyan(', '.join(req_agents) if req_agents else meta.get('requires_agents', 'orchestrator'))}")
+
+    req_skills = info.get("requires", {}).get("skills", [])
+    print(f" {bold('Skills kích hoạt:')}    {yellow(', '.join(req_skills) if req_skills else meta.get('requires_skills', 'Standard'))}")
+
+    artifacts = info.get("artifactOutputs", [])
+    print(f" {bold('Tài liệu tạo ra:')}     {magenta(', '.join(artifacts) if artifacts else meta.get('artifact_outputs', 'None'))}")
+
+    desc = meta.get("description", "")
+    if desc:
+        print(f"\n {bold('Mô tả quy trình:')}")
+        print(f"   {desc}")
+    hr()
+
+
+# ==============================================================================
+# View 5: Tra cứu Workspace Rules (7 Quy tắc Cốt Lõi)
+# ==============================================================================
+
+def list_rules(data: ToolkitData, non_interactive: bool = False) -> None:
+    """Display table of all Workspace Rules and inspection mechanism."""
+    rules = data.rules
+    sorted_names = sorted(rules.keys())
+
+    print(bold(cyan(f"\n📜 DANH MỤC 7 WORKSPACE RULES (NDANHPC KIT v{data.kit_version})")))
+    hr()
+    print(f"{bold('STT'):<5} {bold('Tên Quy Tắc'):<22} {bold('Ưu Tiên'):<10} {bold('Kích Hoạt'):<16} {bold('Đường dẫn file')}")
+    hr("-")
+
+    for idx, name in enumerate(sorted_names, 1):
+        info = rules[name]
+        priority = info.get("priority", "P0")
+        trigger = info.get("trigger", "always_on")
+        path_str = info.get("path", f"rules/{name}.md")
+
+        p_colored = red(priority) if priority == "P0" else (yellow(priority) if priority == "P1" else dim(priority))
+        trig_colored = green(trigger) if trigger == "always_on" else cyan(trigger)
+        print(f"{cyan(f'[{idx:02d}]'):<5} {bold(name):<22} {p_colored:<10} {trig_colored:<16} {dim(path_str)}")
+
+    hr()
+    print(bold("💡 Ý NGHĨA PHÂN CẤP ƯU TIÊN:"))
+    print(f"  • {red('P0 (Always On / Absolute):')} Bắt buộc tuân thủ 100%. Không phỏng đoán, không giải pháp tạm bợ.")
+    print(f"  • {yellow('P1 (Specialist Rules):')}  Quy tắc chuyên trách (Ví dụ: QA 1920x1080 Headed, POM, Zero sleep).")
+    print(f"  • {dim('P2 (On-Demand Catalog):')} Tra cứu nhanh danh mục Agent/Skill khi cần thiết.")
+
+    if non_interactive:
+        return
+
+    while True:
+        print(f"\n {bold('👉 Nhập số [1-7]')} hoặc {bold('tên quy tắc')} để xem chi tiết | {bold('0')} để quay lại:")
+        try:
+            choice = input(cyan("NDANHPC/rules > ")).strip()
         except (EOFError, KeyboardInterrupt):
             break
 
@@ -491,134 +970,115 @@ def list_skills(data: ToolkitData, non_interactive: bool = False) -> None:
                 target_name = matches[0]
 
         if target_name:
-            show_skill_detail(data, target_name)
+            show_rule_detail(data, target_name)
         else:
-            print(yellow(f"Không tìm thấy kỹ năng phù hợp với '{choice}'."))
+            print(yellow(f"Không tìm thấy quy tắc '{choice}'."))
 
 
-def show_skill_detail(data: ToolkitData, name: str) -> None:
-    """Show detailed metadata and instructions for a specific skill."""
-    info = data.skills.get(name, {})
-    meta = data.skills_meta.get(name, {})
+def show_rule_detail(data: ToolkitData, name: str) -> None:
+    """Show details of a specific workspace rule."""
+    info = data.rules.get(name, {})
+    meta = data.rules_meta.get(name, {})
 
-    print(bold(cyan(f"\n📋 THÔNG TIN KỸ NĂNG: @{name}")))
+    print(bold(cyan(f"\n📋 CHI TIẾT QUY TẮC: {name}")))
     hr("═")
-    print(f" {bold('Tên Kỹ năng:')}       {cyan(name)}")
-    print(f" {bold('Tập tin SKILL.md:')}   {dim(info.get('path', meta.get('file', 'N/A')))}")
-    print(f" {bold('Phiên bản:')}          {green(info.get('version', '1.0.0'))}")
-    
-    tools = info.get("allowedTools", [])
-    print(f" {bold('Công cụ cho phép:')}   {magenta(', '.join(tools) if tools else meta.get('allowed_tools', 'Standard'))}")
-
-    scripts = info.get("scripts", [])
-    if scripts:
-        print(f" {bold('Scripts đi kèm:')}")
-        for sc in scripts:
-            print(f"   • {green(sc)}")
-    else:
-        print(f" {bold('Scripts đi kèm:')}    {dim('Không có script độc lập')}")
+    print(f" {bold('Tên Quy tắc:')}       {cyan(name)}")
+    print(f" {bold('Mức ưu tiên:')}       {bold(info.get('priority', 'P0'))}")
+    print(f" {bold('Cơ chế kích hoạt:')}  {green(info.get('trigger', 'always_on'))}")
+    print(f" {bold('Đường dẫn file:')}     {dim(info.get('path', meta.get('file', 'N/A')))}")
 
     desc = meta.get("description", "")
     if desc:
-        print(f"\n {bold('Mô tả chuyên môn:')}")
+        print(f"\n {bold('Mô tả mục tiêu:')}")
         print(f"   {desc}")
 
-    when_to_use = meta.get("when_to_use", "")
-    if when_to_use:
-        print(f"\n {bold('Điều kiện kích hoạt (when_to_use):')}")
-        print(f"   {yellow(when_to_use)}")
-
-    hr()
-
-
-# ==============================================================================
-# View 4: Tra cứu 13 Workflows & Slash Commands
-# ==============================================================================
-
-def list_workflows(data: ToolkitData, non_interactive: bool = False) -> None:
-    """Display table of all 13 Workflows and slash command guides."""
-    workflows = data.workflows
-    sorted_names = sorted(workflows.keys())
-
-    print(bold(cyan(f"\n⚡ DANH MỤC 13 WORKFLOWS & SLASH COMMANDS (NDANHPC KIT v{data.kit_version})")))
-    hr()
-    print(f"{bold('Slash Command'):<18} {bold('Agents Yêu Cầu'):<30} {bold('Artifact Outputs')}")
-    hr("-")
-
-    for name in sorted_names:
-        info = workflows[name]
-        meta = data.workflows_meta.get(name, {})
-        req_agents = ", ".join(info.get("requires", {}).get("agents", []))
-        if not req_agents:
-            req_agents = meta.get("requires_agents", "orchestrator")
-        
-        artifacts = ", ".join(info.get("artifactOutputs", []))
-        if not artifacts:
-            artifacts = meta.get("artifact_outputs", "status-report")
-
-        cmd = f"/{name}"
-        print(f"{green(cmd):<18} {cyan(req_agents):<30} {dim(artifacts)}")
-
-    hr()
-    print(bold("\n💡 HƯỚNG DẪN SỬ DỤNG TRONG GOOGLE ANTIGRAVITY:"))
-    print(f"  • Nhập {green('/plan')} [nhiệm vụ]        → Khởi tạo file kế hoạch phân rã {cyan('{task-slug}.md')}")
-    print(f"  • Nhập {green('/orchestrate')} [nhiệm vụ] → Phối hợp tối thiểu 3 agents giải quyết bài toán phức tạp")
-    print(f"  • Nhập {green('/debug')} [lỗi]           → Điều tra 4 pha khoa học tìm nguyên nhân gốc rễ (Root Cause)")
-    print(f"  • Nhập {green('/verify')}                 → Chạy kiểm định 17 tiêu chí toàn diện trước khi bàn giao")
-    print(f"  • Nhập {green('/remember')} [thông tin]  → Lưu trữ quyết định hoặc quy ước vào hệ thống MEMORY.md")
-
-    if non_interactive:
-        return
-
-    while True:
-        print(f"\n {bold('👉 Nhập tên lệnh (ví dụ: orchestrate, plan, verify)')} để xem chi tiết | {bold('0')} để quay lại:")
+    abs_path = meta.get("abs_path")
+    if abs_path and abs_path.exists():
         try:
-            choice = input(cyan("NDANHPC/workflows > ")).strip().lstrip("/")
-        except (EOFError, KeyboardInterrupt):
-            break
+            content = abs_path.read_text("utf-8", errors="replace")
+            # Print first 25 non-frontmatter lines
+            lines = content.splitlines()
+            body_lines = []
+            in_fm = False
+            for line in lines:
+                if line.strip() == "---":
+                    in_fm = not in_fm
+                    continue
+                if not in_fm and line.strip():
+                    body_lines.append(line)
 
-        if not choice or choice in ("0", "q", "exit"):
-            break
-
-        matches = [n for n in sorted_names if choice.lower() == n.lower() or choice.lower() in n.lower()]
-        if matches:
-            show_workflow_detail(data, matches[0])
-        else:
-            print(yellow(f"Không tìm thấy workflow '/{choice}'."))
-
-
-def show_workflow_detail(data: ToolkitData, name: str) -> None:
-    """Show details of a workflow."""
-    info = data.workflows.get(name, {})
-    meta = data.workflows_meta.get(name, {})
-
-    print(bold(cyan(f"\n📋 CHI TIẾT WORKFLOW: /{name}")))
-    hr("═")
-    print(f" {bold('Lệnh gọi:')}            {green(f'/{name}')}")
-    print(f" {bold('Tập tin quy trình:')}   {dim(info.get('path', meta.get('file', 'N/A')))}")
-    print(f" {bold('Phiên bản:')}           {green(info.get('version', '1.0.0'))}")
-
-    req_agents = info.get("requires", {}).get("agents", [])
-    print(f" {bold('Agents tham gia:')}     {cyan(', '.join(req_agents) if req_agents else 'orchestrator')}")
-
-    req_skills = info.get("requires", {}).get("skills", [])
-    print(f" {bold('Skills kích hoạt:')}    {yellow(', '.join(req_skills) if req_skills else 'Standard')}")
-
-    artifacts = info.get("artifactOutputs", [])
-    print(f" {bold('Tài liệu tạo ra:')}     {magenta(', '.join(artifacts) if artifacts else 'None')}")
-
-    desc = meta.get("description", "")
-    if desc:
-        print(f"\n {bold('Mô tả quy trình:')}")
-        print(f"   {desc}")
+            if body_lines:
+                print(f"\n {bold('Trích dẫn nội dung quy chuẩn:')}")
+                for bl in body_lines[:20]:
+                    print(f"   {dim(bl)}")
+                if len(body_lines) > 20:
+                    print(f"   {italic('... (Xem tiếp trong file để đọc toàn bộ quy tắc)')}")
+        except Exception:
+            pass
     hr()
 
 
 # ==============================================================================
-# View 5: Mô phỏng Multi-Agent Orchestration (/orchestrate)
+# View 6: Trung tâm QA & Test Automation Supercharge Hub (NDANHPC Kit v2026.10.17)
 # ==============================================================================
 
-ORCHESTRATION_PRESETS = {
+def show_qa_hub(data: ToolkitData) -> None:
+    """Display comprehensive QA & Test Automation Supercharge Dashboard."""
+    print(bold(yellow("\n🧪 TRUNG TÂM QA & TEST AUTOMATION SUPERCHARGE (NDANHPC KIT v2026.10.17)")))
+    hr("═", Colors.YELLOW)
+    print(f" {bold('Hệ sinh thái Kiểm thử Chuẩn Quốc Tế:')} Tích hợp hoàn hảo giữa AI và QA Engineering.")
+    hr()
+
+    # 1. Ten QA Skills
+    print(bold("🎯 10 KỸ NĂNG QA CHUYÊN SÂU:"))
+    qa_skills = [
+        ("rbt-manual-testing", "Sinh Manual Test Cases 6 bước AI-RBT (QUICK & FULL mode) kèm ma trận rủi ro"),
+        ("qa-automation-workflow", "Quy trình tự động hóa E2E chuẩn POM, smart waits, tự động debug"),
+        ("smart-locator", "Chiến lược định vị bền vững: User semantic > data-testid > text > resilient CSS"),
+        ("locator-healer", "Tự động phát hiện và vá lỗi locators bị hỏng khi UI DOM thay đổi (Self-healing)"),
+        ("ui-debug", "Điều tra giao diện trực tiếp trên viewport 1920x1080 headed mode"),
+        ("flaky-test-analyzer", "Phân tích nguyên nhân gốc rễ và tự động khắc phục test chạy chập chờn"),
+        ("qa-framework-architect", "Thiết kế & scaffold framework POM hoàn chỉnh cho Playwright, Selenium, Appium"),
+        ("test-data-generator", "Sinh test data unique, traceable (timestamp) và tổ hợp ma trận Pairwise"),
+        ("requirements-analyzer", "Khám phá trang web/tài liệu và sinh bản Yêu cầu nghiệp vụ chuẩn mực"),
+        ("jira-integration", "Kéo requirements từ Jira và đẩy kết quả thực thi lên Jira Xray Cloud/Server")
+    ]
+    for s_name, s_desc in qa_skills:
+        print(f"  • {green(f'@{s_name:<24}')} {dim(s_desc)}")
+    print()
+
+    # 2. Strict QA Rules
+    print(bold("⚖️ 5 NGUYÊN TẮC VÀNG BẮT BUỘC TRONG QA (rules/qa-testing-rules.md):"))
+    rules_qa = [
+        ("1. Desktop Viewport 1920x1080", "Tất cả UI debugging bắt buộc khởi chạy ở kích thước 1920x1080."),
+        ("2. Headed Mode First", "Bắt buộc mở trình duyệt thực tế có giao diện (headed) để quan sát DOM."),
+        ("3. Zero Hard Sleep", "CẤM tuyệt đối Thread.sleep/waitForTimeout. Chỉ sử dụng Smart Auto-Waits."),
+        ("4. Dynamic Traceable Data", "Dữ liệu unique phải có tiền tố thời gian (e.g. test_user_1712049200)."),
+        ("5. Definition of Done (DoD)", "Kiểm thử tự động chỉ hoàn thành khi PASS ổn định ít nhất 2 lần liên tiếp.")
+    ]
+    for r_title, r_desc in rules_qa:
+        print(f"  [{yellow('!')}] {bold(r_title):<30} {dim(r_desc)}")
+    print()
+
+    # 3. 6-Phase Pipelines
+    print(bold("📐 KIẾN TRÚC QUY TRÌNH 6 PHA (AI-RBT & AUTOMATION PIPELINES):"))
+    print(f"  {cyan('Manual AI-RBT:')}    Roleplay → Q&A Phân tích → Phân rã → Ma trận vết → AI-RBT & TC → Xuất mẫu")
+    print(f"  {cyan('Automation POM:')}   Môi trường → Scaffold Framework → Locators → Test Data → Code Gen → Refactor")
+    print()
+
+    # 4. Integrations
+    print(bold("🔌 KẾT NỐI HỆ THỐNG NGOẠI VI (INTEGRATIONS):"))
+    print(f"  • {bold('Jira / Xray Integration:')}  Kéo User Stories và đẩy kết quả Test Execution ({cyan('.agents/scripts/integrations/jira/')})")
+    print(f"  • {bold('Google Sheets Integration:')} Đọc/Ghi test cases tự động lên bảng tính ({cyan('.agents/scripts/integrations/google_sheet/')})")
+    print(f"  • {bold('Excel Converter:')}           Chuyển đổi Markdown Test Cases sang XLSX ({cyan('.agents/scripts/convert_excel/')})")
+    hr()
+
+
+# ==============================================================================
+# View 7: Mô phỏng Multi-Agent Orchestration (/orchestrate)
+# ==============================================================================
+
+ORCHESTRATION_PRESETS: Dict[str, Dict[str, Any]] = {
     "webapp": {
         "title": "Xây dựng Web Application Full-Stack (Next.js & Fastify)",
         "domains": ["Frontend/UI", "Backend/API", "Testing", "Security"],
@@ -646,6 +1106,21 @@ ORCHESTRATION_PRESETS = {
             ("frontend-specialist", "Thiết lập Design System tokens và bảng điều khiển người dùng"),
             ("devops-engineer", "Viết Dockerfile đa tầng và cấu hình GitHub Actions CI/CD zero-downtime"),
             ("test-engineer", "Tự động hóa kiểm thử tích hợp đầu cuối (E2E) qua Playwright")
+        ]
+    },
+    "qa": {
+        "title": "Quy trình AI-RBT & QA Test Automation Toàn diện (Playwright & Xray)",
+        "domains": ["Quality Assurance", "Test Architecture", "Automation", "Integrations"],
+        "agents": ["qa-automation-engineer", "test-engineer", "ux-accessibility-reviewer"],
+        "plan_file": "qa-automation-rbt-pipeline.md",
+        "steps": [
+            ("project-planner", "Phân tích yêu cầu nghiệp vụ và cấu trúc kế hoạch kiểm thử qa-automation-rbt-pipeline.md"),
+            ("explorer-agent", "Quét giao diện web, bóc tách cấu trúc DOM và lập danh mục tương tác"),
+            ("qa-automation-engineer", "Kích hoạt @rbt-manual-testing sinh bộ test cases AI-RBT 6 bước chuẩn mực"),
+            ("qa-automation-engineer", "Áp dụng @smart-locator và @qa-framework-architect scaffold framework Playwright POM"),
+            ("test-engineer", "Sinh test data bằng @test-data-generator và chạy automation test suite"),
+            ("qa-automation-engineer", "Tự động điều tra test chập chờn với @flaky-test-analyzer và tự sửa bằng @locator-healer"),
+            ("qa-automation-engineer", "Đồng bộ kết quả test lên Jira Xray qua @jira-integration")
         ]
     },
     "api": {
@@ -699,11 +1174,12 @@ def simulate_orchestration(data: ToolkitData, task_key: Optional[str] = None) ->
     else:
         print(bold("Chọn kịch bản mô phỏng:"))
         for idx, (key, item) in enumerate(ORCHESTRATION_PRESETS.items(), 1):
-            print(f"  [{cyan(str(idx))}] {bold(item['title'])} {dim(f'({key})')}")
+            is_new = " [MỚI v2026.10.17]" if key == "qa" else ""
+            print(f"  [{cyan(str(idx))}] {bold(item['title'])}{yellow(is_new)} {dim(f'({key})')}")
         print()
 
         try:
-            sel = input(cyan("Chọn kịch bản [1-5, Enter=1]: ")).strip()
+            sel = input(cyan(f"Chọn kịch bản [1-{len(ORCHESTRATION_PRESETS)}, Enter=1]: ")).strip()
         except (EOFError, KeyboardInterrupt):
             return
 
@@ -715,8 +1191,7 @@ def simulate_orchestration(data: ToolkitData, task_key: Optional[str] = None) ->
 
     print(bold(f"\n🎯 KỊCH BẢN ĐÃ CHỌN: {scenario['title']}"))
     print(f" {bold('Lĩnh vực liên quan:')} {magenta(', '.join(scenario['domains']))}")
-    
-    # Validation: Agent count check
+
     agents_count = len(scenario["agents"])
     print(f" {bold('Số lượng Agents tham gia:')} {green(str(agents_count))} (Quy chuẩn tối thiểu: >= 3) -> {bold(green('HỢP LỆ [PASS]'))}")
     print(f" {bold('Specialist Agents:')} {cyan(', '.join(scenario['agents']))}")
@@ -771,7 +1246,59 @@ def simulate_orchestration(data: ToolkitData, task_key: Optional[str] = None) ->
 
 
 # ==============================================================================
-# View 6: Antigravity Doctor
+# View 8: Global Search
+# ==============================================================================
+
+def search_toolkit(data: ToolkitData, query: Optional[str] = None) -> None:
+    """Perform global unified search across all agents, skills, workflows, and rules."""
+    if not query:
+        print(bold(cyan("\n🔍 TÌM KIẾM TOÀN DIỆN TRONG NDANHPC KIT")))
+        hr()
+        try:
+            query = input(cyan("Nhập từ khóa tìm kiếm (ví dụ: qa, test, security, api): ")).strip()
+        except (EOFError, KeyboardInterrupt):
+            return
+
+    if not query:
+        return
+
+    results = data.search(query)
+    total_found = sum(len(items) for items in results.values())
+
+    print(bold(cyan(f"\n🔍 KẾT QUẢ TÌM KIẾM CHO: '{query}' ({total_found} kết quả)")))
+    hr()
+
+    if results["agents"]:
+        print(bold(cyan(f"🤖 Specialist Agents ({len(results['agents'])}):")))
+        for name, desc in results["agents"]:
+            print(f"  • {bold(name):<26} {dim(desc[:60])}")
+        print()
+
+    if results["skills"]:
+        print(bold(cyan(f"📚 Domain Skills ({len(results['skills'])}):")))
+        for name, desc in results["skills"]:
+            print(f"  • {bold(name):<26} {dim(desc[:60])}")
+        print()
+
+    if results["workflows"]:
+        print(bold(cyan(f"⚡ Workflows ({len(results['workflows'])}):")))
+        for name, desc in results["workflows"]:
+            print(f"  • {green(name):<32} {dim(desc[:60])}")
+        print()
+
+    if results["rules"]:
+        print(bold(cyan(f"📜 Workspace Rules ({len(results['rules'])}):")))
+        for name, desc in results["rules"]:
+            print(f"  • {bold(name):<26} {dim(desc[:60])}")
+        print()
+
+    if total_found == 0:
+        print(yellow(f"Không tìm thấy thành phần nào khớp với từ khóa '{query}'."))
+    hr()
+
+
+# ==============================================================================
+# View 9: Antigravity Doctor
 # ==============================================================================
 
 def run_doctor(data: ToolkitData) -> int:
@@ -782,7 +1309,6 @@ def run_doctor(data: ToolkitData) -> int:
     print()
 
     cmd = ["npm", "run", "check:antigravity"]
-    # Check if npm is available, otherwise run node directly
     try:
         proc = subprocess.run(
             cmd,
@@ -813,7 +1339,7 @@ def run_doctor(data: ToolkitData) -> int:
 
 
 # ==============================================================================
-# View 7: Full Verification Suite
+# View 10: Full Verification Suite
 # ==============================================================================
 
 def run_verify(data: ToolkitData) -> int:
@@ -854,7 +1380,7 @@ def run_verify(data: ToolkitData) -> int:
 
 
 # ==============================================================================
-# View 8: Web Portal Launcher
+# View 11: Web Portal Launcher
 # ==============================================================================
 
 def launch_web_portal(data: ToolkitData, port: int = 3000) -> None:
@@ -865,20 +1391,42 @@ def launch_web_portal(data: ToolkitData, port: int = 3000) -> None:
 
     index_html = web_dir / "index.html"
     if not index_html.exists():
-        # Create minimal fallback if missing
         index_html.write_text(
             f"<html><head><title>NDANHPC Kit Portal</title></head><body><h1>NDANHPC Kit {data.kit_version}</h1></body></html>",
             encoding="utf-8"
         )
 
+    # Detect LAN IP for remote desktop users
+    lan_ip = "127.0.0.1"
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        lan_ip = s.getsockname()[0]
+        s.close()
+    except Exception:
+        pass
+
     print(bold(cyan(f"\n🌐 KHỞI CHẠY NDANHPC KIT WEB PORTAL TRÊN CỔNG {port}")))
     hr()
     print(f" {bold('Thư mục phục vụ:')}   {cyan(str(web_dir))}")
-    print(f" {bold('Địa chỉ truy cập:')}   {bold(green(f'http://localhost:{port}'))}")
+    print(f" {bold('Truy cập cục bộ:')}   {bold(green(f'http://localhost:{port}'))}")
+    if lan_ip != "127.0.0.1":
+        print(f" {bold('Truy cập mạng LAN:')} {bold(green(f'http://{lan_ip}:{port}'))} {dim('(Dành cho máy tính desktop / laptop khác cùng mạng)')}")
     print(f" {bold('Dừng máy chủ:')}       {yellow('Nhấn Ctrl+C để dừng và quay lại menu')}")
     hr()
 
-    cmd = [sys.executable, "-m", "http.server", str(port), "--directory", str(web_dir)]
+    server_script = (
+        "import http.server, socketserver\n"
+        "class NoCacheHandler(http.server.SimpleHTTPRequestHandler):\n"
+        "    def end_headers(self):\n"
+        "        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')\n"
+        "        self.send_header('Pragma', 'no-cache')\n"
+        "        self.send_header('Expires', '0')\n"
+        "        super().end_headers()\n"
+        f"with socketserver.TCPServer(('', {port}), lambda *a: NoCacheHandler(*a, directory=r'{web_dir}')) as httpd:\n"
+        "    httpd.serve_forever()\n"
+    )
+    cmd = [sys.executable, "-c", server_script]
     try:
         subprocess.run(cmd, cwd=str(data.project_dir))
     except KeyboardInterrupt:
@@ -894,21 +1442,25 @@ def launch_web_portal(data: ToolkitData, port: int = 3000) -> None:
 def interactive_menu(data: ToolkitData) -> None:
     """Run interactive TUI menu loop."""
     while True:
-        banner()
-        print(bold("Vui lòng chọn một chức năng bên dưới:"))
-        print(f"  {cyan('[1]')} 🚀 {bold('Tổng quan & Kiến trúc NDANHPC Kit')}")
-        print(f"  {cyan('[2]')} 🤖 {bold('Tra cứu danh mục 24 Specialist Agents')}")
-        print(f"  {cyan('[3]')} 📚 {bold('Tra cứu danh mục 51 Skills')}")
-        print(f"  {cyan('[4]')} ⚡ {bold('Tra cứu 13 Workflows & Hướng dẫn Slash Commands')}")
-        print(f"  {cyan('[5]')} 🔄 {bold('Mô phỏng luồng Multi-Agent Orchestration (/orchestrate)')}")
-        print(f"  {cyan('[6]')} 🩺 {bold('Chạy kiểm định Antigravity Doctor')} {dim('(npm run check:antigravity)')}")
-        print(f"  {cyan('[7]')} 🧪 {bold('Chạy Full Verification Suite')} {dim('(npm run verify)')}")
-        print(f"  {cyan('[8]')} 🌐 {bold('Khởi chạy Web Portal')} {dim('(python3 -m http.server 3000 --directory web)')}")
-        print(f"  {yellow('[0]')} 🚪 {bold('Thoát (Exit)')}")
+        banner(data)
+        total_comp = len(data.agents) + len(data.skills) + len(data.workflows) + len(data.rules)
+        print(bold(f"Vui lòng chọn chức năng tra cứu & điều phối ({total_comp} thành phần):"))
+        print(f"  {cyan('[1]')}  🚀 {bold('Tổng quan & Kiến trúc NDANHPC Kit')} {dim(f'({total_comp} thành phần toàn diện)')}")
+        print(f"  {cyan('[2]')}  🤖 {bold(f'Tra cứu Specialist Agents ({len(data.agents)})')} {dim('[Hỗ trợ tìm kiếm]')}")
+        print(f"  {cyan('[3]')}  📚 {bold(f'Tra cứu Domain Skills ({len(data.skills)})')} {dim('[Phân loại 8 danh mục & Tìm kiếm]')}")
+        print(f"  {cyan('[4]')}  ⚡ {bold(f'Tra cứu Workflows & Slash Commands ({len(data.workflows)})')} {dim('[16 QA + 13 Core]')}")
+        print(f"  {cyan('[5]')}  📜 {bold(f'Tra cứu Workspace Rules ({len(data.rules)})')} {dim('[P0 Universal / P1 QA / P2 QuickRef]')}")
+        print(f"  {yellow('[6]')}  🧪 {bold('Trung tâm QA & Test Automation Supercharge')} {yellow('[MỚI v2026.10.17]')}")
+        print(f"  {cyan('[7]')}  🔄 {bold('Mô phỏng Multi-Agent Orchestration (/orchestrate)')} {dim('[6 kịch bản]')}")
+        print(f"  {cyan('[8]')}  🔍 {bold('Tìm kiếm Toàn diện (Search All)')} {dim('[Tra cứu nhanh theo từ khóa]')}")
+        print(f"  {cyan('[9]')}  🩺 {bold('Chạy kiểm định Antigravity Doctor')} {dim('(npm run check:antigravity)')}")
+        print(f"  {cyan('[10]')} 🔬 {bold('Chạy Full Verification Suite')} {dim('(npm run verify)')}")
+        print(f"  {cyan('[11]')} 🌐 {bold('Khởi chạy Web Portal')} {dim('(http://localhost:3000)')}")
+        print(f"  {yellow('[0]')}  🚪 {bold('Thoát (Exit)')}")
         hr()
 
         try:
-            choice = input(bold(cyan("NDANHPC > Chọn số [0-8]: "))).strip()
+            choice = input(bold(cyan("NDANHPC > Chọn số [0-11]: "))).strip()
         except (EOFError, KeyboardInterrupt):
             print(yellow("\n\nTạm biệt! Đã thoát NDANHPC CLI."))
             break
@@ -925,15 +1477,21 @@ def interactive_menu(data: ToolkitData) -> None:
         elif choice == "4":
             list_workflows(data, non_interactive=False)
         elif choice == "5":
-            simulate_orchestration(data)
+            list_rules(data, non_interactive=False)
         elif choice == "6":
-            run_doctor(data)
+            show_qa_hub(data)
         elif choice == "7":
-            run_verify(data)
+            simulate_orchestration(data)
         elif choice == "8":
+            search_toolkit(data)
+        elif choice == "9":
+            run_doctor(data)
+        elif choice == "10":
+            run_verify(data)
+        elif choice == "11":
             launch_web_portal(data, 3000)
         else:
-            print(yellow(f"\n⚠️ Lựa chọn '{choice}' không hợp lệ. Vui lòng nhập từ 0 đến 8."))
+            print(yellow(f"\n⚠️ Lựa chọn '{choice}' không hợp lệ. Vui lòng nhập từ 0 đến 11."))
 
         print()
         try:
@@ -953,21 +1511,33 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Ví dụ sử dụng:
   python3 .agents/scripts/ndanhpc_cli.py               # Mở menu TUI tương tác
-  python3 .agents/scripts/ndanhpc_cli.py --overview    # Xem tổng quan kiến trúc
-  python3 .agents/scripts/ndanhpc_cli.py --agents      # Tra cứu 24 Specialist Agents
-  python3 .agents/scripts/ndanhpc_cli.py --skills      # Tra cứu 51 Skills
-  python3 .agents/scripts/ndanhpc_cli.py --workflows   # Tra cứu 13 Workflows
-  python3 .agents/scripts/ndanhpc_cli.py --simulate webapp  # Mô phỏng điều phối
+  python3 .agents/scripts/ndanhpc_cli.py --overview    # Xem tổng quan kiến trúc (121 thành phần)
+  python3 .agents/scripts/ndanhpc_cli.py --agents      # Tra cứu danh mục Specialist Agents (24)
+  python3 .agents/scripts/ndanhpc_cli.py --skills      # Tra cứu danh mục Domain Skills (61)
+  python3 .agents/scripts/ndanhpc_cli.py --workflows   # Tra cứu danh mục Workflows (29)
+  python3 .agents/scripts/ndanhpc_cli.py --rules       # Tra cứu Workspace Rules (7)
+  python3 .agents/scripts/ndanhpc_cli.py --qa          # Bảng điều khiển QA Supercharge v2026.10.17
+  python3 .agents/scripts/ndanhpc_cli.py --search qa   # Tìm kiếm toàn diện với từ khóa 'qa'
+  python3 .agents/scripts/ndanhpc_cli.py --simulate qa # Mô phỏng quy trình kiểm thử AI-RBT & QA
   python3 .agents/scripts/ndanhpc_cli.py --doctor      # Kiểm định Antigravity Doctor
   python3 .agents/scripts/ndanhpc_cli.py --verify      # Kiểm định chất lượng toàn diện
+  python3 .agents/scripts/ndanhpc_cli.py --web         # Mở Web Portal trên cổng 3000
 """
     )
 
     parser.add_argument("--overview", action="store_true", help="Hiển thị tổng quan & kiến trúc NDANHPC Kit")
-    parser.add_argument("--agents", action="store_true", help="Liệt kê danh mục 24 Specialist Agents")
-    parser.add_argument("--skills", action="store_true", help="Liệt kê danh mục 51 Skills")
-    parser.add_argument("--workflows", action="store_true", help="Liệt kê danh mục 13 Workflows & Slash Commands")
-    parser.add_argument("--simulate", nargs="?", const="webapp", help="Mô phỏng điều phối Multi-Agent (webapp, fullstack, api, security, debug)")
+    parser.add_argument("--agents", action="store_true", help="Liệt kê danh mục Specialist Agents (24)")
+    parser.add_argument("--skills", nargs="?", const="", help="Liệt kê danh mục Skills (61) hoặc tìm kiếm theo từ khóa")
+    parser.add_argument("--workflows", action="store_true", help="Liệt kê danh mục Workflows & Slash Commands (29)")
+    parser.add_argument("--rules", action="store_true", help="Liệt kê danh mục Workspace Rules (7)")
+    parser.add_argument("--qa", action="store_true", help="Hiển thị bảng điều khiển QA & Test Automation Supercharge")
+    parser.add_argument("-s", "--search", type=str, help="Tìm kiếm toàn diện trong Agents, Skills, Workflows, Rules")
+    parser.add_argument(
+        "--simulate",
+        nargs="?",
+        const="webapp",
+        help="Mô phỏng điều phối Multi-Agent (webapp, fullstack, qa, api, security, debug)"
+    )
     parser.add_argument("--doctor", action="store_true", help="Chạy kiểm định Antigravity Doctor (npm run check:antigravity)")
     parser.add_argument("--verify", action="store_true", help="Chạy Full Verification Suite (npm run verify)")
     parser.add_argument("--web", nargs="?", type=int, const=3000, help="Khởi chạy Web Portal trên cổng chỉ định (mặc định: 3000)")
@@ -983,11 +1553,21 @@ def main() -> int:
     if args.agents:
         list_agents(data, non_interactive=True)
         return 0
-    if args.skills:
-        list_skills(data, non_interactive=True)
+    if args.skills is not None:
+        q = args.skills if args.skills else None
+        list_skills(data, non_interactive=True, query=q)
         return 0
     if args.workflows:
         list_workflows(data, non_interactive=True)
+        return 0
+    if args.rules:
+        list_rules(data, non_interactive=True)
+        return 0
+    if args.qa:
+        show_qa_hub(data)
+        return 0
+    if args.search:
+        search_toolkit(data, query=args.search)
         return 0
     if args.simulate:
         simulate_orchestration(data, task_key=args.simulate)

@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>NDANHPC Kit - Antigravity Agent Capability Portal</title>
-  <meta name="description" content="NDANHPC Kit - Antigravity-native AI Agent Capability Toolkit v2026.10.13. Phân luồng yêu cầu thông minh, tải ngữ cảnh lũy tiến và bảo vệ an toàn với PreToolUse hook.">
+  <meta name="description" content="NDANHPC Kit - Antigravity-native AI Agent Capability Toolkit v2026.10.17. Phân luồng yêu cầu thông minh, tải ngữ cảnh lũy tiến và bảo vệ an toàn với PreToolUse hook.">
   <meta name="author" content="ndanhpc">
-  <meta name="datePublished" content="2026-10-13">
+  <meta name="datePublished" content="2026-10-17">
   <meta property="og:title" content="NDANHPC Kit - Antigravity Agent Capability Portal">
   <meta property="og:description" content="Khám phá 24 Specialist Agents, 61 Skills, 29 Workflows, 7 Rules và kiến trúc 6 phases Antigravity runtime.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://github.com/ndanhpc/ndanhpc-kit">
   <meta property="og:image" content="/assets/og-preview.png">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261017.5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <script type="application/ld+json">
   {
@@ -24,7 +27,7 @@
     "name": "NDANHPC Kit",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Antigravity, Linux, macOS, Windows",
-    "version": "2026.10.13",
+    "version": "2026.10.17",
     "author": {
       "@type": "Person",
       "name": "ndanhpc"
@@ -53,7 +56,7 @@
         <div class="brand-info">
           <div class="brand-title">
             NDANHPC Kit
-            <span class="version-pill">v2026.10.13</span>
+            <span class="version-pill">v2026.10.17</span>
           </div>
           <span class="brand-subtitle">Antigravity-native AI Agent Capability Toolkit</span>
         </div>
@@ -145,15 +148,15 @@
 
       
       <!-- Release Announcement Banner -->
-      <section class="release-announcement glass-panel" style="margin-top: 1.5rem; border-left: 4px solid var(--accent-emerald, #10B981); padding: 1.25rem 1.5rem; background: rgba(16, 185, 129, 0.05);">
+      <section class="release-announcement glass-panel">
         <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
           <div>
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
-              <span class="badge-tag badge-emerald" style="font-weight: 700; font-size: 0.75rem;">MỚI NHẤT v2026.10.13</span>
-              <span style="color: #FFFFFF; font-weight: 700; font-size: 1.05rem;">Bản Cập Nhật: QA & Test Automation Supercharge</span>
+              <span class="badge-tag badge-emerald" style="font-weight: 700; font-size: 0.75rem;">MỚI NHẤT v2026.10.17</span>
+              <span style="color: var(--text-primary); font-weight: 700; font-size: 1.05rem;">Bản Cập Nhật: Cloudflare Light Theme & UI Modernization</span>
             </div>
-            <p style="color: var(--text-muted, #94A3B8); font-size: 0.9rem; margin: 0; line-height: 1.5;">
-              Hợp nhất toàn diện bộ <strong>Antigravity Testing Kit</strong>: Bổ sung <strong>10 Kỹ Năng QA Chuyên Biệt</strong>, <strong>16 Workflows Kiểm Thử</strong>, chuẩn <strong>POM & Smart Waits</strong>, và cấu trúc khép kín 100% trong <code>.agents/</code>.
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+              Giao diện sáng hiện đại chuẩn Cloudflare Design System, tối ưu tương phản cao WCAG 2.2 AAA, đạt điểm kiểm chuẩn <strong>100/100 Lighthouse</strong> và hoàn thiện Responsive 6 tiers mượt mà.
             </p>
           </div>
           <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -255,7 +258,7 @@
                 <span class="badge-tag badge-cyan">CalVer</span>
               </div>
               <p class="track-desc">Đánh số theo ngày phát hành toàn hệ thống cho bộ cài và runtime:</p>
-              <div class="track-code">VERSION: 2026.10.10<br>package.json: 2026.10.10<br>web/package.json: 2026.10.10</div>
+              <div class="track-code">VERSION: 2026.10.17<br>package.json: 2026.10.17<br>web/package.json: 2026.10.17</div>
             </div>
 
             <div class="track-box">
@@ -289,6 +292,7 @@
         </div>
         <div class="catalog-search-row">
           <div class="search-input-wrap">
+            <label for="catalog-search" class="sr-only">Tìm kiếm Agent, Skill, Workflow hoặc Rule</label>
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" id="catalog-search" class="catalog-search-input" placeholder="Tìm kiếm Agent, Skill, Workflow, Rule theo tên, mô tả hoặc tag... (/ để focus)" aria-label="Tìm kiếm Agent, Skill, Workflow hoặc Rule">
             <span class="kbd-shortcut">/</span>
@@ -346,12 +350,12 @@
           </div>
 
           <div>
-            <div class="sim-section-label">Mô tả bài toán</div>
+            <label for="custom-task-desc" class="sim-section-label">Mô tả bài toán</label>
             <textarea id="custom-task-desc" class="custom-task-input" placeholder="Mô tả công việc cần điều phối..." aria-label="Mô tả công việc cần điều phối"></textarea>
           </div>
 
           <div class="sim-speed-wrap">
-            <span>Tốc độ mô phỏng:</span>
+            <label for="sim-speed">Tốc độ mô phỏng:</label>
             <select id="sim-speed" class="speed-select" aria-label="Tốc độ mô phỏng">
               <option value="1000">1x (Thực tế)</option>
               <option value="400">2.5x (Nhanh)</option>
@@ -493,7 +497,7 @@
           </div>
 
           <div class="cmd-preview-box">
-            <label class="form-label">Cú pháp lệnh hoàn chỉnh:</label>
+            <div class="form-label">Cú pháp lệnh hoàn chỉnh:</div>
             <div class="cmd-preview-code" id="cmd-preview-text">/create Xây dựng hệ thống quản lý kho hàng với Next.js và Supabase</div>
           </div>
 
@@ -556,7 +560,7 @@
                 <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                 <div>
                   <div class="check-title">Orchestration & Validation</div>
-                  <div class="check-sub">Đồng bộ phiên bản 2026.10.10: .agents/VERSION, package.json, web/package.json</div>
+                  <div class="check-sub">Đồng bộ phiên bản 2026.10.17: .agents/VERSION, package.json, web/package.json</div>
                 </div>
               </div>
               <span class="check-status">PASS</span>
@@ -602,7 +606,7 @@
           <span class="badge-dot pulse"></span>
           NDANHPC Kit
         </div>
-        <span class="footer-version">v2026.10.13</span>
+        <span class="footer-version">v2026.10.17</span>
         <p class="footer-desc">Antigravity-native AI Agent Capability Toolkit. Độc lập, tối ưu và bảo vệ đa tầng.</p>
       </div>
       <div class="footer-meta">
@@ -662,6 +666,6 @@
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Application Logic -->
-  <script defer src="app.js?v=20261017"></script>
+  <script defer src="app.js?v=20261017.5"></script>
 </body>
 </html>
