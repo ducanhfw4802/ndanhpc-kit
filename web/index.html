@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -211,7 +212,7 @@
             <label class="sandbox-label" for="sandbox-input">Thử nghiệm kiểm tra lệnh Bash:</label>
             <div class="cmd-input-wrap">
               <span class="cmd-prompt-sym">$</span>
-              <input type="text" id="sandbox-input" class="cmd-input" value="rm -rf /" placeholder="Nhập lệnh bash để kiểm tra..." spellcheck="false">
+              <input type="text" id="sandbox-input" class="cmd-input" value="rm -rf /" placeholder="Nhập lệnh bash để kiểm tra..." aria-label="Thử nghiệm kiểm tra lệnh Bash" spellcheck="false">
             </div>
           </div>
 
@@ -484,7 +485,7 @@
 
             <div class="form-group">
               <label class="form-label" for="gen-mode">Chế độ thực thi (Mode):</label>
-              <select id="gen-mode" class="form-select">
+              <select id="gen-mode" class="form-select" aria-label="Chế độ thực thi">
                 <option value="plan">Plan Mode (4 pha chặt chẽ - Lập kế hoạch trước)</option>
                 <option value="edit">Edit Mode (Thực thi trực tiếp với orchestrator)</option>
               </select>
@@ -661,6 +662,6 @@
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Application Logic -->
-  <script type="module" src="app.js"></script>
+  <script defer src="app.js?v=20261017"></script>
 </body>
 </html>

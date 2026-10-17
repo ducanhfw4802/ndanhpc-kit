@@ -1,5 +1,5 @@
 /**
- * NDANHPC Kit - Modern Interactive Web Portal (v2026.10.10)
+ * NDANHPC Kit - Modern Interactive Web Portal
  * Antigravity-native AI Agent Capability Toolkit
  */
 
@@ -2320,10 +2320,219 @@ const EMBEDDED_DATA = {
   }
 };
 
+// Application State
+const state = {
+  activeTab: "overview",
+  catalog: {
+    type: "all",
+    subcat: "all",
+    search: "",
+    items: []
+  },
+  simulator: {
+    mode: "orchestrate",
+    presetKey: "webapp",
+    isRunning: false,
+    timer: null,
+    step: 0,
+    speed: 1000
+  },
+  generator: {
+    cmd: "/create",
+    task: "Xây dựng hệ thống quản lý kho hàng với Next.js và Supabase",
+    stack: "Next.js 15, Tailwind v4, PostgreSQL, TypeScript",
+    mode: "plan"
+  },
+  data: {
+    manifest: EMBEDDED_DATA,
+    phases: [
+    {
+        "id": "discovery",
+        "step": 1,
+        "name": "Discovery",
+        "subtitle": "Phát hiện & Khám phá",
+        "guarantee": "Frontmatter & Required paths validated",
+        "desc": "Antigravity tự động phát hiện các quy tắc (.agents/rules), kỹ năng (.agents/skills), kịch bản (.agents/workflows) và vai trò (.agents/agent). Nạp ngữ cảnh lũy tiến (Progressive loading) giúp tiết kiệm token.",
+        "files": [
+            "rules/*.md",
+            "skills/*/SKILL.md",
+            "workflows/*.md",
+            "agent/*.md"
+        ]
+    },
+    {
+        "id": "mcp",
+        "step": 2,
+        "name": "MCP Gateway",
+        "subtitle": "Kết nối Model Context Protocol",
+        "guarantee": "Zero implicit home-directory write",
+        "desc": "Quản lý an toàn các máy chủ công cụ ngoài (Chrome DevTools, Puppeteer, Figma, Context7). Tự động chặn placeholder chưa cấu hình và bảo vệ xung đột cổng.",
+        "files": [
+            ".agents/mcp_config.json",
+            ".agents/hooks/sync-mcp.mjs"
+        ]
+    },
+    {
+        "id": "hooks",
+        "step": 3,
+        "name": "PreToolUse Hooks",
+        "subtitle": "Cổng an toàn tiền thực thi",
+        "guarantee": "Narrow destructive-command gate",
+        "desc": "Cổng chặn các lệnh có nguy cơ phá hủy hệ thống hoặc xóa sạch ổ đĩa trước khi lệnh được chuyển tới shell. Thời gian phản hồi kiểm tra < 10ms, timeout 10s.",
+        "files": [
+            ".agents/hooks.json",
+            ".agents/hooks/validate-tool-call.mjs"
+        ]
+    },
+    {
+        "id": "orchestration",
+        "step": 4,
+        "name": "Orchestration",
+        "subtitle": "Phối hợp đa tác tử",
+        "guarantee": "Minimum 3 agents • Strict 3 phases",
+        "desc": "Điều phối tác tử giải quyết bài toán phức tạp qua /orchestrate và /coordinate. Bắt buộc tối thiểu 3 tác tử song song ở pha thực thi và phê duyệt kế hoạch trước khi code.",
+        "files": [
+            ".agents/workflows/orchestrate.md",
+            ".agents/workflows/coordinate.md"
+        ]
+    },
+    {
+        "id": "plugin",
+        "step": 5,
+        "name": "Plugin Packaging",
+        "subtitle": "Đóng gói mở rộng Antigravity",
+        "guarantee": "Reviewable bundle with SHA-256 inventory",
+        "desc": "Hỗ trợ xuất gói mở rộng cho Antigravity IDE và Gemini CLI kèm kiểm kê mã băm SHA-256 toàn vẹn cho toàn bộ tệp tin.",
+        "files": [
+            ".agents/hooks/build-plugin.mjs",
+            ".agents/hooks/plugin/GEMINI.md"
+        ]
+    },
+    {
+        "id": "validation",
+        "step": 6,
+        "name": "Validation & Integrity",
+        "subtitle": "Thẩm định & Kiểm chuẩn hệ thống",
+        "guarantee": "Doctor check pass + Smoke tests mandatory",
+        "desc": "Antigravity Doctor chạy 6 bài kiểm tra độc lập: Discovery, MCP, Hooks, Orchestration, Plugin, Validation. Khóa toàn vẹn manifest.lock.json với SHA-256.",
+        "files": [
+            ".agents/hooks/antigravity-doctor.mjs",
+            ".agents/hooks/tests/antigravity.test.mjs",
+            ".agents/manifest.lock.json"
+        ]
+    }
+],
+    presets: {
+    "webapp": {
+        "name": "Web Application",
+        "desc": "Ứng dụng Web hiện đại (Frontend React/Next.js + Backend API + Testing)",
+        "agents": [
+            "frontend-specialist",
+            "backend-specialist",
+            "test-engineer"
+        ],
+        "subtasks": {
+            "frontend-specialist": "Thiết kế giao diện người dùng tương tác, áp dụng Design Tokens và tối ưu trải nghiệm",
+            "backend-specialist": "Thiết kế các API Endpoints, xác thực người dùng và kết nối cơ sở dữ liệu",
+            "test-engineer": "Viết kịch bản kiểm thử tự động AAA, Unit Tests và Integration Tests"
+        }
+    },
+    "api": {
+        "name": "REST / GraphQL API",
+        "desc": "Hệ thống Backend API hiệu năng cao, bảo mật và kiểm thử tải",
+        "agents": [
+            "backend-specialist",
+            "security-auditor",
+            "test-engineer"
+        ],
+        "subtasks": {
+            "backend-specialist": "Xây dựng cấu trúc microservice/API, validation schemas và rate limiting",
+            "security-auditor": "Rà soát lỗ hổng OWASP 2025, SQL Injection, SSRF và cấu hình xác thực",
+            "test-engineer": "Kiểm thử tải hợp đồng API, kiểm tra dữ liệu biên và mã lỗi HTTP"
+        }
+    },
+    "ui_design": {
+        "name": "UI & Design System",
+        "desc": "Thiết kế hệ thống giao diện cao cấp, chống slop và tối ưu Core Web Vitals",
+        "agents": [
+            "frontend-specialist",
+            "seo-specialist",
+            "performance-optimizer"
+        ],
+        "subtasks": {
+            "frontend-specialist": "Xây dựng Atomic Component Library, tuân thủ nguyên tắc cấm màu tím tuỳ tiện",
+            "seo-specialist": "Cấu hình thẻ siêu dữ liệu OpenGraph, Schema.org JSON-LD và ngữ nghĩa HTML5",
+            "performance-optimizer": "Tối ưu hóa tài nguyên tải nhanh LCP < 2.5s, giảm thiểu độ giật CLS"
+        }
+    },
+    "database": {
+        "name": "Database Architecture",
+        "desc": "Thiết kế kiến trúc cơ sở dữ liệu, tối ưu truy vấn SQL và bảo mật",
+        "agents": [
+            "database-architect",
+            "backend-specialist",
+            "security-auditor"
+        ],
+        "subtasks": {
+            "database-architect": "Thiết kế mô hình quan hệ ERD, chiến lược đánh chỉ mục và kế hoạch di chuyển dữ liệu",
+            "backend-specialist": "Triển khai tầng truy cập dữ liệu DAO/ORM, quản lý transaction an toàn",
+            "security-auditor": "Kiểm tra phân quyền tài khoản cơ sở dữ liệu và mã hóa dữ liệu nhạy cảm"
+        }
+    },
+    "fullstack": {
+        "name": "Full Stack Product",
+        "desc": "Dự án sản phẩm hoàn chỉnh từ quy hoạch, phát triển tới triển khai CI/CD",
+        "agents": [
+            "project-planner",
+            "frontend-specialist",
+            "backend-specialist",
+            "devops-engineer"
+        ],
+        "subtasks": {
+            "project-planner": "Phân tích yêu cầu, xây dựng tài liệu kế hoạch {task-slug}.md chi tiết",
+            "frontend-specialist": "Phát triển tầng giao diện Single-Page mượt mà, phản hồi thời gian thực",
+            "backend-specialist": "Triển khai logic nghiệp vụ và xử lý hàng đợi tác vụ nền",
+            "devops-engineer": "Thiết lập Dockerfile đa giai đoạn và tự động hóa quy trình CI/CD"
+        }
+    },
+    "security": {
+        "name": "Security Audit & Pentest",
+        "desc": "Rà soát an ninh mã nguồn tĩnh và kiểm thử xâm nhập chủ động",
+        "agents": [
+            "security-auditor",
+            "penetration-tester",
+            "devops-engineer"
+        ],
+        "subtasks": {
+            "security-auditor": "Quét mã độc, phân tích rò rỉ secrets và đánh giá cấu hình hạ tầng",
+            "penetration-tester": "Thực nghiệm kịch bản tấn công theo MITRE ATT&CK và bypass validation",
+            "devops-engineer": "Củng cố an toàn container hardening và cấu hình mạng cô lập"
+        }
+    },
+    "debug": {
+        "name": "Deep Debugging",
+        "desc": "Điều tra lỗi phức tạp theo phương pháp khoa học 4 pha và lập bài test chống tái diễn",
+        "agents": [
+            "debugger",
+            "explorer-agent",
+            "test-engineer"
+        ],
+        "subtasks": {
+            "debugger": "Phân tích Call Stack, đặt giả thuyết và xác định nguyên nhân gốc rễ",
+            "explorer-agent": "Quét bản đồ phụ thuộc để tính toán bán kính ảnh hưởng của lỗi",
+            "test-engineer": "Viết Unit Test hồi quy (Regression Test) để bảo đảm lỗi không tái phát"
+        }
+    }
+}
+  }
+};
+
 // =========================================================
 // INITIALIZATION
 // =========================================================
-document.addEventListener('DOMContentLoaded', async () => {
+window.state = state;
+
+async function bootstrapApp() {
   await initData();
   setupNavTabs();
   initOverviewTab();
@@ -2331,7 +2540,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSimulatorTab();
   initSetupTab();
   setupKeyboardShortcuts();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrapApp);
+} else {
+  bootstrapApp();
+}
 
 async function initData() {
   try {
