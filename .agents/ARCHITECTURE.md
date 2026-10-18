@@ -9,7 +9,7 @@
 NDANHPC Kit is a modular, independent Antigravity workspace system consisting of:
 
 - **24 Specialist Agents** — role-based AI personas and orchestration roles;
-- **62 Skills** — domain knowledge modules with progressive conditional loading;
+- **63 Skills** — domain knowledge modules with progressive conditional loading;
 - **30 Workflows** — slash-command procedures;
 - **7 Rules** — workspace routing, coding, design, safety, QA, and quick-reference constraints;
 - **Antigravity runtime layer** — contract, native hook, MCP helper, plugin builder, Doctor, schemas, and tests.
@@ -146,6 +146,7 @@ Modular knowledge domains that agents can load on-demand based on task context. 
 | Skill                   | Description                    |
 | ----------------------- | ------------------------------ |
 | `api-patterns`          | REST, GraphQL, tRPC            |
+| `golang-patterns`       | Go 1.22+ patterns, concurrency, net/http & Chi, error handling, pgx |
 | `nodejs-best-practices` | Node.js async, modules         |
 | `python-patterns`       | Python standards, FastAPI      |
 | `rust-pro`              | Rust async, systems, type system |
@@ -371,11 +372,11 @@ For command details and prerequisites, see [scripts/README.md](scripts/README.md
 | Metric              | Value                             |
 | ------------------- | --------------------------------- |
 | **Total Agents**    | 24 (1 major upgrade in 2026.5.13) |
-| **Total Skills**    | 62                                |
+| **Total Skills**    | 63                                |
 | **Total Workflows** | 30          |
 | **Toolkit Utilities** | 7 user-facing + 2 internal modules |
 | **Antigravity Utilities** | 4 runtime utilities              |
-| **Total Skill Scripts** | 23                              |
+| **Total Skill Scripts** | 24                              |
 | **Coverage**        | Web, API, mobile, security, quality, runtime, orchestration |
 | **Token Efficiency**| Reduced via conditional skill loading |
 

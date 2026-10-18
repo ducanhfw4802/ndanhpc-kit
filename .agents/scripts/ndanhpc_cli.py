@@ -166,8 +166,8 @@ SKILL_CATEGORIES: Dict[str, Tuple[str, str, List[str]]] = {
         "⚙️ Backend & Architecture",
         "Kiến trúc hệ thống, API patterns, thiết kế cơ sở dữ liệu và async runtimes",
         [
-            "architecture", "api-patterns", "database-design", "nodejs-best-practices",
-            "python-patterns", "rust-pro"
+            "architecture", "api-patterns", "database-design", "golang-patterns",
+            "nodejs-best-practices", "python-patterns", "rust-pro"
         ]
     ),
     "orchestration": (
@@ -634,7 +634,7 @@ def show_agent_detail(data: ToolkitData, name: str) -> None:
 
 
 # ==============================================================================
-# View 3: Tra cứu Domain Skills (62 Skills)
+# View 3: Tra cứu Domain Skills (63 Skills)
 # ==============================================================================
 
 def list_skills(
@@ -1634,9 +1634,9 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Ví dụ sử dụng:
   python3 .agents/scripts/ndanhpc_cli.py               # Mở menu TUI tương tác
-  python3 .agents/scripts/ndanhpc_cli.py --overview    # Xem tổng quan kiến trúc (123 thành phần)
+  python3 .agents/scripts/ndanhpc_cli.py --overview    # Xem tổng quan kiến trúc (124 thành phần)
   python3 .agents/scripts/ndanhpc_cli.py --agents      # Tra cứu danh mục Specialist Agents (24)
-  python3 .agents/scripts/ndanhpc_cli.py --skills      # Tra cứu danh mục Domain Skills (62)
+  python3 .agents/scripts/ndanhpc_cli.py --skills      # Tra cứu danh mục Domain Skills (63)
   python3 .agents/scripts/ndanhpc_cli.py --workflows   # Tra cứu danh mục Workflows (30)
   python3 .agents/scripts/ndanhpc_cli.py --rules       # Tra cứu Workspace Rules (7)
   python3 .agents/scripts/ndanhpc_cli.py --qa          # Bảng điều khiển QA Supercharge v2026.10.18
@@ -1652,7 +1652,7 @@ def main() -> int:
 
     parser.add_argument("--overview", action="store_true", help="Hiển thị tổng quan & kiến trúc NDANHPC Kit")
     parser.add_argument("--agents", action="store_true", help="Liệt kê danh mục Specialist Agents (24)")
-    parser.add_argument("--skills", nargs="?", const="", help="Liệt kê danh mục Skills (62) hoặc tìm kiếm theo từ khóa")
+    parser.add_argument("--skills", nargs="?", const="", help="Liệt kê danh mục Skills (63) hoặc tìm kiếm theo từ khóa")
     parser.add_argument("--workflows", action="store_true", help="Liệt kê danh mục Workflows & Slash Commands (30)")
     parser.add_argument("--rules", action="store_true", help="Liệt kê danh mục Workspace Rules (7)")
     parser.add_argument("--qa", action="store_true", help="Hiển thị bảng điều khiển QA & Test Automation Supercharge")

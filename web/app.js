@@ -9,7 +9,7 @@ const EMBEDDED_DATA = {
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
-    "skills": 62,
+    "skills": 63,
     "workflows": 30,
     "rules": 7
   },
@@ -34,6 +34,7 @@ const EMBEDDED_DATA = {
         "bash-linux",
         "clean-code",
         "database-design",
+        "golang-patterns",
         "lint-and-validate",
         "mcp-builder",
         "nodejs-best-practices",
@@ -941,6 +942,25 @@ const EMBEDDED_DATA = {
       ],
       "path": "skills/geo-fundamentals/SKILL.md",
       "category": "SEO & Growth"
+    },
+    {
+      "id": "golang-patterns",
+      "name": "golang-patterns",
+      "description": "Production-grade Go (Golang 1.22+) patterns for idiomatic backend services, concurrent pipelines, net/http & Chi/Gin/Fiber routing, error handling, pgx/sqlc database integration, and high-throughput server architecture.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/golang-patterns/scripts/go_patterns_validator.py"
+      ],
+      "path": "skills/golang-patterns/SKILL.md",
+      "category": "Backend & API"
     },
     {
       "id": "i18n-localization",

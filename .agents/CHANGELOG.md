@@ -14,8 +14,16 @@
 - **GitHub Actions Auto-Publish Workflow (`.github/workflows/publish-npm.yml`)**:
   - Tự động đóng gói và xuất bản package lên NPM Registry qua GitHub Action.
   - Bổ sung lệnh `npm run release:npm` phục vụ phát hành nhanh.
+- **Mở Rộng Năng Lực Backend Toàn Diện (Golang 1.22+, gRPC, Event-Driven Architecture)**:
+  - Bổ sung skill `golang-patterns` nâng tổng số skill lên **63 Modular Skills** (tổng **124 thành phần hệ thống**).
+  - Tích hợp tài liệu chuyên sâu: Idiomatic Go 1.22+, concurrency với Goroutines/errgroup/Worker Pools, chuẩn net/http & Chi/Gin/Fiber, pgx v5/sqlc, error handling (`errors.Is`/`errors.As`), memory leak prevention.
+  - Bộ kiểm định tĩnh `go_patterns_validator.py` (24 scripts) tự động phát hiện goroutine leaks, unclosed `resp.Body`, SQL injection và ignored errors.
+  - Mở rộng kỹ năng `api-patterns`:
+    - `grpc.md`: Kiến trúc gRPC & Protocol Buffers, 4 kiểu streaming (Unary, Server, Client, Bi-directional), gRPC error status codes, và interceptors (Auth, Logging, Recovery).
+    - `event-driven.md`: Kiến trúc hướng sự kiện (Kafka, RabbitMQ, Redis Streams), CloudEvents v1.0.2 spec, Transactional Outbox Pattern, Idempotent Consumer, và Dead Letter Queue (DLQ).
+  - Nâng cấp `backend-specialist` (`.agents/agent/backend-specialist.md`) hỗ trợ đầy đủ Go, gRPC, Event-Driven, cùng Socratic Gate nhận diện Go stack.
 - **Tích Hợp UI/UX Pro Max Design Intelligence (v2.15.0)**:
-  - Bổ sung skill `ui-ux-pro-max` nâng tổng số skill lên **62 Modular Skills**.
+  - Bổ sung skill `ui-ux-pro-max`.
   - Tích hợp kho tri thức thiết kế định lượng: 79 UI styles, 192 color palettes (Hex tokens), 74 font pairings (Google Fonts), 119 UX guidelines, 25 chart types và 22 tech stacks.
   - Bổ sung workflow `/design-system` (`.agents/workflows/design-system.md`) nâng tổng số workflow lên **30 Workflows**.
   - Nâng cấp năng lực thiết kế định lượng cho 4 specialist agents: `ui-ux-designer`, `frontend-ui-developer`, `frontend-specialist`, và `ux-accessibility-reviewer`.
@@ -23,12 +31,12 @@
 ### Changed
 - **Đồng Bộ Dữ Liệu Web Portal & Chống Crash Khởi Tạo (`web/app.js`, `web/manifest.json`)**:
   - Khôi phục cấu trúc array danh mục và bổ sung cơ chế chuẩn hóa dữ liệu tự động (data normalization) trong `initData()` của `web/app.js`, xử lý an toàn cả định dạng array lẫn object tránh lỗi TypeError khởi động.
-  - Cập nhật số liệu dynamic cho toàn bộ huy hiệu bộ lọc (Tất cả: 123, Agents: 24, Skills: 62, Workflows: 30, Rules: 7) và hero stats real-time.
-  - Tích hợp chuỗi cache-busting `?v=20261018.2` cho `styles.css` và `app.js` bảo đảm tải ngay bản mới nhất.
+  - Cập nhật số liệu dynamic cho toàn bộ huy hiệu bộ lọc (Tất cả: 124, Agents: 24, Skills: 63, Workflows: 30, Rules: 7) và hero stats real-time.
+  - Tích hợp chuỗi cache-busting `?v=20261018.4` cho `styles.css` và `app.js` bảo đảm tải ngay bản mới nhất.
 - **Nâng Cấp Terminal CLI (`ndanhpc_cli.py`)**:
   - Bổ sung menu item `[12]` (Cập nhật Kit) và `[13]` (Gỡ bỏ Kit).
   - Bổ sung tham số dòng lệnh `--update` và `--uninstall`.
-  - Phân loại kỹ năng `ui-ux-pro-max` vào nhóm Frontend & Design, workflow `/design-system` vào Core Workflows và đồng bộ 123 thành phần trên menu TUI và overview.
+  - Phân loại kỹ năng `golang-patterns` vào nhóm Backend & Architecture, `ui-ux-pro-max` vào nhóm Frontend & Design, workflow `/design-system` vào Core Workflows và đồng bộ 124 thành phần trên menu TUI và overview.
 - **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**:
   - Nâng cấp đồng bộ `2026.10.18` trên `.agents/VERSION`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `web/manifest.json`, `web/data/manifest.json`, `web/app.js`, `web/index.html`, và `.agents/ARCHITECTURE.md`.
 

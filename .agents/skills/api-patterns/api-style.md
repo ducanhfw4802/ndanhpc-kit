@@ -17,21 +17,24 @@ Who are the API consumers?
 │   └── tRPC (end-to-end type safety)
 │
 ├── Real-time / Event-driven
-│   └── WebSocket + AsyncAPI
+│   └── WebSocket / SSE or Message Broker (Kafka / RabbitMQ / Cloud PubSub)
 │
 └── Internal microservices
-    └── gRPC (performance) or REST (simplicity)
+    └── gRPC (multiplexed HTTP/2, Protobuf) or REST (simplicity)
 ```
 
 ## Comparison
 
-| Factor | REST | GraphQL | tRPC |
-|--------|------|---------|------|
-| **Best for** | Public APIs | Complex apps | TS monorepos |
-| **Learning curve** | Low | Medium | Low (if TS) |
-| **Over/under fetching** | Common | Solved | Solved |
-| **Type safety** | Manual (OpenAPI) | Schema-based | Automatic |
-| **Caching** | HTTP native | Complex | Client-based |
+| Factor | REST | GraphQL | tRPC | gRPC |
+|--------|------|---------|------|------|
+| **Best for** | Public APIs | Complex web apps | TS monorepos | Internal microservices |
+| **Transport** | HTTP/1.1, HTTP/2 | HTTP POST | HTTP | HTTP/2 Multiplexed |
+| **Serialization** | JSON | JSON | JSON / Superjson | Binary Protobuf |
+| **Learning curve** | Low | Medium | Low (if TS) | Medium |
+| **Over/under fetching** | Common | Solved | Solved | Strictly defined |
+| **Type safety** | Manual (OpenAPI) | Schema-based | Automatic (Inferred) | Code-gen (Protobuf) |
+| **Streaming** | Limited (SSE) | Subscriptions | Subscriptions | Native Bidirectional |
+| **Caching** | HTTP native | Complex | Client-based | Service-level / Redis |
 
 ## Selection Questions
 

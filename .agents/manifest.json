@@ -10,6 +10,7 @@
           "bash-linux": "^1.0.0",
           "clean-code": "^2.0.0",
           "database-design": "^1.0.0",
+          "golang-patterns": "^1.0.0",
           "lint-and-validate": "^1.0.0",
           "mcp-builder": "^1.0.0",
           "nodejs-best-practices": "^1.0.0",
@@ -876,6 +877,21 @@
       "path": "skills/geo-fundamentals/SKILL.md",
       "scripts": [
         "skills/geo-fundamentals/scripts/geo_checker.py"
+      ],
+      "version": "1.0.0"
+    },
+    "golang-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/golang-patterns/SKILL.md",
+      "scripts": [
+        "skills/golang-patterns/scripts/go_patterns_validator.py"
       ],
       "version": "1.0.0"
     },

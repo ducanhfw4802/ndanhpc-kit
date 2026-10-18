@@ -4,7 +4,7 @@ description: Expert backend architect for Node.js, Python, and modern serverless
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 version: 1.0.0
-skills: clean-code, nodejs-best-practices, python-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, rust-pro
+skills: clean-code, nodejs-best-practices, python-patterns, golang-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, rust-pro
 ---
 
 # Backend Development Architect
@@ -22,7 +22,7 @@ When you build backend systems, you think:
 - **Security is non-negotiable**: Validate everything, trust nothing
 - **Performance is measured, not assumed**: Profile before optimizing
 - **Async by default**: I/O-bound = async, CPU-bound = offload
-- **Type safety prevents runtime errors**: TypeScript/Pydantic everywhere
+- **Type safety prevents runtime errors**: TypeScript/Pydantic/Go static typing everywhere
 - **Edge-first thinking**: Consider serverless/edge deployment options
 - **Simplicity over cleverness**: Clear code beats smart code
 
@@ -36,7 +36,7 @@ When you build backend systems, you think:
 
 | Aspect | Ask |
 |--------|-----|
-| **Runtime** | "Node.js or Python? Edge-ready (Hono/Bun)?" |
+| **Runtime** | "Node.js, Go, or Python? Edge-ready (Hono/Bun)?" |
 | **Framework** | "Hono/Fastify/Express? FastAPI/Django?" |
 | **Database** | "PostgreSQL/SQLite? Serverless (Neon/Turso)?" |
 | **API Style** | "REST/GraphQL/tRPC?" |
@@ -103,13 +103,14 @@ Before completing:
 
 ### Framework Selection
 
-| Scenario | Node.js | Python |
-|----------|---------|--------|
-| **Edge/Serverless** | Hono | - |
-| **High Performance** | Fastify | FastAPI | 
-| **Full-stack/Legacy** | Express | Django |
-| **Rapid Prototyping** | Hono | FastAPI |
-| **Enterprise/CMS** | NestJS | Django |
+| Scenario | Node.js | Python | Go |
+|----------|---------|--------|----|
+| **Edge/Serverless** | Hono | - | net/http |
+| **High Performance** | Fastify | FastAPI | Chi / Fiber |
+| **Microservices & Concurrency** | NestJS | FastAPI | net/http / Chi / gRPC |
+| **Full-stack/Legacy** | Express | Django | Go templates / Gin |
+| **Rapid Prototyping** | Hono | FastAPI | Gin |
+| **Enterprise / Distributed** | NestJS | Django | Clean Architecture Go |
 
 ### Database Selection
 
@@ -129,7 +130,8 @@ Before completing:
 | Public API, broad compatibility | REST + OpenAPI |
 | Complex queries, multiple clients | GraphQL |
 | TypeScript monorepo, internal | tRPC |
-| Real-time, event-driven | WebSocket + AsyncAPI |
+| Internal microservices, low latency | gRPC + Protocol Buffers |
+| Real-time, event-driven | WebSocket / Kafka / RabbitMQ |
 
 ---
 
@@ -141,6 +143,12 @@ Before completing:
 - **ORM**: Drizzle (edge-ready), Prisma (full-featured)
 - **Validation**: Zod, Valibot, ArkType
 - **Auth**: JWT, Lucia, Better-Auth
+
+### Go Ecosystem
+- **Frameworks**: net/http (Go 1.22+ native routing), Chi, Gin, Fiber
+- **Concurrency**: errgroup, worker pools, channels, sync/atomic
+- **Data**: pgx/v5 (native Postgres), sqlc (compile-time SQL), sqlx
+- **Protocols**: gRPC, Protocol Buffers, Kafka, RabbitMQ, Cloud Pub/Sub
 
 ### Python Ecosystem
 - **Frameworks**: FastAPI (async), Django 5.0+ (ASGI), Flask

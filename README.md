@@ -10,13 +10,13 @@
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square" alt="Version"></a>
   <a href=".agents/antigravity.json"><img src="https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square" alt="Runtime"></a>
   <a href="#-24-specialist-agents"><img src="https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square" alt="Agents"></a>
-  <a href="#-62-modular-skills"><img src="https://img.shields.io/badge/skills-62%20Modular-orange.svg?style=flat-square" alt="Skills"></a>
+  <a href="#-63-modular-skills"><img src="https://img.shields.io/badge/skills-63%20Modular-orange.svg?style=flat-square" alt="Skills"></a>
   <a href="#-30-workflows--slash-commands"><img src="https://img.shields.io/badge/workflows-30%20Slash%20Cmds-cyan.svg?style=flat-square" alt="Workflows"></a>
   <a href=".agents/manifest.lock.json"><img src="https://img.shields.io/badge/integrity-SHA--256%20Locked-green.svg?style=flat-square" alt="Integrity"></a>
 </p>
 
 <p align="center">
-  <b>Hệ sinh thái 123 thành phần đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.</b>
+  <b>Hệ sinh thái 124 thành phần đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.</b>
 </p>
 
 ---
@@ -27,8 +27,9 @@ Bản phát hành **v2026.10.18** nâng cấp đột phá trải nghiệm triể
 
 - 📦 **Remote npx / npm CLI (`ndanhpc-kit`)**: Cài đặt hoặc cập nhật kit trực tiếp qua mạng không cần clone repository: `npx github:ducanhfw4802/ndanhpc-kit init`.
 - ⚡ **Unified 1-Line Installer (`install.sh`)**: Script POSIX cài đặt và cập nhật siêu tốc qua `curl -fsSL ... | bash`.
-- 🎨 **Tích Hợp UI/UX Pro Max Design Intelligence**: Bổ sung kỹ năng `ui-ux-pro-max` (**62 Modular Skills**) và workflow `/design-system` (**30 Workflows**) với kho tri thức 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types và 22 tech stacks.
-- 🌐 **Web Portal & CLI Đồng Bộ Tuyệt Đối**: Cập nhật toàn diện 123 thành phần, cơ chế nạp dữ liệu an toàn chống crash khởi tạo, live badge counters và cache-busting `?v=20261018.2`.
+- 🚀 **Nâng Cấp Backend Tối Cường (Golang 1.22+, gRPC & Event-Driven)**: Bổ sung kỹ năng `golang-patterns` (**63 Modular Skills**, tổng **124 thành phần**) với Goroutines/errgroup, pgx/sqlc; mở rộng `api-patterns` với chuẩn `grpc.md` (Protocol Buffers, 4 kiểu streaming) và `event-driven.md` (Kafka, RabbitMQ, Redis Streams, Transactional Outbox, Idempotency).
+- 🎨 **Tích Hợp UI/UX Pro Max Design Intelligence**: Bổ sung kỹ năng `ui-ux-pro-max` và workflow `/design-system` (**30 Workflows**) với kho tri thức 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types và 22 tech stacks.
+- 🌐 **Web Portal & CLI Đồng Bộ Tuyệt Đối**: Cập nhật toàn diện 124 thành phần, cơ chế nạp dữ liệu an toàn chống crash khởi tạo, live badge counters và cache-busting `?v=20261018.4`.
 - 🔄 **Auto-Update & Safe Backup**: Tự động so sánh phiên bản, lưu trữ bản sao lưu `.agents.bak/` và bảo toàn 100% bộ nhớ cấu hình cá nhân (`.agents/memory/`).
 - 📦 **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**: Đưa toàn bộ hệ sinh thái lên chuẩn phát hành `2026.10.18`.
 
@@ -42,7 +43,7 @@ NDANHPC Kit được thiết kế theo kiến trúc module hóa với hợp đ�
 ndanhpc-kit/
 ├── .agents/                      # 🧠 BỘ NÃO AI KHÉP KÍN (Chỉ cần copy thư mục này sang dự án khác)
 │   ├── agent/                    # 24 Specialist Agents phân định rõ trách nhiệm
-│   ├── skills/                   # 62 Modular Skills (Full-stack Dev + QA Automation + UI/UX Pro Max)
+│   ├── skills/                   # 63 Modular Skills (Full-stack Dev + QA Automation + UI/UX Pro Max + Golang)
 │   ├── workflows/                # 30 Slash Commands điều phối quy trình tự động
 │   ├── rules/                    # 7 Strict Rules (Security, UI Design, QA Testing, Code Rules)
 │   ├── hooks/                    # Native Lifecycle Hooks (Bảo vệ PreToolUse chặn lệnh nguy hiểm)
@@ -138,12 +139,12 @@ Bạn có thể copy thư mục `.agents/` vào thư mục gốc của dự án:
 ```bash
 cp -r /opt/Apps/ndanhpc-kit/.agents /duong/dan/du-an-moi/
 ```
-Mở dự án trên Antigravity — toàn bộ 24 Agents, 62 Skills, 30 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
+Mở dự án trên Antigravity — toàn bộ 24 Agents, 63 Skills, 30 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
 
 ---
 
 ### 2. Khởi Chạy Web Portal Tra Cứu Trực Quan
-Web Portal cung cấp giao diện tương tác, tra cứu toàn bộ 123 thành phần và mô phỏng điều phối Multi-Agent:
+Web Portal cung cấp giao diện tương tác, tra cứu toàn bộ 124 thành phần và mô phỏng điều phối Multi-Agent:
 
 ```bash
 npm run web
@@ -233,7 +234,7 @@ npm run test:toolkit
 
 Chi tiết toàn bộ thay đổi qua từng phiên bản được ghi nhận tại [**`CHANGELOG.md`**](CHANGELOG.md):
 
-* **[v2026.10.18](CHANGELOG.md#20261018---remote-npxnpm-cli--unified-1-line-installer-release)**: Ra mắt công cụ thực thi từ xa `npx ndanhpc-kit`, bộ cài đặt 1-line `install.sh`, tích hợp kỹ năng `ui-ux-pro-max`, workflow `/design-system`, nâng cấp Web Portal & CLI lên 123 thành phần và đồng bộ toàn hệ sinh thái.
+* **[v2026.10.18](CHANGELOG.md#20261018---remote-npxnpm-cli--unified-1-line-installer-release)**: Ra mắt công cụ thực thi từ xa `npx ndanhpc-kit`, bộ cài đặt 1-line `install.sh`, nâng cấp backend tối cường với kỹ năng `golang-patterns` (Go 1.22+), mở rộng `api-patterns` (gRPC, Event-Driven), tích hợp `ui-ux-pro-max`, workflow `/design-system`, nâng cấp Web Portal & CLI lên 124 thành phần và đồng bộ toàn hệ sinh thái.
 * **[v2026.10.17](CHANGELOG.md#20261017---cloudflare-light-theme--ui-modernization-release)**: Ra mắt giao diện Cloudflare Light Theme, tối ưu hóa responsive toàn diện (mobile/tablet/desktop), nâng cấp Web Portal và đồng bộ phiên bản toàn hệ sinh thái.
 * **[v2026.10.13](CHANGELOG.md#20261013---qa--test-automation-supercharge-release)**: Hợp nhất toàn diện Antigravity Testing Kit (10 QA Skills, 16 Workflows, QA Rules, Self-contained structure, Web Portal 121 components).
 * **[v2026.10.10](CHANGELOG.md#20261010---ndanhpc-kit-official-release)**: Phiên bản chính thức đầu tiên ra mắt Interactive Web Portal, Terminal TUI CLI, 24 Agents, 51 Skills và Native PreToolUse Hooks.

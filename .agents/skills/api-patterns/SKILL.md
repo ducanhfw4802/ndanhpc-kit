@@ -26,6 +26,8 @@ version: 1.0.0
 | `response.md` | Envelope pattern, error format, pagination | Response structure |
 | `graphql.md` | Schema design, when to use, security | Considering GraphQL |
 | `trpc.md` | TypeScript monorepo, type safety | TS fullstack projects |
+| `grpc.md` | Protocol Buffers, unary & streaming RPCs, interceptors | Internal microservices & low latency |
+| `event-driven.md` | Kafka/RabbitMQ/Redis, Transactional Outbox, Idempotency | Asynchronous event streaming & queues |
 | `versioning.md` | URI/Header/Query versioning | API evolution planning |
 | `auth.md` | JWT, OAuth, Passkey, API Keys | Auth pattern selection |
 | `rate-limiting.md` | Token bucket, sliding window | API protection |
