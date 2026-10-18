@@ -42,6 +42,7 @@
     "web": "python3 -m http.server 3000 --directory web",
     "tui": "python3 .agents/scripts/ndanhpc_cli.py",
     "update": "bash install.sh update",
-    "uninstall": "bash install.sh uninstall"
+    "uninstall": "bash install.sh uninstall",
+    "release:npm": "npm publish --access public"
   }
 }
