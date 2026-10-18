@@ -6,7 +6,7 @@
 - **Remote npx / npm CLI (`bin/ndanhpc-kit.js`)**:
   - Hỗ trợ thực thi từ xa không cần clone mã nguồn: `npx github:ducanhfw4802/ndanhpc-kit init` (hoặc `npx ndanhpc-kit init`).
   - Cung cấp các lệnh con chuyên dụng: `init`, `update`, `check`, `web`, `tui`, `doctor`, `uninstall`.
-  - Tự động phát hiện môi trường, nạp trọn bộ 121 thành phần `.agents/` và chạy validation toàn vẹn.
+  - Tự động phát hiện môi trường, nạp trọn bộ 123 thành phần `.agents/` và chạy validation toàn vẹn.
 - **Unified 1-Line Installer & Lifecycle Manager (`install.sh`)**:
   - Script POSIX độc lập cho Linux, macOS và WSL.
   - Cài đặt nhanh qua `curl -fsSL ... | bash` và cập nhật an toàn qua `bash install.sh update`.
@@ -21,9 +21,14 @@
   - Nâng cấp năng lực thiết kế định lượng cho 4 specialist agents: `ui-ux-designer`, `frontend-ui-developer`, `frontend-specialist`, và `ux-accessibility-reviewer`.
 
 ### Changed
+- **Đồng Bộ Dữ Liệu Web Portal & Chống Crash Khởi Tạo (`web/app.js`, `web/manifest.json`)**:
+  - Khôi phục cấu trúc array danh mục và bổ sung cơ chế chuẩn hóa dữ liệu tự động (data normalization) trong `initData()` của `web/app.js`, xử lý an toàn cả định dạng array lẫn object tránh lỗi TypeError khởi động.
+  - Cập nhật số liệu dynamic cho toàn bộ huy hiệu bộ lọc (Tất cả: 123, Agents: 24, Skills: 62, Workflows: 30, Rules: 7) và hero stats real-time.
+  - Tích hợp chuỗi cache-busting `?v=20261018.2` cho `styles.css` và `app.js` bảo đảm tải ngay bản mới nhất.
 - **Nâng Cấp Terminal CLI (`ndanhpc_cli.py`)**:
   - Bổ sung menu item `[12]` (Cập nhật Kit) và `[13]` (Gỡ bỏ Kit).
   - Bổ sung tham số dòng lệnh `--update` và `--uninstall`.
+  - Phân loại kỹ năng `ui-ux-pro-max` vào nhóm Frontend & Design, workflow `/design-system` vào Core Workflows và đồng bộ 123 thành phần trên menu TUI và overview.
 - **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**:
   - Nâng cấp đồng bộ `2026.10.18` trên `.agents/VERSION`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `web/manifest.json`, `web/data/manifest.json`, `web/app.js`, `web/index.html`, và `.agents/ARCHITECTURE.md`.
 
