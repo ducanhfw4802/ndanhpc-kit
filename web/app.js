@@ -9,7 +9,7 @@ const EMBEDDED_DATA = {
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
-    "skills": 63,
+    "skills": 64,
     "workflows": 30,
     "rules": 7
   },
@@ -38,6 +38,7 @@ const EMBEDDED_DATA = {
         "lint-and-validate",
         "mcp-builder",
         "nodejs-best-practices",
+        "php-patterns",
         "powershell-windows",
         "python-patterns",
         "rust-pro"
@@ -1176,6 +1177,25 @@ const EMBEDDED_DATA = {
       ],
       "path": "skills/performance-profiling/SKILL.md",
       "category": "Other"
+    },
+    {
+      "id": "php-patterns",
+      "name": "php-patterns",
+      "description": "Production-grade PHP (8.2+) & Laravel (11+) patterns for idiomatic backend services, Action/Service architecture, Eloquent query optimization (N+1 prevention), Form Requests, Pest/PHPUnit testing, and secure API design.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/php-patterns/scripts/php_patterns_validator.py"
+      ],
+      "path": "skills/php-patterns/SKILL.md",
+      "category": "Backend & API"
     },
     {
       "id": "plan-writing",

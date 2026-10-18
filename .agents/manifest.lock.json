@@ -1,11 +1,11 @@
 {
   "$schema": "schemas/manifest-lock.schema.json",
   "components": {
-    "ARCHITECTURE.md": "b75e8688e1bd2681eaf28ec4d27fab979027b37795bd466230296832fa7e5f8d",
-    "CHANGELOG.md": "dfa098d2f0b388b0f639a7433f43978f9b4427adf661807ead0e5faf8b8c7fc1",
+    "ARCHITECTURE.md": "2c62a51814fb35dd42739a1c911972a3c44ba8e35cc346b3fd4e84efcc2a7aa2",
+    "CHANGELOG.md": "c9fbb15baf54184648c7a58d48703aa838357119887a93a62dafaafcc3e7bc0b",
     "README.md": "51f5484fab2e73b5896d6b4ca9861c1875aa607544fbc63867c3ec078d3f60da",
     "VERSION": "40b1289c513417d5044690994ec25b3db14341e72590222a38eb2d572fd46298",
-    "agent/backend-specialist.md": "796a528bfb76c3909dc69a72ede1be15ef118a6edc67efd7832438e40688d703",
+    "agent/backend-specialist.md": "61d892eb10458a34bfd2dd6de680ef467b51f8a528d8a654c069ba4805118538",
     "agent/code-archaeologist.md": "a0c654b885773c425f6a1c3f35ac7a1d509ed32e08a4e2daf373ddc5c6c805f3",
     "agent/database-architect.md": "1649c5ba554eca2674df75c50229cc00463aed1400d3b6d55131d8f4b12f3c76",
     "agent/debugger.md": "5b73decefc6834500ed5f27390021d2ea11e1397c40dd101d6a664217fbbaeac",
@@ -84,7 +84,7 @@
     "scripts/integrations/jira/utils.js": "43c96142611e28e6c546e7bbe3b9655dae2c4dfe4f3ac9d8ad63c2ed36d48aa1",
     "scripts/integrations/jira/xray_auth.js": "26480eda2fd0c6079a98436ddfe72d65d224811a90e83b96ec7630bcd6eedcf3",
     "scripts/integrations/jira/xray_importer.js": "6484c8705783dd71353ed63c01e22fb46fc253ca4e3b8eff229ac598df1d3f88",
-    "scripts/ndanhpc_cli.py": "0b5d8b50af6e00f3bba076b105649bf974f9b3b949ee7a9380cb9c62a7c5f76c",
+    "scripts/ndanhpc_cli.py": "c00a2f8c790480848d32bf6c44e75643665290c7266ab644352db1d0e3fce138",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
     "scripts/validate_kit.py": "fd6c6fd1ca14a225f68a61c0df4d76c13c9c35bac9a70fedb9ac82387ecef610",
@@ -217,6 +217,8 @@
     "skills/performance-profiling/SKILL.md": "91bd2041ab8447ad6fc6fa16d4e0e414adc2ee38e4df6fd27f1810e4e982ca0c",
     "skills/performance-profiling/scripts/bundle_analyzer.py": "f626e41febb7f56ac68e3870e1b53f3c85560ee3d5ac5b720fdfb0fbb353eccc",
     "skills/performance-profiling/scripts/lighthouse_audit.py": "45157873f60d7649b2224f90ddef6caa9f0f02848ab2e62af6adefecb6741067",
+    "skills/php-patterns/SKILL.md": "62e16d2190a143176367e2a687785720506e6b77944a266ffd6cf706d3b8e113",
+    "skills/php-patterns/scripts/php_patterns_validator.py": "ebf21e834bb7da5a07f616aa0e76614d511bf0389a4624e56741d9af64cca3fb",
     "skills/plan-writing/SKILL.md": "2698f0dcae134d9ef587d4a2e00bc6901a251b24691f393faf581917bf80b248",
     "skills/powershell-windows/SKILL.md": "a2e47e73f225ca24627e2d7109a9805acfeb4b59e8ac4c683ef8994dea8e432f",
     "skills/python-patterns/SKILL.md": "bab8eb299ef8f97bfdf8dc9d68a19ab1f84b9a1e86a852a84b7fa943d97cc2f6",
@@ -332,6 +334,6 @@
     "workflows/verify.md": "2dc26bcbe24c7e71571953da75629521ea3d7a0a444a7101e3601b39864971fc"
   },
   "kitVersion": "2026.10.18",
-  "manifestSha256": "4ce008ae7d3c910aa45f5122de08d4e7170ed41ac78194afe9ed36f6c2bec223",
+  "manifestSha256": "5e1f5209d45111e938ada80b07454cf0402be3cdbead55d767226b07d1eb62f9",
   "schemaVersion": "1.0.0"
 }
