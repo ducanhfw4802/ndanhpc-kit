@@ -53,40 +53,68 @@ ndanhpc-kit/
 
 ---
 
-## ⚡ Cài Đặt, Cập Nhật & Gỡ Bỏ Nhanh (1 Dòng Lệnh Duy Nhất)
+## ⚡ Cài Đặt, Cập Nhật & Gỡ Bỏ Từ Xa (Remote 1 Lệnh Duy Nhất)
 
-Không cần clone cả kho mã nguồn hay xóa đi clone lại, bạn có thể cài đặt, cập nhật hoặc gỡ bỏ bộ kit trên **bất kỳ máy tính / dự án nào** chỉ với một dòng lệnh duy nhất:
+Bạn **không cần phải clone cả kho mã nguồn hay làm thủ công**. Trên bất kỳ máy tính nào, bạn có thể sử dụng trực tiếp qua **`npx`**, **`npm`** hoặc **`curl`**:
 
-### 📥 1. Cài Đặt Vào Dự Án Bất Kỳ (1 Lệnh Duy Nhất)
+### 📦 Cách 1: Sử Dụng `npx` (Khuyên Dùng - Không Cần Cài Đặt Trước)
 Đứng tại thư mục bất kỳ của bạn trên máy tính và chạy:
-```bash
-curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash
-```
-> Script sẽ tự động tải trọn gói bộ não AI khép kín `.agents/` mới nhất về dự án hiện tại và kiểm tra toàn vẹn 100%.
 
-### 🔄 2. Cập Nhật Lên Bản Mới Nhất (1 Lệnh Duy Nhất)
-Khi có bản cập nhật mới trên GitHub, cập nhật siêu tốc trong 2 giây mà không cần clone lại:
 ```bash
-# Cách 1: Qua 1 dòng lệnh curl (áp dụng cho mọi máy / mọi dự án):
+# 1. Cài đặt bộ kit (.agents/) vào dự án hiện tại:
+npx github:ducanhfw4802/ndanhpc-kit init
+# (hoặc: npx ndanhpc-kit init khi cài từ npm registry)
+
+# 2. Cập nhật kit lên phiên bản mới nhất:
+npx github:ducanhfw4802/ndanhpc-kit update
+
+# 3. Kiểm tra phiên bản trên máy vs GitHub:
+npx github:ducanhfw4802/ndanhpc-kit check
+
+# 4. Mở Web Portal trực quan (Cổng 3000):
+npx github:ducanhfw4802/ndanhpc-kit web
+
+# 5. Mở Terminal TUI điều khiển:
+npx github:ducanhfw4802/ndanhpc-kit tui
+
+# 6. Gỡ bỏ bộ kit khỏi dự án:
+npx github:ducanhfw4802/ndanhpc-kit uninstall
+```
+
+---
+
+### 🌐 Cách 2: Cài Đặt Toàn Cục (Global CLI qua `npm`)
+Nếu bạn muốn có lệnh `ndanhpc-kit` dùng ở bất kỳ đâu trên máy tính:
+
+```bash
+# Cài đặt CLI toàn cục trực tiếp từ GitHub:
+npm install -g git+https://github.com/ducanhfw4802/ndanhpc-kit.git
+
+# Sau đó sử dụng ở bất kỳ thư mục nào:
+ndanhpc-kit init        # Cài đặt kit vào dự án hiện tại
+ndanhpc-kit update      # Tự động cập nhật kit
+ndanhpc-kit check       # Kiểm tra phiên bản
+ndanhpc-kit tui         # Mở Terminal TUI
+ndanhpc-kit web         # Mở Web Portal
+ndanhpc-kit uninstall   # Gỡ bỏ kit
+```
+
+---
+
+### 🚀 Cách 3: Sử Dụng 1 Dòng Lệnh `curl` (Linux / macOS / WSL)
+Nếu không dùng Node.js/npm, bạn có thể dùng bash script:
+
+```bash
+# 1. Cài đặt vào dự án hiện tại:
+curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash
+
+# 2. Cập nhật bản mới nhất:
 curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- update
 
-# Cách 2: Qua Terminal CLI tích hợp:
-python3 .agents/scripts/ndanhpc_cli.py --update
-
-# Cách 3: Nếu bạn dùng Git Repository ndanhpc-kit:
-npm run update   # hoặc: git pull origin main
-```
-> Tự động so sánh phiên bản, sao lưu an toàn (`.agents.bak/`), bảo toàn bộ nhớ ghi chú cá nhân (`.agents/memory/`) và nạp ngay năng lực mới.
-
-### 🗑️ 3. Gỡ Bỏ Hoàn Toàn Khỏi Dự Án (1 Lệnh Duy Nhất)
-```bash
+# 3. Gỡ bỏ kit khỏi dự án:
 curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- uninstall
-# hoặc:
-python3 .agents/scripts/ndanhpc_cli.py --uninstall
-```
 
-### 🔍 4. Kiểm Tra Trạng Thái Phiên Bản
-```bash
+# 4. Kiểm tra trạng thái phiên bản:
 curl -fsSL https://raw.githubusercontent.com/ducanhfw4802/ndanhpc-kit/main/install.sh | bash -s -- check
 ```
 
