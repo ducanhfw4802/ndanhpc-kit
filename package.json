@@ -23,6 +23,8 @@
   ],
   "files": [
     ".agents",
+    "!**/*.pyc",
+    "!**/__pycache__",
     "bin",
     "web",
     "install.sh",
