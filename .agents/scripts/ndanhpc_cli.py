@@ -122,7 +122,7 @@ def hr(char: str = "─", color: str = Colors.DIM) -> None:
 
 def banner(data: Optional[ToolkitData] = None) -> None:
     """Print the NDANHPC Kit banner with dynamic CalVer version."""
-    version = data.kit_version if data else "2026.10.17"
+    version = data.kit_version if data else "2026.10.18"
     ascii_logo = r"""
   _   _ ____    _    _   _ _   _ ____   ____   _  ___ _   
  | \ | |  _ \  / \  | \ | | | | |  _ \ / ___| | |/ (_) |_ 
@@ -386,7 +386,7 @@ class ToolkitData:
                     return str(data["version"])
             except Exception:
                 pass
-        return "2026.10.17"
+        return "2026.10.18"
 
     @property
     def agents(self) -> Dict[str, Any]:
@@ -472,12 +472,12 @@ def show_overview(data: ToolkitData) -> None:
     print(f"  • {bold('Self-Contained:')}     {green('100%')} nằm trọn trong thư mục {cyan('.agents/')} (Dễ dàng sao chép sang dự án mới)")
     print()
 
-    # Highlight v2026.10.17
-    print(bold(yellow("⭐ ĐIỂM NHẤN PHÁT HÀNH v2026.10.17 - CLOUDFLARE LIGHT THEME & UI MODERNIZATION:")))
-    print(f"  • {bold('Cloudflare Light Theme:')}     Giao diện sáng cao cấp (#F6821F / #18181B / #F9FAFB), sắc nét, dịu mắt")
-    print(f"  • {bold('Responsive Toàn Diện:')}       Tương thích 100% Mobile, Tablet & Desktop, khắc phục tràn layout")
-    print(f"  • {bold('QA Automation Supercharge:')}  10 Kỹ năng QA, 16 Workflows (/rbt, /framework, /flaky, POM, Jira/Xray)")
-    print(f"  • {bold('Đồng Bộ CalVer 2026.10.17:')}  Đồng bộ toàn bộ hệ sinh thái (Rules, Hooks, Manifests, Web Portal)")
+    # Highlight v2026.10.18
+    print(bold(yellow("⭐ ĐIỂM NHẤN PHÁT HÀNH v2026.10.18 - REMOTE NPX/NPM CLI & ONE-LINE INSTALLER:")))
+    print(f"  • {bold('Remote npx / npm CLI:')}       Khởi tạo, cập nhật & kiểm tra kit từ xa: {cyan('npx github:... init')}")
+    print(f"  • {bold('Trình Cài Đặt 1 Lệnh:')}       {cyan('curl -fsSL .../install.sh | bash')} cài đặt chỉ trong 2 giây")
+    print(f"  • {bold('Cloudflare Light Theme:')}     Giao diện sáng cao cấp (#F6821F / #18181B / #F9FAFB) 100/100 Lighthouse")
+    print(f"  • {bold('Đồng Bộ CalVer 2026.10.18:')}  Đồng bộ toàn bộ hệ sinh thái (Rules, Hooks, Manifests, Web Portal)")
     print()
 
     # Tier Architecture
@@ -1019,12 +1019,12 @@ def show_rule_detail(data: ToolkitData, name: str) -> None:
 
 
 # ==============================================================================
-# View 6: Trung tâm QA & Test Automation Supercharge Hub (NDANHPC Kit v2026.10.17)
+# View 6: Trung tâm QA & Test Automation Supercharge Hub (NDANHPC Kit v2026.10.18)
 # ==============================================================================
 
 def show_qa_hub(data: ToolkitData) -> None:
     """Display comprehensive QA & Test Automation Supercharge Dashboard."""
-    print(bold(yellow("\n🧪 TRUNG TÂM QA & TEST AUTOMATION SUPERCHARGE (NDANHPC KIT v2026.10.17)")))
+    print(bold(yellow("\n🧪 TRUNG TÂM QA & TEST AUTOMATION SUPERCHARGE (NDANHPC KIT v2026.10.18)")))
     hr("═", Colors.YELLOW)
     print(f" {bold('Hệ sinh thái Kiểm thử Chuẩn Quốc Tế:')} Tích hợp hoàn hảo giữa AI và QA Engineering.")
     hr()
@@ -1174,7 +1174,7 @@ def simulate_orchestration(data: ToolkitData, task_key: Optional[str] = None) ->
     else:
         print(bold("Chọn kịch bản mô phỏng:"))
         for idx, (key, item) in enumerate(ORCHESTRATION_PRESETS.items(), 1):
-            is_new = " [MỚI v2026.10.17]" if key == "qa" else ""
+            is_new = " [MỚI v2026.10.18]" if key == "qa" else ""
             print(f"  [{cyan(str(idx))}] {bold(item['title'])}{yellow(is_new)} {dim(f'({key})')}")
         print()
 
@@ -1565,7 +1565,7 @@ def interactive_menu(data: ToolkitData) -> None:
         print(f"  {cyan('[3]')}  📚 {bold(f'Tra cứu Domain Skills ({len(data.skills)})')} {dim('[Phân loại 8 danh mục & Tìm kiếm]')}")
         print(f"  {cyan('[4]')}  ⚡ {bold(f'Tra cứu Workflows & Slash Commands ({len(data.workflows)})')} {dim('[16 QA + 13 Core]')}")
         print(f"  {cyan('[5]')}  📜 {bold(f'Tra cứu Workspace Rules ({len(data.rules)})')} {dim('[P0 Universal / P1 QA / P2 QuickRef]')}")
-        print(f"  {yellow('[6]')}  🧪 {bold('Trung tâm QA & Test Automation Supercharge')} {yellow('[MỚI v2026.10.17]')}")
+        print(f"  {yellow('[6]')}  🧪 {bold('Trung tâm QA & Test Automation Supercharge')} {yellow('[MỚI v2026.10.18]')}")
         print(f"  {cyan('[7]')}  🔄 {bold('Mô phỏng Multi-Agent Orchestration (/orchestrate)')} {dim('[6 kịch bản]')}")
         print(f"  {cyan('[8]')}  🔍 {bold('Tìm kiếm Toàn diện (Search All)')} {dim('[Tra cứu nhanh theo từ khóa]')}")
         print(f"  {cyan('[9]')}  🩺 {bold('Chạy kiểm định Antigravity Doctor')} {dim('(npm run check:antigravity)')}")
@@ -1638,7 +1638,7 @@ def main() -> int:
   python3 .agents/scripts/ndanhpc_cli.py --skills      # Tra cứu danh mục Domain Skills (61)
   python3 .agents/scripts/ndanhpc_cli.py --workflows   # Tra cứu danh mục Workflows (29)
   python3 .agents/scripts/ndanhpc_cli.py --rules       # Tra cứu Workspace Rules (7)
-  python3 .agents/scripts/ndanhpc_cli.py --qa          # Bảng điều khiển QA Supercharge v2026.10.17
+  python3 .agents/scripts/ndanhpc_cli.py --qa          # Bảng điều khiển QA Supercharge v2026.10.18
   python3 .agents/scripts/ndanhpc_cli.py --search qa   # Tìm kiếm toàn diện với từ khóa 'qa'
   python3 .agents/scripts/ndanhpc_cli.py --simulate qa # Mô phỏng quy trình kiểm thử AI-RBT & QA
   python3 .agents/scripts/ndanhpc_cli.py --doctor      # Kiểm định Antigravity Doctor

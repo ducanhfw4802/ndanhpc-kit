@@ -1,5 +1,29 @@
 # AG Kit Toolkit Changelog
 
+## 2026.10.18 - Remote npx/npm CLI & Unified 1-Line Installer Release
+
+### Added
+- **Remote npx / npm CLI (`bin/ndanhpc-kit.js`)**:
+  - Hỗ trợ thực thi từ xa không cần clone mã nguồn: `npx github:ducanhfw4802/ndanhpc-kit init` (hoặc `npx ndanhpc-kit init`).
+  - Cung cấp các lệnh con chuyên dụng: `init`, `update`, `check`, `web`, `tui`, `doctor`, `uninstall`.
+  - Tự động phát hiện môi trường, nạp trọn bộ 121 thành phần `.agents/` và chạy validation toàn vẹn.
+- **Unified 1-Line Installer & Lifecycle Manager (`install.sh`)**:
+  - Script POSIX độc lập cho Linux, macOS và WSL.
+  - Cài đặt nhanh qua `curl -fsSL ... | bash` và cập nhật an toàn qua `bash install.sh update`.
+  - Tự động sao lưu thư mục cũ sang `.agents.bak/` và bảo toàn 100% dữ liệu cấu hình dự án (`.agents/memory/`).
+- **GitHub Actions Auto-Publish Workflow (`.github/workflows/publish-npm.yml`)**:
+  - Tự động đóng gói và xuất bản package lên NPM Registry qua GitHub Action.
+  - Bổ sung lệnh `npm run release:npm` phục vụ phát hành nhanh.
+
+### Changed
+- **Nâng Cấp Terminal CLI (`ndanhpc_cli.py`)**:
+  - Bổ sung menu item `[12]` (Cập nhật Kit) và `[13]` (Gỡ bỏ Kit).
+  - Bổ sung tham số dòng lệnh `--update` và `--uninstall`.
+- **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**:
+  - Nâng cấp đồng bộ `2026.10.18` trên `.agents/VERSION`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `web/manifest.json`, `web/data/manifest.json`, `web/app.js`, `web/index.html`, và `.agents/ARCHITECTURE.md`.
+
+---
+
 ## 2026.10.17 - Cloudflare Light Theme & UI Modernization Release
 
 ### Added

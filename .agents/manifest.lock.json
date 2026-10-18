@@ -1,10 +1,10 @@
 {
   "$schema": "schemas/manifest-lock.schema.json",
   "components": {
-    "ARCHITECTURE.md": "c09459972b56048ae47bf2a421973511598e98adfc779438e877ee30cf7b375f",
-    "CHANGELOG.md": "76893360a2716265087f5cfab593f4e4126f5b175d2b1f84e0f3d30f5b51ac69",
+    "ARCHITECTURE.md": "5b808c466e7d0e80d0d2b38e5b9f11a7d0363ef216deed7fac0500317abc8899",
+    "CHANGELOG.md": "a256e038eeaad3938c8cf622b5faa6189ad71d17731b927296ca756025a6ab58",
     "README.md": "51f5484fab2e73b5896d6b4ca9861c1875aa607544fbc63867c3ec078d3f60da",
-    "VERSION": "84078880372ae23a581676459c5b00e1ff9b6d6fe9bccaceb1b73e3f1ad917f8",
+    "VERSION": "40b1289c513417d5044690994ec25b3db14341e72590222a38eb2d572fd46298",
     "agent/backend-specialist.md": "65087ad56011ce55231f2754c3bdbb1c32ee14fa24ae9f389c0a7a67c178f1fd",
     "agent/code-archaeologist.md": "a0c654b885773c425f6a1c3f35ac7a1d509ed32e08a4e2daf373ddc5c6c805f3",
     "agent/database-architect.md": "1649c5ba554eca2674df75c50229cc00463aed1400d3b6d55131d8f4b12f3c76",
@@ -84,7 +84,7 @@
     "scripts/integrations/jira/utils.js": "43c96142611e28e6c546e7bbe3b9655dae2c4dfe4f3ac9d8ad63c2ed36d48aa1",
     "scripts/integrations/jira/xray_auth.js": "26480eda2fd0c6079a98436ddfe72d65d224811a90e83b96ec7630bcd6eedcf3",
     "scripts/integrations/jira/xray_importer.js": "6484c8705783dd71353ed63c01e22fb46fc253ca4e3b8eff229ac598df1d3f88",
-    "scripts/ndanhpc_cli.py": "170fa8e385532864b7d88f83c872735a35dc5ad4bb57158fe6eafd9ad49f0b98",
+    "scripts/ndanhpc_cli.py": "42743336738c8b61b1969a6d9b1022806907dbfeeddcd9540fd8a3a76124a710",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
     "scripts/validate_kit.py": "fd6c6fd1ca14a225f68a61c0df4d76c13c9c35bac9a70fedb9ac82387ecef610",
@@ -279,7 +279,7 @@
     "workflows/test.md": "bd06ae644376e3cc2661f1a623504247445c86a83dfb0df92ed5f0eccdef60ea",
     "workflows/verify.md": "2dc26bcbe24c7e71571953da75629521ea3d7a0a444a7101e3601b39864971fc"
   },
-  "kitVersion": "2026.10.17",
-  "manifestSha256": "f91b44469f53b44c1648f58ea642aa6b19d9c86365c989cf74d7ae86c5d3e891",
+  "kitVersion": "2026.10.18",
+  "manifestSha256": "21b05094a2c5153960fa9480de30aeba0e6dac24b08d8c95beb61568cd37c26d",
   "schemaVersion": "1.0.0"
 }

@@ -1,6 +1,6 @@
 .skip-link { position: absolute; top: -50px; left: 1rem; background: #F6821F; color: #FFFFFF; padding: 0.5rem 1rem; z-index: 1000; border-radius: 6px; font-weight: 600; text-decoration: none; transition: top 0.2s ease; } .skip-link:focus { top: 1rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-/* NDANHPC Kit - Cloudflare Light Theme Stylesheet (v2026.10.17) */
+/* NDANHPC Kit - Cloudflare Light Theme Stylesheet (v2026.10.18) */
 :root {
   --bg-primary: #F8FAFC;
   --bg-secondary: #F1F5F9;

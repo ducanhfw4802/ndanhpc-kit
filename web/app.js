@@ -5,7 +5,7 @@
 
 // Embedded full dataset for seamless operation offline / file:// / HTTP
 const EMBEDDED_DATA = {
-  "kitVersion": "2026.10.17",
+  "kitVersion": "2026.10.18",
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,

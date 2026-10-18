@@ -1,6 +1,6 @@
 # NDANHPC Kit Architecture
 
-> Antigravity-native AI Agent Capability Toolkit — 2026.10.17
+> Antigravity-native AI Agent Capability Toolkit — 2026.10.18
 
 ---
 
@@ -16,7 +16,7 @@ NDANHPC Kit is a modular, independent Antigravity workspace system consisting of
 
 ---
 
-## 🔐 Managed Component Registry (2026.10.17)
+## 🔐 Managed Component Registry (2026.10.18)
 
 NDANHPC Kit uses dual-track versioning:
 

@@ -3,7 +3,7 @@
 > **Antigravity-native AI Agent Capability Toolkit**
 > Hệ sinh thái đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.
 
-[![Version](https://img.shields.io/badge/version-2026.10.17-blue.svg?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square)](CHANGELOG.md)
 [![Runtime](https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square)](.agents/antigravity.json)
 [![Agents](https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square)](#-24-specialist-agents)
 [![Skills](https://img.shields.io/badge/skills-61%20Modular-orange.svg?style=flat-square)](#-61-modular-skills)
@@ -12,15 +12,15 @@
 
 ---
 
-## 🌟 Mới Nhất: Release v2026.10.17 (Cloudflare Light Theme & UI Modernization)
+## 🌟 Mới Nhất: Release v2026.10.18 (Remote npx/npm CLI & Unified 1-Line Installer)
 
-Bản phát hành **v2026.10.17** mang đến diện mạo hoàn toàn mới và hiện đại cho **NDANHPC Kit** với giao diện Cloudflare Light Theme và tối ưu hóa hiển thị:
+Bản phát hành **v2026.10.18** nâng cấp đột phá trải nghiệm triển khai từ xa, cho phép người dùng trên mọi máy tính tải về, cài đặt, cập nhật và gỡ bỏ NDANHPC Kit chỉ với 1 dòng lệnh duy nhất:
 
-- 🎨 **Cloudflare Light Theme**: Thiết kế hiện đại lấy cảm hứng từ Cloudflare Dashboard với bảng màu cam `#F6821F`, xám đen `#18181B`, nền sáng trang nhã `#F9FAFB` và độ tương phản cao, dịu mắt.
-- 📱 **Tối Ưu Responsive Toàn Diện**: Thiết kế lại layout cho máy tính, tablet và mobile. Khắc phục triệt để lỗi tràn giao diện (horizontal overflow), thanh cuộn x-axis, container thẻ components và navigation bar.
-- ⚡ **Hiệu Năng & Trải Nghiệm Hoàn Hảo**: Tối ưu hóa CSS Grid/Flexbox, đạt 100/100 điểm Performance, Accessibility, Best Practices và SEO.
-- 🧪 **Kế Thừa Toàn Bộ QA Supercharge**: Giữ nguyên vẹn 10 kỹ năng QA, 16 workflows kiểm thử, terminal CLI TUI và native Antigravity runtime hooks.
-- 📦 **Đồng Bộ Phiên Bản Toàn Hệ Thống**: Đồng bộ hóa CalVer `2026.10.17` trên toàn bộ files định nghĩa, manifests và plugins.
+- 📦 **Remote npx / npm CLI (`ndanhpc-kit`)**: Cài đặt hoặc cập nhật kit trực tiếp qua mạng không cần clone repository: `npx github:ducanhfw4802/ndanhpc-kit init`.
+- ⚡ **Unified 1-Line Installer (`install.sh`)**: Script POSIX cài đặt và cập nhật siêu tốc qua `curl -fsSL ... | bash`.
+- 🔄 **Auto-Update & Safe Backup**: Tự động so sánh phiên bản, lưu trữ bản sao lưu `.agents.bak/` và bảo toàn 100% bộ nhớ cấu hình cá nhân (`.agents/memory/`).
+- 🎨 **Kế Thừa Toàn Bộ Cloudflare Light Theme & QA Hub**: Giữ trọn bộ diện mạo sang trọng, responsive 6 tiers và 10 kỹ năng QA Supercharge.
+- 📦 **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**: Đưa toàn bộ hệ sinh thái lên chuẩn phát hành `2026.10.18`.
 
 ---
 
@@ -222,6 +222,7 @@ npm run test:toolkit
 
 Chi tiết toàn bộ thay đổi qua từng phiên bản được ghi nhận tại [**`CHANGELOG.md`**](CHANGELOG.md):
 
+* **[v2026.10.18](CHANGELOG.md#20261018---remote-npxnpm-cli--unified-1-line-installer-release)**: Ra mắt công cụ thực thi từ xa `npx ndanhpc-kit`, bộ cài đặt 1-line `install.sh`, GitHub Actions tự động xuất bản NPM và đồng bộ toàn hệ thống.
 * **[v2026.10.17](CHANGELOG.md#20261017---cloudflare-light-theme--ui-modernization-release)**: Ra mắt giao diện Cloudflare Light Theme, tối ưu hóa responsive toàn diện (mobile/tablet/desktop), nâng cấp Web Portal và đồng bộ phiên bản toàn hệ sinh thái.
 * **[v2026.10.13](CHANGELOG.md#20261013---qa--test-automation-supercharge-release)**: Hợp nhất toàn diện Antigravity Testing Kit (10 QA Skills, 16 Workflows, QA Rules, Self-contained structure, Web Portal 121 components).
 * **[v2026.10.10](CHANGELOG.md#20261010---ndanhpc-kit-official-release)**: Phiên bản chính thức đầu tiên ra mắt Interactive Web Portal, Terminal TUI CLI, 24 Agents, 51 Skills và Native PreToolUse Hooks.
