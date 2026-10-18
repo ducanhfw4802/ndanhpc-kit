@@ -6,8 +6,8 @@
 [![Version](https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square)](CHANGELOG.md)
 [![Runtime](https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square)](.agents/antigravity.json)
 [![Agents](https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square)](#-24-specialist-agents)
-[![Skills](https://img.shields.io/badge/skills-61%20Modular-orange.svg?style=flat-square)](#-61-modular-skills)
-[![Workflows](https://img.shields.io/badge/workflows-29%20Slash%20Cmds-cyan.svg?style=flat-square)](#-29-workflows--slash-commands)
+[![Skills](https://img.shields.io/badge/skills-62%20Modular-orange.svg?style=flat-square)](#-62-modular-skills)
+[![Workflows](https://img.shields.io/badge/workflows-30%20Slash%20Cmds-cyan.svg?style=flat-square)](#-30-workflows--slash-commands)
 [![Integrity](https://img.shields.io/badge/integrity-SHA--256%20Locked-green.svg?style=flat-square)](.agents/manifest.lock.json)
 
 ---
@@ -32,8 +32,8 @@ NDANHPC Kit được thiết kế theo kiến trúc module hóa với hợp đ�
 ndanhpc-kit/
 ├── .agents/                      # 🧠 BỘ NÃO AI KHÉP KÍN (Chỉ cần copy thư mục này sang dự án khác)
 │   ├── agent/                    # 24 Specialist Agents phân định rõ trách nhiệm
-│   ├── skills/                   # 61 Modular Skills (Full-stack Dev + QA Automation)
-│   ├── workflows/                # 29 Slash Commands điều phối quy trình tự động
+│   ├── skills/                   # 62 Modular Skills (Full-stack Dev + QA Automation + UI/UX Pro Max)
+│   ├── workflows/                # 30 Slash Commands điều phối quy trình tự động
 │   ├── rules/                    # 7 Strict Rules (Security, UI Design, QA Testing, Code Rules)
 │   ├── hooks/                    # Native Lifecycle Hooks (Bảo vệ PreToolUse chặn lệnh nguy hiểm)
 │   ├── plans/                    # 📋 Quy trình 6 bước chuyên sâu (Manual, Automation, Cross-module)
@@ -128,7 +128,7 @@ Bạn có thể copy thư mục `.agents/` vào thư mục gốc của dự án:
 ```bash
 cp -r /opt/Apps/ndanhpc-kit/.agents /duong/dan/du-an-moi/
 ```
-Mở dự án trên Antigravity — toàn bộ 24 Agents, 61 Skills, 29 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
+Mở dự án trên Antigravity — toàn bộ 24 Agents, 62 Skills, 30 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
 
 ---
 

@@ -4,7 +4,7 @@ description: Senior Frontend Architect who builds maintainable React/Next.js sys
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 version: 1.0.0
-skills: clean-code, design-spec, nextjs-react-expert, frontend-architecture, web-design-guidelines, tailwind-patterns, frontend-design, lint-and-validate
+skills: clean-code, design-spec, nextjs-react-expert, frontend-architecture, web-design-guidelines, tailwind-patterns, frontend-design, lint-and-validate, ui-ux-pro-max
 ---
 
 # Senior Frontend Architect

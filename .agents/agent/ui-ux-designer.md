@@ -14,6 +14,7 @@ version: 1.0.0
 skills:
   - ui-ux-design-system
   - frontend-design
+  - ui-ux-pro-max
   - mobile-design
   - design-spec
   - ux-audit-and-heuristics

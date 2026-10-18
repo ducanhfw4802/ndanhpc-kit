@@ -9,8 +9,8 @@ const EMBEDDED_DATA = {
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
-    "skills": 61,
-    "workflows": 29,
+    "skills": 62,
+    "workflows": 30,
     "rules": 7
   },
   "agents": [
@@ -204,7 +204,8 @@ const EMBEDDED_DATA = {
         "lint-and-validate",
         "nextjs-react-expert",
         "tailwind-patterns",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/frontend-specialist.md",
       "category": "Frontend & Design"
@@ -228,7 +229,8 @@ const EMBEDDED_DATA = {
         "frontend-design",
         "responsive-web-design",
         "tailwind-patterns",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/frontend-ui-developer.md",
       "category": "Frontend & Design"
@@ -573,7 +575,8 @@ const EMBEDDED_DATA = {
         "frontend-design",
         "mobile-design",
         "ui-ux-design-system",
-        "ux-audit-and-heuristics"
+        "ux-audit-and-heuristics",
+        "ui-ux-pro-max"
       ],
       "path": "agent/ui-ux-designer.md",
       "category": "Frontend & Design"
@@ -595,7 +598,8 @@ const EMBEDDED_DATA = {
       "skills": [
         "ui-ux-design-system",
         "ux-audit-and-heuristics",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/ux-accessibility-reviewer.md",
       "category": "Frontend & Design"
@@ -1515,6 +1519,29 @@ const EMBEDDED_DATA = {
       "category": "Frontend & UI"
     },
     {
+      "id": "ui-ux-pro-max",
+      "name": "ui-ux-pro-max",
+      "description": "AI-powered UI/UX design intelligence with 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types, and automated design system generator across 22 tech stacks.",
+      "version": "2.15.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/ui-ux-pro-max/scripts/core.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py",
+        "skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+        "skills/ui-ux-pro-max/scripts/search.py",
+        "skills/ui-ux-pro-max/scripts/validate_data.py"
+      ],
+      "path": "skills/ui-ux-pro-max/SKILL.md",
+      "category": "Frontend & Design"
+    },
+    {
       "id": "ux-audit-and-heuristics",
       "name": "ux-audit-and-heuristics",
       "description": "UX evaluation, usability heuristics audit, cognitive load reduction, and conversion rate optimization (CRO) for web and mobile apps. Use when conducting UX reviews, auditing interfaces against Nielsen's 10 Heuristics, optimizing form UX and error handling, reducing cognitive load, or improving onboarding and empty states.",
@@ -1748,6 +1775,28 @@ const EMBEDDED_DATA = {
         "rollback-plan"
       ],
       "path": "workflows/deploy.md"
+    },
+    {
+      "id": "design-system",
+      "name": "/design-system",
+      "slug": "design-system",
+      "description": "Tạo tài liệu đặc tả Design System hoàn chỉnh (phong cách, bảng màu, font chữ, layout và checklist) bằng engine định lượng UI/UX Pro Max.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "ui-ux-designer"
+        ],
+        "skills": [
+          "ui-ux-pro-max",
+          "ui-ux-design-system",
+          "design-spec"
+        ]
+      },
+      "artifactOutputs": [
+        "DESIGN.md",
+        "design-system-spec"
+      ],
+      "path": "workflows/design-system.md"
     },
     {
       "id": "enhance",
@@ -2564,35 +2613,61 @@ if (document.readyState === 'loading') {
 
 async function initData() {
   try {
-    const res = await fetch('manifest.json?v=20261017');
+    const res = await fetch('manifest.json?v=20261018.' + Date.now());
     if (res.ok) {
       const liveData = await res.json();
-      state.data.manifest = liveData;
-      console.log('Successfully loaded live manifest data.');
+      if (liveData && (Array.isArray(liveData.skills) || typeof liveData.skills === 'object')) {
+        state.data.manifest = liveData;
+        console.log('Successfully loaded live manifest data.');
+      }
     }
   } catch (err) {
     console.info('Using embedded fallback manifest data (standalone mode).');
   }
 
-  // Flatten catalog items
   const m = state.data.manifest;
-  state.catalog.items = [
-    ...(m.agents || []).map(a => ({ ...a, kind: 'agent' })),
-    ...(m.skills || []).map(s => ({ ...s, kind: 'skill' })),
-    ...(m.workflows || []).map(w => ({ ...w, kind: 'workflow' })),
-    ...(m.rules || []).map(r => ({ ...r, kind: 'rule' }))
-  ];
+  const toArray = (items, kind) => {
+    if (Array.isArray(items)) return items.map(item => ({ ...item, kind }));
+    if (items && typeof items === 'object') {
+      return Object.entries(items).map(([id, item]) => ({
+        id,
+        name: item.name || id,
+        ...item,
+        kind
+      }));
+    }
+    return [];
+  };
 
-  // Update hero stats
+  const agents = toArray(m.agents, 'agent');
+  const skills = toArray(m.skills, 'skill');
+  const workflows = toArray(m.workflows, 'workflow');
+  const rules = toArray(m.rules, 'rule');
+
+  state.catalog.items = [...agents, ...skills, ...workflows, ...rules];
+
+  // Update hero stats & counters
   const statAgents = document.getElementById('stat-agents');
   const statSkills = document.getElementById('stat-skills');
   const statWorkflows = document.getElementById('stat-workflows');
   const statRules = document.getElementById('stat-rules');
 
-  if (statAgents) statAgents.textContent = (m.agents || []).length;
-  if (statSkills) statSkills.textContent = (m.skills || []).length;
-  if (statWorkflows) statWorkflows.textContent = (m.workflows || []).length;
-  if (statRules) statRules.textContent = (m.rules || []).length;
+  if (statAgents) statAgents.textContent = agents.length;
+  if (statSkills) statSkills.textContent = skills.length;
+  if (statWorkflows) statWorkflows.textContent = workflows.length;
+  if (statRules) statRules.textContent = rules.length;
+
+  const badgeAll = document.getElementById('badge-count-all');
+  const badgeAgents = document.getElementById('badge-count-agents');
+  const badgeSkills = document.getElementById('badge-count-skills');
+  const badgeWorkflows = document.getElementById('badge-count-workflows');
+  const badgeRules = document.getElementById('badge-count-rules');
+
+  if (badgeAll) badgeAll.textContent = state.catalog.items.length;
+  if (badgeAgents) badgeAgents.textContent = agents.length;
+  if (badgeSkills) badgeSkills.textContent = skills.length;
+  if (badgeWorkflows) badgeWorkflows.textContent = workflows.length;
+  if (badgeRules) badgeRules.textContent = rules.length;
 }
 
 // Navigation Tabs

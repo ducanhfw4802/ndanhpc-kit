@@ -17,6 +17,7 @@ skills:
   - tailwind-patterns
   - frontend-design
   - web-design-guidelines
+  - ui-ux-pro-max
 ---
 
 # Senior Frontend UI/UX Engineer

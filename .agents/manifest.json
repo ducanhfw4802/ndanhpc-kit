@@ -159,6 +159,7 @@
           "lint-and-validate": "^1.0.0",
           "nextjs-react-expert": "^1.0.0",
           "tailwind-patterns": "^1.0.0",
+          "ui-ux-pro-max": "^2.15.0",
           "web-design-guidelines": "^1.0.0"
         }
       },
@@ -181,6 +182,7 @@
           "frontend-design": "^1.0.0",
           "responsive-web-design": "^1.0.0",
           "tailwind-patterns": "^1.0.0",
+          "ui-ux-pro-max": "^2.15.0",
           "web-design-guidelines": "^1.0.0"
         }
       },
@@ -484,6 +486,7 @@
           "frontend-design": "^1.0.0",
           "mobile-design": "^1.0.0",
           "ui-ux-design-system": "^1.0.0",
+          "ui-ux-pro-max": "^2.15.0",
           "ux-audit-and-heuristics": "^1.0.0"
         }
       },
@@ -502,6 +505,7 @@
       "requires": {
         "skills": {
           "ui-ux-design-system": "^1.0.0",
+          "ui-ux-pro-max": "^2.15.0",
           "ux-audit-and-heuristics": "^1.0.0",
           "web-design-guidelines": "^1.0.0"
         }
@@ -1311,6 +1315,25 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "ui-ux-pro-max": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/ui-ux-pro-max/SKILL.md",
+      "scripts": [
+        "skills/ui-ux-pro-max/scripts/core.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py",
+        "skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+        "skills/ui-ux-pro-max/scripts/search.py",
+        "skills/ui-ux-pro-max/scripts/validate_data.py"
+      ],
+      "version": "2.15.0"
+    },
     "ux-audit-and-heuristics": {
       "allowedTools": [
         "Read",
@@ -1505,6 +1528,24 @@
         "skills": [
           "deployment-procedures",
           "verify-changes"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "design-system": {
+      "artifactOutputs": [
+        "DESIGN.md",
+        "design-system-spec"
+      ],
+      "path": "workflows/design-system.md",
+      "requires": {
+        "agents": [
+          "ui-ux-designer"
+        ],
+        "skills": [
+          "ui-ux-pro-max",
+          "ui-ux-design-system",
+          "design-spec"
         ]
       },
       "version": "1.0.0"

@@ -14,6 +14,11 @@
 - **GitHub Actions Auto-Publish Workflow (`.github/workflows/publish-npm.yml`)**:
   - Tự động đóng gói và xuất bản package lên NPM Registry qua GitHub Action.
   - Bổ sung lệnh `npm run release:npm` phục vụ phát hành nhanh.
+- **Tích Hợp UI/UX Pro Max Design Intelligence (v2.15.0)**:
+  - Bổ sung skill `ui-ux-pro-max` nâng tổng số skill lên **62 Modular Skills**.
+  - Tích hợp kho tri thức thiết kế định lượng: 79 UI styles, 192 color palettes (Hex tokens), 74 font pairings (Google Fonts), 119 UX guidelines, 25 chart types và 22 tech stacks.
+  - Bổ sung workflow `/design-system` (`.agents/workflows/design-system.md`) nâng tổng số workflow lên **30 Workflows**.
+  - Nâng cấp năng lực thiết kế định lượng cho 4 specialist agents: `ui-ux-designer`, `frontend-ui-developer`, `frontend-specialist`, và `ux-accessibility-reviewer`.
 
 ### Changed
 - **Nâng Cấp Terminal CLI (`ndanhpc_cli.py`)**:

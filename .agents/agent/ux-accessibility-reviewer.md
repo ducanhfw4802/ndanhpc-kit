@@ -15,6 +15,7 @@ skills:
   - ux-audit-and-heuristics
   - web-design-guidelines
   - ui-ux-design-system
+  - ui-ux-pro-max
 ---
 
 # UX & Accessibility (a11y) Reviewer

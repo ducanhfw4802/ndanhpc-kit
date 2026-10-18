@@ -3,8 +3,8 @@
   "schemaVersion": "1.0.0",
   "counts": {
     "agents": 24,
-    "skills": 61,
-    "workflows": 29,
+    "skills": 62,
+    "workflows": 30,
     "rules": 7
   },
   "agents": [
@@ -198,7 +198,8 @@
         "lint-and-validate",
         "nextjs-react-expert",
         "tailwind-patterns",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/frontend-specialist.md",
       "category": "Frontend & Design"
@@ -222,7 +223,8 @@
         "frontend-design",
         "responsive-web-design",
         "tailwind-patterns",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/frontend-ui-developer.md",
       "category": "Frontend & Design"
@@ -567,7 +569,8 @@
         "frontend-design",
         "mobile-design",
         "ui-ux-design-system",
-        "ux-audit-and-heuristics"
+        "ux-audit-and-heuristics",
+        "ui-ux-pro-max"
       ],
       "path": "agent/ui-ux-designer.md",
       "category": "Frontend & Design"
@@ -589,7 +592,8 @@
       "skills": [
         "ui-ux-design-system",
         "ux-audit-and-heuristics",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "ui-ux-pro-max"
       ],
       "path": "agent/ux-accessibility-reviewer.md",
       "category": "Frontend & Design"
@@ -1509,6 +1513,29 @@
       "category": "Frontend & UI"
     },
     {
+      "id": "ui-ux-pro-max",
+      "name": "ui-ux-pro-max",
+      "description": "AI-powered UI/UX design intelligence with 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types, and automated design system generator across 22 tech stacks.",
+      "version": "2.15.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/ui-ux-pro-max/scripts/core.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py",
+        "skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+        "skills/ui-ux-pro-max/scripts/search.py",
+        "skills/ui-ux-pro-max/scripts/validate_data.py"
+      ],
+      "path": "skills/ui-ux-pro-max/SKILL.md",
+      "category": "Frontend & Design"
+    },
+    {
       "id": "ux-audit-and-heuristics",
       "name": "ux-audit-and-heuristics",
       "description": "UX evaluation, usability heuristics audit, cognitive load reduction, and conversion rate optimization (CRO) for web and mobile apps. Use when conducting UX reviews, auditing interfaces against Nielsen's 10 Heuristics, optimizing form UX and error handling, reducing cognitive load, or improving onboarding and empty states.",
@@ -1742,6 +1769,28 @@
         "rollback-plan"
       ],
       "path": "workflows/deploy.md"
+    },
+    {
+      "id": "design-system",
+      "name": "/design-system",
+      "slug": "design-system",
+      "description": "Tạo tài liệu đặc tả Design System hoàn chỉnh (phong cách, bảng màu, font chữ, layout và checklist) bằng engine định lượng UI/UX Pro Max.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "ui-ux-designer"
+        ],
+        "skills": [
+          "ui-ux-pro-max",
+          "ui-ux-design-system",
+          "design-spec"
+        ]
+      },
+      "artifactOutputs": [
+        "DESIGN.md",
+        "design-system-spec"
+      ],
+      "path": "workflows/design-system.md"
     },
     {
       "id": "enhance",
