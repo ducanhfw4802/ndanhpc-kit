@@ -1,14 +1,23 @@
-# NDANHPC Kit 🚀
+<p align="center">
+  <a href="https://github.com/ducanhfw4802/ndanhpc-kit">
+    <img src="assets/banner.svg" alt="NDANHPC Kit Official Hero Banner" width="100%">
+  </a>
+</p>
 
-> **Antigravity-native AI Agent Capability Toolkit**
-> Hệ sinh thái đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.
+<p align="center">
+  <img src="assets/logo.svg" alt="NDANHPC Kit Logo" width="56" height="56">
+  <br>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square" alt="Version"></a>
+  <a href=".agents/antigravity.json"><img src="https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square" alt="Runtime"></a>
+  <a href="#-24-specialist-agents"><img src="https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square" alt="Agents"></a>
+  <a href="#-62-modular-skills"><img src="https://img.shields.io/badge/skills-62%20Modular-orange.svg?style=flat-square" alt="Skills"></a>
+  <a href="#-30-workflows--slash-commands"><img src="https://img.shields.io/badge/workflows-30%20Slash%20Cmds-cyan.svg?style=flat-square" alt="Workflows"></a>
+  <a href=".agents/manifest.lock.json"><img src="https://img.shields.io/badge/integrity-SHA--256%20Locked-green.svg?style=flat-square" alt="Integrity"></a>
+</p>
 
-[![Version](https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square)](CHANGELOG.md)
-[![Runtime](https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square)](.agents/antigravity.json)
-[![Agents](https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square)](#-24-specialist-agents)
-[![Skills](https://img.shields.io/badge/skills-62%20Modular-orange.svg?style=flat-square)](#-62-modular-skills)
-[![Workflows](https://img.shields.io/badge/workflows-30%20Slash%20Cmds-cyan.svg?style=flat-square)](#-30-workflows--slash-commands)
-[![Integrity](https://img.shields.io/badge/integrity-SHA--256%20Locked-green.svg?style=flat-square)](.agents/manifest.lock.json)
+<p align="center">
+  <b>Hệ sinh thái 123 thành phần đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.</b>
+</p>
 
 ---
 
@@ -228,6 +237,18 @@ Chi tiết toàn bộ thay đổi qua từng phiên bản được ghi nhận t�
 * **[v2026.10.17](CHANGELOG.md#20261017---cloudflare-light-theme--ui-modernization-release)**: Ra mắt giao diện Cloudflare Light Theme, tối ưu hóa responsive toàn diện (mobile/tablet/desktop), nâng cấp Web Portal và đồng bộ phiên bản toàn hệ sinh thái.
 * **[v2026.10.13](CHANGELOG.md#20261013---qa--test-automation-supercharge-release)**: Hợp nhất toàn diện Antigravity Testing Kit (10 QA Skills, 16 Workflows, QA Rules, Self-contained structure, Web Portal 121 components).
 * **[v2026.10.10](CHANGELOG.md#20261010---ndanhpc-kit-official-release)**: Phiên bản chính thức đầu tiên ra mắt Interactive Web Portal, Terminal TUI CLI, 24 Agents, 51 Skills và Native PreToolUse Hooks.
+
+---
+
+## 🎨 Bộ Nhận Diện Thương Hiệu (Brand Identity & Assets)
+
+NDANHPC Kit tích hợp trọn bộ tài nguyên đồ họa vector SVG và hình ảnh độ nét cao được tối ưu hóa cho cả Dark & Light Mode:
+
+| Tài Nguyên | Định Dạng | Mô Tả | Đường Dẫn |
+| :--- | :--- | :--- | :--- |
+| **Official Logo** | SVG Vector (512x512) | Biểu tượng Antigravity Core & Agent Constellation đa chiều | [`assets/logo.svg`](assets/logo.svg) |
+| **Hero Banner (Vector)** | SVG Vector (1280x420) | Banner kỹ thuật sắc nét chuẩn responsive cho GitHub & Web Portal | [`assets/banner.svg`](assets/banner.svg) |
+| **Cinematic Banner (HD)** | PNG (16:9 / 1280x640) | Hình ảnh phân giải cao cho Social Card, OpenGraph & Media Preview | [`assets/banner.png`](assets/banner.png) |
 
 ---
 

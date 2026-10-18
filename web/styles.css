@@ -118,10 +118,16 @@ body {
   width: 42px;
   height: 42px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #F6821F, #EB6709);
-  box-shadow: 0 2px 10px rgba(246, 130, 31, 0.35);
-  color: #FFFFFF;
+  background: transparent;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.brand-logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-info {
@@ -310,6 +316,32 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Visual Card */
+.hero-visual-card {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  background: #060911;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-visual-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(246, 130, 31, 0.15);
+}
+
+.hero-banner-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 420;
+  object-fit: cover;
 }
 
 /* =========================================================
