@@ -8,12 +8,41 @@ const EMBEDDED_DATA = {
   "kitVersion": "2026.10.18",
   "schemaVersion": "1.0.0",
   "counts": {
-    "agents": 24,
-    "skills": 64,
-    "workflows": 30,
+    "agents": 25,
+    "skills": 67,
+    "workflows": 32,
     "rules": 7
   },
   "agents": [
+    {
+      "id": "ai-engineer",
+      "name": "ai-engineer",
+      "title": "AI & LLM Systems Engineer",
+      "description": "Specialist AI & LLM engineer for architecting GenAI pipelines, RAG systems, vector embeddings, function calling, agentic workflows, prompt evaluation, and model integration (OpenAI, Gemini, Anthropic, local Ollama). Triggers on ai, llm, rag, embeddings, vector, prompt, langchain, llamaindex, agent, openai, gemini.",
+      "version": "1.0.0",
+      "model": "inherit",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Edit",
+        "Write"
+      ],
+      "skills": [
+        "ai-rag-patterns",
+        "api-patterns",
+        "bash-linux",
+        "clean-code",
+        "database-design",
+        "lint-and-validate",
+        "mcp-builder",
+        "powershell-windows",
+        "python-patterns"
+      ],
+      "path": "agent/ai-engineer.md",
+      "category": "Backend & Data"
+    },
     {
       "id": "backend-specialist",
       "name": "backend-specialist",
@@ -609,6 +638,25 @@ const EMBEDDED_DATA = {
   ],
   "skills": [
     {
+      "id": "ai-rag-patterns",
+      "name": "ai-rag-patterns",
+      "description": "Production-grade Retrieval-Augmented Generation (RAG) & LLM engineering patterns. Vector search (pgvector, Pinecone, Qdrant), semantic chunking, hybrid search (BM25 + Dense), reranking, prompt routing, and evaluation.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/ai-rag-patterns/scripts/rag_validator.py"
+      ],
+      "path": "skills/ai-rag-patterns/SKILL.md",
+      "category": "Backend & API"
+    },
+    {
       "id": "api-patterns",
       "name": "api-patterns",
       "description": "API design principles and decision-making. REST vs GraphQL vs tRPC selection, response formats, versioning, pagination.",
@@ -843,6 +891,25 @@ const EMBEDDED_DATA = {
       "scripts": [],
       "path": "skills/design-spec/SKILL.md",
       "category": "Frontend & UI"
+    },
+    {
+      "id": "docker-k8s-patterns",
+      "name": "docker-k8s-patterns",
+      "description": "Production-grade containerization & orchestration patterns. Multi-stage Dockerfiles, distroless images, Docker Compose for local/production, Kubernetes Deployments, Services, Ingress, ConfigMaps, Secrets, HPA, and health probes.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/docker-k8s-patterns/scripts/docker_k8s_validator.py"
+      ],
+      "path": "skills/docker-k8s-patterns/SKILL.md",
+      "category": "Cloud & Infrastructure"
     },
     {
       "id": "documentation-templates",
@@ -1647,6 +1714,25 @@ const EMBEDDED_DATA = {
       "category": "Frontend & UI"
     },
     {
+      "id": "web-scraping-patterns",
+      "name": "web-scraping-patterns",
+      "description": "Production-grade web scraping, crawling, and anti-bot evasion. Headless browser automation (Playwright/Puppeteer), fingerprint spoofing, proxy rotation, rate limiting, HTML parsing with BeautifulSoup/Cheerio, and structured data extraction.",
+      "version": "1.0.0",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "scripts": [
+        "skills/web-scraping-patterns/scripts/scraping_validator.py"
+      ],
+      "path": "skills/web-scraping-patterns/SKILL.md",
+      "category": "Other"
+    },
+    {
       "id": "webapp-testing",
       "name": "webapp-testing",
       "description": "Web application testing principles. E2E, Playwright, deep audit strategies.",
@@ -2220,6 +2306,47 @@ const EMBEDDED_DATA = {
         "memory-entry"
       ],
       "path": "workflows/remember.md"
+    },
+    {
+      "id": "scaffold-agent",
+      "name": "/scaffold-agent",
+      "slug": "scaffold-agent",
+      "description": "Scaffold a new specialist AI agent for the NDANHPC Kit with compliant frontmatter, tools, philosophy, Socratic gate, and auto-registration.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "orchestrator"
+        ],
+        "skills": [
+          "clean-code",
+          "lint-and-validate"
+        ]
+      },
+      "artifactOutputs": [
+        "agent-definition"
+      ],
+      "path": "workflows/scaffold-agent.md"
+    },
+    {
+      "id": "scaffold-skill",
+      "name": "/scaffold-skill",
+      "slug": "scaffold-skill",
+      "description": "Scaffold a new modular skill with compliant frontmatter, when_to_use triggers, allowed-tools, optional validation script, and manifest synchronization.",
+      "version": "1.0.0",
+      "requires": {
+        "agents": [
+          "orchestrator"
+        ],
+        "skills": [
+          "clean-code",
+          "lint-and-validate",
+          "skillify"
+        ]
+      },
+      "artifactOutputs": [
+        "skill-definition"
+      ],
+      "path": "workflows/scaffold-skill.md"
     },
     {
       "id": "status",

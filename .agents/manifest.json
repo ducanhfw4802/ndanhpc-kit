@@ -1,6 +1,32 @@
 {
   "$schema": "schemas/manifest.schema.json",
   "agents": {
+    "ai-engineer": {
+      "model": "inherit",
+      "path": "agent/ai-engineer.md",
+      "requires": {
+        "skills": {
+          "ai-rag-patterns": "^1.0.0",
+          "api-patterns": "^1.0.0",
+          "bash-linux": "^1.0.0",
+          "clean-code": "^2.0.0",
+          "database-design": "^1.0.0",
+          "lint-and-validate": "^1.0.0",
+          "mcp-builder": "^1.0.0",
+          "powershell-windows": "^1.0.0",
+          "python-patterns": "^1.0.0"
+        }
+      },
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Edit",
+        "Write"
+      ],
+      "version": "1.0.0"
+    },
     "backend-specialist": {
       "model": "inherit",
       "path": "agent/backend-specialist.md",
@@ -629,6 +655,21 @@
   },
   "schemaVersion": "1.0.0",
   "skills": {
+    "ai-rag-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/ai-rag-patterns/SKILL.md",
+      "scripts": [
+        "skills/ai-rag-patterns/scripts/rag_validator.py"
+      ],
+      "version": "1.0.0"
+    },
     "api-patterns": {
       "allowedTools": [
         "Read",
@@ -803,6 +844,21 @@
       ],
       "path": "skills/design-spec/SKILL.md",
       "scripts": [],
+      "version": "1.0.0"
+    },
+    "docker-k8s-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/docker-k8s-patterns/SKILL.md",
+      "scripts": [
+        "skills/docker-k8s-patterns/scripts/docker_k8s_validator.py"
+      ],
       "version": "1.0.0"
     },
     "documentation-templates": {
@@ -1415,6 +1471,21 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "web-scraping-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/web-scraping-patterns/SKILL.md",
+      "scripts": [
+        "skills/web-scraping-patterns/scripts/scraping_validator.py"
+      ],
+      "version": "1.0.0"
+    },
     "webapp-testing": {
       "allowedTools": [
         "Read",
@@ -1885,6 +1956,39 @@
         ],
         "skills": [
           "memory-system"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "scaffold-agent": {
+      "artifactOutputs": [
+        "agent-definition"
+      ],
+      "path": "workflows/scaffold-agent.md",
+      "requires": {
+        "agents": [
+          "orchestrator"
+        ],
+        "skills": [
+          "clean-code",
+          "lint-and-validate"
+        ]
+      },
+      "version": "1.0.0"
+    },
+    "scaffold-skill": {
+      "artifactOutputs": [
+        "skill-definition"
+      ],
+      "path": "workflows/scaffold-skill.md",
+      "requires": {
+        "agents": [
+          "orchestrator"
+        ],
+        "skills": [
+          "clean-code",
+          "lint-and-validate",
+          "skillify"
         ]
       },
       "version": "1.0.0"

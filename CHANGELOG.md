@@ -14,10 +14,22 @@
 - **GitHub Actions Auto-Publish Workflow (`.github/workflows/publish-npm.yml`)**:
   - Tự động đóng gói và xuất bản package lên NPM Registry qua GitHub Action.
   - Bổ sung lệnh `npm run release:npm` phục vụ phát hành nhanh.
+- **Mở Rộng Hệ Sinh Thái AI Engineering, DevOps, Web Scraping & Component Scaffolding**:
+  - Bổ sung Specialist Agent mới: `ai-engineer` (`.agents/agent/ai-engineer.md`) nâng tổng số lên **25 Specialist Agents**, chuyên trách GenAI, RAG, phát triển ứng dụng LLM, Vector Databases, Prompt Engineering, Structured Outputs và AI Orchestration.
+  - Bổ sung 3 Domain Skills mới nâng tổng số lên **67 Modular Skills**:
+    - `ai-rag-patterns`: Kiến trúc RAG production, pgvector / Qdrant / Pinecone, contextual chunking, Hybrid Search (Dense + Sparse BM25 / SPLADE), Reciprocal Rank Fusion (RRF), Cross-Encoder Reranking, và RAG Triad Evaluation (Context Relevance, Groundedness, Answer Relevance). Kèm validator thực thi `rag_validator.py`.
+    - `docker-k8s-patterns`: Dockerfile đa tầng (multi-stage), non-root user, Docker Compose healthchecks/networks, Kubernetes manifests (Deployments, Services, Ingress, ConfigMap/Secret, Liveness/Readiness probes, Resource requests/limits, HPA). Kèm validator thực thi `docker_k8s_validator.py`.
+    - `web-scraping-patterns`: Playwright Stealth, Chrome DevTools Protocol (CDP), evasion chống bot (Cloudflare, Akamai), proxy rotation, jitter rate limiting, phân tích DOM siêu tốc (Selectolax / BeautifulSoup / Scrapy), tuân thủ robots.txt. Kèm validator thực thi `scraping_validator.py`.
+  - Nâng tổng số executable skill scripts lên **28 scripts**.
+  - Bổ sung 2 Slash Workflows mới nâng tổng số lên **32 Workflows**:
+    - `/scaffold-agent` (`.agents/workflows/scaffold-agent.md`): Quy trình tạo Specialist Agent mới chuẩn hoá frontmatter SemVer, persona, checklist, Socratic gate và auto-sync manifest.
+    - `/scaffold-skill` (`.agents/workflows/scaffold-skill.md`): Quy trình tạo Modular Skill mới kèm script validator tự động, `when_to_use` trigger và auto-sync manifest.
+  - Bổ sung công cụ dòng lệnh Scaffolding `.agents/scripts/scaffold_component.py` (hỗ trợ các lệnh con `agent`, `skill`, `workflow` và cờ `--no-sync`).
+  - Nâng tổng số thành phần hệ thống lên **131 Components** (25 Agents, 67 Skills, 32 Workflows, 7 Rules).
 - **Mở Rộng Năng Lực Backend Toàn Diện (Golang 1.22+, PHP 8.2+/Laravel 11+, gRPC, Event-Driven Architecture)**:
-  - Bổ sung skill `golang-patterns` và `php-patterns` nâng tổng số skill lên **64 Modular Skills** (tổng **125 thành phần hệ thống**).
+  - Bổ sung skill `golang-patterns` và `php-patterns`.
   - Tích hợp tài liệu chuyên sâu PHP & Laravel: Strict types (`declare(strict_types=1);`), Readonly classes, Match, Enums, Single-Action Controllers, Action/Service layers, Eloquent N+1 prevention (`preventLazyLoading`), Form Requests, Pest PHP / PHPUnit testing, và API defense.
-  - Bộ kiểm định tĩnh `php_patterns_validator.py` (nâng tổng số lên **25 skill scripts**) tự động phát hiện thiếu strict types, SQL injection trong raw query (`whereRaw`, `DB::raw`), empty catch blocks, và mass assignment không an toàn.
+  - Bộ kiểm định tĩnh `php_patterns_validator.py` tự động phát hiện thiếu strict types, SQL injection trong raw query (`whereRaw`, `DB::raw`), empty catch blocks, và mass assignment không an toàn.
   - Tích hợp tài liệu chuyên sâu Go: Idiomatic Go 1.22+, concurrency với Goroutines/errgroup/Worker Pools, chuẩn net/http & Chi/Gin/Fiber, pgx v5/sqlc, error handling (`errors.Is`/`errors.As`), memory leak prevention.
   - Bộ kiểm định tĩnh `go_patterns_validator.py` tự động phát hiện goroutine leaks, unclosed `resp.Body`, SQL injection và ignored errors.
   - Mở rộng kỹ năng `api-patterns`:
@@ -27,18 +39,18 @@
 - **Tích Hợp UI/UX Pro Max Design Intelligence (v2.15.0)**:
   - Bổ sung skill `ui-ux-pro-max`.
   - Tích hợp kho tri thức thiết kế định lượng: 79 UI styles, 192 color palettes (Hex tokens), 74 font pairings (Google Fonts), 119 UX guidelines, 25 chart types và 22 tech stacks.
-  - Bổ sung workflow `/design-system` (`.agents/workflows/design-system.md`) nâng tổng số workflow lên **30 Workflows**.
+  - Bổ sung workflow `/design-system` (`.agents/workflows/design-system.md`).
   - Nâng cấp năng lực thiết kế định lượng cho 4 specialist agents: `ui-ux-designer`, `frontend-ui-developer`, `frontend-specialist`, và `ux-accessibility-reviewer`.
 
 ### Changed
 - **Đồng Bộ Dữ Liệu Web Portal & Chống Crash Khởi Tạo (`web/app.js`, `web/manifest.json`)**:
   - Khôi phục cấu trúc array danh mục và bổ sung cơ chế chuẩn hóa dữ liệu tự động (data normalization) trong `initData()` của `web/app.js`, xử lý an toàn cả định dạng array lẫn object tránh lỗi TypeError khởi động.
-  - Cập nhật số liệu dynamic cho toàn bộ huy hiệu bộ lọc (Tất cả: 125, Agents: 24, Skills: 64, Workflows: 30, Rules: 7) và hero stats real-time.
-  - Tích hợp chuỗi cache-busting `?v=20261018.5` cho `styles.css` và `app.js` bảo đảm tải ngay bản mới nhất.
+  - Cập nhật số liệu dynamic cho toàn bộ huy hiệu bộ lọc (Tất cả: 131, Agents: 25, Skills: 67, Workflows: 32, Rules: 7) và hero stats real-time.
+  - Tích hợp chuỗi cache-busting `?v=20261018.6` cho `styles.css` và `app.js` bảo đảm tải ngay bản mới nhất.
 - **Nâng Cấp Terminal CLI (`ndanhpc_cli.py`)**:
   - Bổ sung menu item `[12]` (Cập nhật Kit) và `[13]` (Gỡ bỏ Kit).
   - Bổ sung tham số dòng lệnh `--update` và `--uninstall`.
-  - Phân loại kỹ năng `golang-patterns` và `php-patterns` vào nhóm Backend & Architecture, `ui-ux-pro-max` vào nhóm Frontend & Design, workflow `/design-system` vào Core Workflows và đồng bộ 125 thành phần trên menu TUI và overview.
+  - Phân loại kỹ năng `ai-rag-patterns`, `golang-patterns`, `php-patterns` vào Backend & Architecture, `docker-k8s-patterns`, `web-scraping-patterns` vào System & Tooling, `ui-ux-pro-max` vào Frontend & Design, workflow `/scaffold-agent`, `/scaffold-skill`, `/design-system` vào Core Workflows và đồng bộ 131 thành phần trên menu TUI và overview.
 - **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**:
   - Nâng cấp đồng bộ `2026.10.18` trên `.agents/VERSION`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `web/manifest.json`, `web/data/manifest.json`, `web/app.js`, `web/index.html`, và `.agents/ARCHITECTURE.md`.
 

@@ -8,9 +8,9 @@
 
 NDANHPC Kit is a modular, independent Antigravity workspace system consisting of:
 
-- **24 Specialist Agents** — role-based AI personas and orchestration roles;
-- **64 Skills** — domain knowledge modules with progressive conditional loading;
-- **30 Workflows** — slash-command procedures;
+- **25 Specialist Agents** — role-based AI personas and orchestration roles;
+- **67 Skills** — domain knowledge modules with progressive conditional loading;
+- **32 Workflows** — slash-command procedures;
 - **7 Rules** — workspace routing, coding, design, safety, QA, and quick-reference constraints;
 - **Antigravity runtime layer** — contract, native hook, MCP helper, plugin builder, Doctor, schemas, and tests.
 
@@ -93,12 +93,13 @@ The Antigravity runtime files are included in the managed integrity lock beginni
 
 ---
 
-## 🤖 Agents (24)
+## 🤖 Agents (25)
 
 Specialist AI personas for different domains.
 
 | Agent                    | Focus                      | Skills Used                                              |
 | ------------------------ | -------------------------- | -------------------------------------------------------- |
+| `ai-engineer`            | GenAI, RAG, LLM Apps       | ai-rag-patterns, python-patterns, api-patterns, database-design |
 | `orchestrator`           | Multi-agent coordination   | parallel-agents, coordinator-mode, memory-system, context-compression, verify-changes |
 | `project-planner`        | Discovery, task planning   | brainstorming, plan-writing, architecture                |
 | `frontend-specialist`    | Web UI/UX                  | frontend-design, nextjs-react-expert, tailwind-patterns |
@@ -146,6 +147,7 @@ Modular knowledge domains that agents can load on-demand based on task context. 
 | Skill                   | Description                    |
 | ----------------------- | ------------------------------ |
 | `api-patterns`          | REST, GraphQL, tRPC            |
+| `ai-rag-patterns`       | RAG, Vector Search, Embeddings, Hybrid Search, Evaluation |
 | `golang-patterns`       | Go 1.22+ patterns, concurrency, net/http & Chi, error handling, pgx |
 | `nodejs-best-practices` | Node.js async, modules         |
 | `php-patterns`          | PHP 8.2+, Laravel 11+, Eloquent N+1 prevention, Pest |
@@ -163,6 +165,7 @@ Modular knowledge domains that agents can load on-demand based on task context. 
 | Skill                   | Description               |
 | ----------------------- | ------------------------- |
 | `deployment-procedures` | CI/CD, deploy workflows   |
+| `docker-k8s-patterns`   | Multi-stage Dockerfiles, Docker Compose, Kubernetes manifests |
 | `server-management`     | Infrastructure management |
 
 ### Testing & Quality
@@ -242,6 +245,7 @@ Modular knowledge domains that agents can load on-demand based on task context. 
 | `i18n-localization`       | Internationalization      |
 | `performance-profiling`   | Web Vitals, optimization  |
 | `systematic-debugging`    | Troubleshooting           |
+| `web-scraping-patterns`   | Playwright stealth, Anti-bot evasion, Proxies, BeautifulSoup |
 | `intelligent-routing`     | Request → agent routing   |
 
 ---
@@ -262,6 +266,8 @@ Slash command procedures. Invoke with `/command`.
 | `/plan`          | Task breakdown                                 |
 | `/preview`       | Preview changes                                |
 | `/remember`      | **NEW** Save to persistent memory              |
+| `/scaffold-agent`| **NEW** Scaffold a new specialist agent        |
+| `/scaffold-skill`| **NEW** Scaffold a new modular skill           |
 | `/status`        | Check project status                           |
 | `/test`          | Run tests                                      |
 | `/verify`        | **NEW** Prove code works by running it         |
@@ -372,12 +378,12 @@ For command details and prerequisites, see [scripts/README.md](scripts/README.md
 
 | Metric              | Value                             |
 | ------------------- | --------------------------------- |
-| **Total Agents**    | 24 (1 major upgrade in 2026.5.13) |
-| **Total Skills**    | 64                                |
-| **Total Workflows** | 30          |
+| **Total Agents**    | 25                                |
+| **Total Skills**    | 67                                |
+| **Total Workflows** | 32          |
 | **Toolkit Utilities** | 7 user-facing + 2 internal modules |
 | **Antigravity Utilities** | 4 runtime utilities              |
-| **Total Skill Scripts** | 25                              |
+| **Total Skill Scripts** | 28                              |
 | **Coverage**        | Web, API, mobile, security, quality, runtime, orchestration |
 | **Token Efficiency**| Reduced via conditional skill loading |
 

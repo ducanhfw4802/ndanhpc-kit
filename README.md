@@ -9,27 +9,30 @@
   <br>
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2026.10.18-blue.svg?style=flat-square" alt="Version"></a>
   <a href=".agents/antigravity.json"><img src="https://img.shields.io/badge/runtime-Google%20Antigravity-purple.svg?style=flat-square" alt="Runtime"></a>
-  <a href="#-24-specialist-agents"><img src="https://img.shields.io/badge/agents-24%20Specialists-emerald.svg?style=flat-square" alt="Agents"></a>
-  <a href="#-64-modular-skills"><img src="https://img.shields.io/badge/skills-64%20Modular-orange.svg?style=flat-square" alt="Skills"></a>
-  <a href="#-30-workflows--slash-commands"><img src="https://img.shields.io/badge/workflows-30%20Slash%20Cmds-cyan.svg?style=flat-square" alt="Workflows"></a>
+  <a href="#-25-specialist-agents"><img src="https://img.shields.io/badge/agents-25%20Specialists-emerald.svg?style=flat-square" alt="Agents"></a>
+  <a href="#-67-modular-skills"><img src="https://img.shields.io/badge/skills-67%20Modular-orange.svg?style=flat-square" alt="Skills"></a>
+  <a href="#-32-workflows--slash-commands"><img src="https://img.shields.io/badge/workflows-32%20Slash%20Cmds-cyan.svg?style=flat-square" alt="Workflows"></a>
   <a href=".agents/manifest.lock.json"><img src="https://img.shields.io/badge/integrity-SHA--256%20Locked-green.svg?style=flat-square" alt="Integrity"></a>
 </p>
 
 <p align="center">
-  <b>Hệ sinh thái 125 thành phần đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.</b>
+  <b>Hệ sinh thái 131 thành phần đa tác nhân (Multi-Agent) chuyên sâu, thông minh và an toàn dành riêng cho Google Antigravity.</b>
 </p>
 
 ---
 
-## 🌟 Mới Nhất: Release v2026.10.18 (Remote npx/npm CLI, Unified Installer & UI/UX Pro Max)
+## 🌟 Mới Nhất: Release v2026.10.18 (AI Engineering, Component Scaffolders, Remote npx CLI & UI/UX Pro Max)
 
-Bản phát hành **v2026.10.18** nâng cấp đột phá trải nghiệm triển khai từ xa và tích hợp kho tri thức thiết kế giao diện định lượng:
+Bản phát hành **v2026.10.18** nâng cấp đột phá trải nghiệm triển khai từ xa, tích hợp Agent chuyên sâu AI Engineering, 3 Modular Skills mới, công cụ tự động tạo component và kho tri thức thiết kế định lượng:
 
+- 🤖 **Agent Chuyên Biệt `ai-engineer` & Kỹ Năng `ai-rag-patterns`**: Bổ sung Specialist Agent thứ 25 (`ai-engineer.md`) cùng kỹ năng RAG chuyên sâu (pgvector, Qdrant, Pinecone, Hybrid Search, RRF, RAG Triad Evaluation và script `rag_validator.py`).
+- 🐳 **DevOps & Thu Thập Dữ Liệu (`docker-k8s-patterns`, `web-scraping-patterns`)**: Mở rộng năng lực container hóa Docker/K8s chuẩn production (kèm `docker_k8s_validator.py`) và kỹ thuật cào dữ liệu Playwright stealth/anti-bot/proxy (kèm `scraping_validator.py`), nâng tổng số lên **67 Modular Skills** và **28 Skill Scripts**.
+- 🛠️ **Bộ Công Cụ Tạo Component Tự Động (`/scaffold-agent`, `/scaffold-skill`, `scaffold_component.py`)**: Hỗ trợ khởi tạo nhanh Agent và Skill với metadata SemVer, template chuyên nghiệp và tự động đồng bộ hóa manifest vào hệ sinh thái (**32 Workflows**, tổng cộng **131 thành phần hệ thống**).
 - 📦 **Remote npx / npm CLI (`ndanhpc-kit`)**: Cài đặt hoặc cập nhật kit trực tiếp qua mạng không cần clone repository: `npx github:ducanhfw4802/ndanhpc-kit init`.
 - ⚡ **Unified 1-Line Installer (`install.sh`)**: Script POSIX cài đặt và cập nhật siêu tốc qua `curl -fsSL ... | bash`.
-- 🚀 **Nâng Cấp Backend Tối Cường (Golang 1.22+, PHP 8.2+/Laravel 11+, gRPC & Event-Driven)**: Bổ sung kỹ năng `golang-patterns` và `php-patterns` (**64 Modular Skills**, tổng **125 thành phần**) với Goroutines/errgroup, pgx/sqlc, Laravel Action/Service architecture, Eloquent N+1 prevention, Pest testing; mở rộng `api-patterns` với chuẩn `grpc.md` (Protocol Buffers, 4 kiểu streaming) và `event-driven.md` (Kafka, RabbitMQ, Redis Streams, Transactional Outbox, Idempotency).
-- 🎨 **Tích Hợp UI/UX Pro Max Design Intelligence**: Bổ sung kỹ năng `ui-ux-pro-max` và workflow `/design-system` (**30 Workflows**) với kho tri thức 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types và 22 tech stacks.
-- 🌐 **Web Portal & CLI Đồng Bộ Tuyệt Đối**: Cập nhật toàn diện 125 thành phần, cơ chế nạp dữ liệu an toàn chống crash khởi tạo, live badge counters và cache-busting `?v=20261018.5`.
+- 🚀 **Nâng Cấp Backend Tối Cường (Golang 1.22+, PHP 8.2+/Laravel 11+, gRPC & Event-Driven)**: Tích hợp `golang-patterns` và `php-patterns` với Goroutines/errgroup, pgx/sqlc, Laravel Action/Service architecture, Eloquent N+1 prevention, Pest testing; mở rộng `api-patterns` với chuẩn `grpc.md` (Protocol Buffers, 4 kiểu streaming) và `event-driven.md` (Kafka, RabbitMQ, Redis Streams, Transactional Outbox, Idempotency).
+- 🎨 **Tích Hợp UI/UX Pro Max Design Intelligence**: Bổ sung kỹ năng `ui-ux-pro-max` và workflow `/design-system` với kho tri thức 79 UI styles, 192 color palettes, 74 font pairings, 119 UX guidelines, 25 chart types và 22 tech stacks.
+- 🌐 **Web Portal & CLI Đồng Bộ Tuyệt Đối**: Cập nhật toàn diện 131 thành phần, cơ chế nạp dữ liệu an toàn chống crash khởi tạo, live badge counters và cache-busting `?v=20261018.6`.
 - 🔄 **Auto-Update & Safe Backup**: Tự động so sánh phiên bản, lưu trữ bản sao lưu `.agents.bak/` và bảo toàn 100% bộ nhớ cấu hình cá nhân (`.agents/memory/`).
 - 📦 **Đồng Bộ Phiên Bản CalVer Toàn Hệ Thống**: Đưa toàn bộ hệ sinh thái lên chuẩn phát hành `2026.10.18`.
 
@@ -42,9 +45,9 @@ NDANHPC Kit được thiết kế theo kiến trúc module hóa với hợp đ�
 ```
 ndanhpc-kit/
 ├── .agents/                      # 🧠 BỘ NÃO AI KHÉP KÍN (Chỉ cần copy thư mục này sang dự án khác)
-│   ├── agent/                    # 24 Specialist Agents phân định rõ trách nhiệm
-│   ├── skills/                   # 64 Modular Skills (Full-stack Dev + QA Automation + UI/UX Pro Max + Golang + PHP/Laravel)
-│   ├── workflows/                # 30 Slash Commands điều phối quy trình tự động
+│   ├── agent/                    # 25 Specialist Agents phân định rõ trách nhiệm
+│   ├── skills/                   # 67 Modular Skills (AI/RAG + Full-stack + Docker/K8s + Scraping + UI/UX Pro Max)
+│   ├── workflows/                # 32 Slash Commands điều phối quy trình tự động
 │   ├── rules/                    # 7 Strict Rules (Security, UI Design, QA Testing, Code Rules)
 │   ├── hooks/                    # Native Lifecycle Hooks (Bảo vệ PreToolUse chặn lệnh nguy hiểm)
 │   ├── plans/                    # 📋 Quy trình 6 bước chuyên sâu (Manual, Automation, Cross-module)
@@ -139,12 +142,12 @@ Bạn có thể copy thư mục `.agents/` vào thư mục gốc của dự án:
 ```bash
 cp -r /opt/Apps/ndanhpc-kit/.agents /duong/dan/du-an-moi/
 ```
-Mở dự án trên Antigravity — toàn bộ 24 Agents, 64 Skills, 30 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
+Mở dự án trên Antigravity — toàn bộ 25 Agents, 67 Skills, 32 Workflows và bộ quy chuẩn sẽ tự động kích hoạt ngay lập tức!
 
 ---
 
 ### 2. Khởi Chạy Web Portal Tra Cứu Trực Quan
-Web Portal cung cấp giao diện tương tác, tra cứu toàn bộ 125 thành phần và mô phỏng điều phối Multi-Agent:
+Web Portal cung cấp giao diện tương tác, tra cứu toàn bộ 131 thành phần và mô phỏng điều phối Multi-Agent:
 
 ```bash
 npm run web
@@ -181,7 +184,7 @@ npm run test:toolkit
 
 ---
 
-## 🤖 Danh Mục 24 Specialist Agents
+## 🤖 Danh Mục 25 Specialist Agents
 
 | Phân Nhóm | Specialist Agents | Vai Trò Chính |
 | :--- | :--- | :--- |
@@ -190,17 +193,18 @@ npm run test:toolkit
 | **Điều Phối & Lập Kế Hoạch** | `orchestrator` | Điều phối tổng thể các tác vụ đa luồng, phân chia công việc cho chuyên gia. |
 | | `project-planner` | Phân tích bài toán, lập kế hoạch chi tiết, khởi tạo blueprint dự án. |
 | | `product-owner` / `product-manager` | Quản trị backlog, user stories, tiêu chuẩn nghiệm thu và tính năng sản phẩm. |
+| **Trí Tuệ Nhân Tạo (AI/ML)** | `ai-engineer` | Kỹ sư chuyên trách GenAI, RAG (Vector DBs, pgvector/Qdrant), Embeddings, Prompt Engineering và LLM App Evaluation. |
 | **Frontend & Design** | `frontend-specialist` | Chuyên sâu React, Next.js, Vue, Tailwind CSS, tối ưu hiệu năng web. |
 | | `frontend-ui-developer` | Thiết kế giao diện pixel-perfect, CSS hiện đại và responsive. |
 | | `ui-ux-designer` | Thiết kế trải nghiệm người dùng, Design System, Design Tokens. |
 | | `ux-accessibility-reviewer` | Đánh giá khả năng tiếp cận WCAG 2.2, kiểm thử tương phản và bàn phím. |
-| **Backend & Dữ Liệu** | `backend-specialist` | Thiết kế kiến trúc API, Node.js, Python, logic nghiệp vụ máy chủ. |
+| **Backend & Dữ Liệu** | `backend-specialist` | Thiết kế kiến trúc API, Node.js, Python, Go, PHP/Laravel, logic máy chủ. |
 | | `database-architect` | Thiết kế schema CSDL, tối ưu hóa index, migration dữ liệu an toàn. |
 | **Mobile Development** | `mobile-developer` | Phát triển ứng dụng Flutter, React Native, iOS & Android. |
 | | `mobile-ui-developer` | Tối ưu hóa UI di động, thumb zones, gesture navigation và 60fps. |
 | **Bảo Mật & Hạ Tầng** | `security-auditor` | Rà soát lỗ hổng, kiểm tra cấu hình an toàn và chính sách bảo mật. |
 | | `penetration-tester` | Đánh giá thâm nhập, kiểm thử bảo mật API và phòng chống tấn công. |
-| | `devops-engineer` | CI/CD pipelines, Docker, triển khai đám mây và giám sát hệ thống. |
+| | `devops-engineer` | CI/CD pipelines, Docker, Kubernetes, triển khai đám mây và giám sát hệ thống. |
 | **Chuyên Biệt Khác** | `debugger`, `performance-optimizer`, `code-archaeologist`, `game-developer`, `seo-specialist`, `documentation-writer`, `explorer-agent` | Các vai trò chuyên sâu hỗ trợ toàn diện mọi khía cạnh phần mềm. |
 
 ---
@@ -213,6 +217,8 @@ npm run test:toolkit
 * `/coordinate`: Phân chia và chạy song song các tác vụ nghiên cứu / rà soát độc lập.
 * `/plan`: Phân tích sâu yêu cầu và lập kế hoạch kỹ thuật trước khi code.
 * `/design-system`: Tự động tạo đặc tả Design System hoàn chỉnh (bảng màu, typography, layout, checklist) theo định lượng từ UI/UX Pro Max.
+* `/scaffold-agent`: Tự động tạo Specialist Agent mới chuẩn hoá SemVer và tự động đồng bộ manifest.
+* `/scaffold-skill`: Tự động tạo Modular Skill mới kèm script validator tự động và đồng bộ manifest.
 * `/debug`: Điều tra và sửa lỗi hệ thống có phương pháp (Systematic Debugging).
 * `/verify`: Chứng minh tính đúng đắn của code bằng thực thi kiểm chứng thực tế.
 
@@ -234,7 +240,7 @@ npm run test:toolkit
 
 Chi tiết toàn bộ thay đổi qua từng phiên bản được ghi nhận tại [**`CHANGELOG.md`**](CHANGELOG.md):
 
-* **[v2026.10.18](CHANGELOG.md#20261018---remote-npxnpm-cli--unified-1-line-installer-release)**: Ra mắt công cụ thực thi từ xa `npx ndanhpc-kit`, bộ cài đặt 1-line `install.sh`, nâng cấp backend tối cường với kỹ năng `golang-patterns` (Go 1.22+) và `php-patterns` (PHP 8.2+/Laravel 11+), mở rộng `api-patterns` (gRPC, Event-Driven), tích hợp `ui-ux-pro-max`, workflow `/design-system`, nâng cấp Web Portal & CLI lên 125 thành phần và đồng bộ toàn hệ sinh thái.
+* **[v2026.10.18](CHANGELOG.md#20261018---remote-npxnpm-cli--unified-1-line-installer-release)**: Ra mắt công cụ thực thi từ xa `npx ndanhpc-kit`, bộ cài đặt 1-line `install.sh`, nâng cấp backend tối cường với kỹ năng `golang-patterns` (Go 1.22+) và `php-patterns` (PHP 8.2+/Laravel 11+), mở rộng `api-patterns` (gRPC, Event-Driven), tích hợp `ai-engineer`, 3 skills (`ai-rag-patterns`, `docker-k8s-patterns`, `web-scraping-patterns`), workflow `/scaffold-agent`, `/scaffold-skill`, tích hợp `ui-ux-pro-max`, workflow `/design-system`, nâng cấp Web Portal & CLI lên 131 thành phần (25 Agents, 67 Skills, 32 Workflows, 7 Rules) và đồng bộ toàn hệ sinh thái.
 * **[v2026.10.17](CHANGELOG.md#20261017---cloudflare-light-theme--ui-modernization-release)**: Ra mắt giao diện Cloudflare Light Theme, tối ưu hóa responsive toàn diện (mobile/tablet/desktop), nâng cấp Web Portal và đồng bộ phiên bản toàn hệ sinh thái.
 * **[v2026.10.13](CHANGELOG.md#20261013---qa--test-automation-supercharge-release)**: Hợp nhất toàn diện Antigravity Testing Kit (10 QA Skills, 16 Workflows, QA Rules, Self-contained structure, Web Portal 121 components).
 * **[v2026.10.10](CHANGELOG.md#20261010---ndanhpc-kit-official-release)**: Phiên bản chính thức đầu tiên ra mắt Interactive Web Portal, Terminal TUI CLI, 24 Agents, 51 Skills và Native PreToolUse Hooks.
