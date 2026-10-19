@@ -1,10 +1,10 @@
 {
   "$schema": "schemas/manifest-lock.schema.json",
   "components": {
-    "ARCHITECTURE.md": "0616d4410e6f4aafcde65154fecfd0725a7e0ca009e6cca181fb6b6d76853a6b",
-    "CHANGELOG.md": "1480e029a5cf8fea936231626165996bb1612aab0387c3622fc9f8f7459a8f63",
+    "ARCHITECTURE.md": "0b3398e2a592ab0c04f7cc07ca4ce4586e425d039ffc9e785fb5c9eda5a4ea6b",
+    "CHANGELOG.md": "0fc8bd9e6571806bece19d929fe3a18f839467d897fdf7c9ae497780fdcd6840",
     "README.md": "51f5484fab2e73b5896d6b4ca9861c1875aa607544fbc63867c3ec078d3f60da",
-    "VERSION": "40b1289c513417d5044690994ec25b3db14341e72590222a38eb2d572fd46298",
+    "VERSION": "d45417875d8e4bf24ea710237dcb8496878003d3959b797bd957a5a19c5844d4",
     "agent/ai-engineer.md": "78c3e610625ea945bd753c2e26654b9c920c9a3fc2f9439bcedbc9c354d8885c",
     "agent/backend-specialist.md": "61d892eb10458a34bfd2dd6de680ef467b51f8a528d8a654c069ba4805118538",
     "agent/code-archaeologist.md": "a0c654b885773c425f6a1c3f35ac7a1d509ed32e08a4e2daf373ddc5c6c805f3",
@@ -85,7 +85,7 @@
     "scripts/integrations/jira/utils.js": "43c96142611e28e6c546e7bbe3b9655dae2c4dfe4f3ac9d8ad63c2ed36d48aa1",
     "scripts/integrations/jira/xray_auth.js": "26480eda2fd0c6079a98436ddfe72d65d224811a90e83b96ec7630bcd6eedcf3",
     "scripts/integrations/jira/xray_importer.js": "6484c8705783dd71353ed63c01e22fb46fc253ca4e3b8eff229ac598df1d3f88",
-    "scripts/ndanhpc_cli.py": "3cccf4490aa539e88eff6475c69c1775a5415843afbd8932901a4ad7967773d8",
+    "scripts/ndanhpc_cli.py": "7426018935d46573620b7a3ef82118788af68d9314e5ec32f43d74291c989deb",
     "scripts/scaffold_component.py": "09a1e1be4267bee7486badb64e2f0ece899cc2aea69d708dc4eb4e159d2e3d30",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
     "scripts/tests/test_toolkit.py": "9e3937b2873d2954b9820d36b085c0d18a7da9afb85b7995da7ec410bb526805",
@@ -343,7 +343,7 @@
     "workflows/test.md": "bd06ae644376e3cc2661f1a623504247445c86a83dfb0df92ed5f0eccdef60ea",
     "workflows/verify.md": "2dc26bcbe24c7e71571953da75629521ea3d7a0a444a7101e3601b39864971fc"
   },
-  "kitVersion": "2026.10.18",
-  "manifestSha256": "dca1e403406bef6090e154510c4fc1ad4daed6ae5c71413f073f7a2ff59bf253",
+  "kitVersion": "2026.10.19",
+  "manifestSha256": "aafa5dfad55982147dae14d85bf1667aaabe4c59725e15bec019dbd327596407",
   "schemaVersion": "1.0.0"
 }

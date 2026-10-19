@@ -122,7 +122,7 @@ def hr(char: str = "─", color: str = Colors.DIM) -> None:
 
 def banner(data: Optional[ToolkitData] = None) -> None:
     """Print the NDANHPC Kit banner with dynamic CalVer version."""
-    version = data.kit_version if data else "2026.10.18"
+    version = data.kit_version if data else "2026.10.19"
     ascii_logo = r"""
   _   _ ____    _    _   _ _   _ ____   ____   _  ___ _   
  | \ | |  _ \  / \  | \ | | | | |  _ \ / ___| | |/ (_) |_ 
@@ -391,7 +391,7 @@ class ToolkitData:
                     return str(data["version"])
             except Exception:
                 pass
-        return "2026.10.18"
+        return "2026.10.19"
 
     @property
     def agents(self) -> Dict[str, Any]:
@@ -477,12 +477,12 @@ def show_overview(data: ToolkitData) -> None:
     print(f"  • {bold('Self-Contained:')}     {green('100%')} nằm trọn trong thư mục {cyan('.agents/')} (Dễ dàng sao chép sang dự án mới)")
     print()
 
-    # Highlight v2026.10.18
-    print(bold(yellow("⭐ ĐIỂM NHẤN PHÁT HÀNH v2026.10.18 - REMOTE NPX/NPM CLI & ONE-LINE INSTALLER:")))
-    print(f"  • {bold('Remote npx / npm CLI:')}       Khởi tạo, cập nhật & kiểm tra kit từ xa: {cyan('npx github:... init')}")
-    print(f"  • {bold('Trình Cài Đặt 1 Lệnh:')}       {cyan('curl -fsSL .../install.sh | bash')} cài đặt chỉ trong 2 giây")
-    print(f"  • {bold('Cloudflare Light Theme:')}     Giao diện sáng cao cấp (#F6821F / #18181B / #F9FAFB) 100/100 Lighthouse")
-    print(f"  • {bold('Đồng Bộ CalVer 2026.10.18:')}  Đồng bộ toàn bộ hệ sinh thái (Rules, Hooks, Manifests, Web Portal)")
+    # Highlight v2026.10.19
+    print(bold(yellow("⭐ ĐIỂM NHẤN PHÁT HÀNH v2026.10.19 - AI ENGINEERING, RAG, DEVOPS & COMPONENT SCAFFOLDING:")))
+    print(f"  • {bold('Specialist Agent:')}          Bổ sung ai-engineer cho GenAI, RAG, LLM App, Vector DBs & Evaluation")
+    print(f"  • {bold('3 Modular Skills Mới:')}      ai-rag-patterns, docker-k8s-patterns, web-scraping-patterns (kèm 3 validator scripts)")
+    print(f"  • {bold('Component Scaffolders:')}     Quy trình /scaffold-agent, /scaffold-skill & CLI scaffold_component.py")
+    print(f"  • {bold('Đồng Bộ CalVer 2026.10.19:')}  Đạt mốc 131 thành phần (25 Agents, 67 Skills, 32 Workflows, 7 Rules)")
     print()
 
     # Tier Architecture
